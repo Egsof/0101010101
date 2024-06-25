@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Egsof - Pilih Bot Kamu</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      margin-bottom: 20px;
+      width: 90%;
+      max-width: 400px;
+      animation: smoothFadeIn 2s ease-out;
+    }
+
+    .button {
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 10px 0;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .button-main {
+      background-color: #28a745;
+    }
+
+    .button-main:hover {
+      background-color: #218838;
+    }
+
+    .main-button-container img {
+      max-width: 100px;
+      border-radius: 50%;
+      margin-top: 20px;
+      animation: smoothFadeIn 2s ease-out;
+    }
+
+    @keyframes smoothFadeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes highlight {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 1);
+        transform: scale(1.1);
+      }
+    }
+
+    .highlight {
+      animation: highlight 1s infinite;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 15px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 300px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .pointer {
+      position: absolute;
+      font-size: 1.5em;
+      animation: bounce 1s infinite;
+      transform-origin: bottom;
+      z-index: 3;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @media (min-width: 600px) {
+      .container {
+        padding: 30px;
+      }
+
+      .button {
+        padding: 15px 32px;
+        font-size: 16px;
+      }
+
+      .main-button-container img {
+        max-width: 150px;
+      }
+
+      .modal-content {
+        padding: 20px;
+        max-width: 400px;
+      }
+
+      .close {
+        font-size: 28px;
+      }
+
+      .pointer {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="container container-main">
+    <button id="buttonMain" class="button button-main">Egbot Ai</button>
+    <div class="main-button-container">
+      <img src="https://telegra.ph/file/0b848cd0e5320e252054a.jpg" alt="Bot Utama">
+    </div>
+  </div>
+  
+  <div class="container container-bots">
+    <button id="button1" class="button">Hikari Ai</button>
+    <button id="button2" class="button">Nozomi Ai</button>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p id="modal-text">Klik ya untuk melanjutkan</p>
+      <button id="confirm" class="button">Ya</button>
+      <button id="cancel" class="button">Tidak</button>
+    </div>
+  </div>
+
+  <script>
+    var modal = document.getElementById("modal");
+    var closeBtn = document.getElementsByClassName("close")[0];
+    var confirmBtn = document.getElementById("confirm");
+    var cancelBtn = document.getElementById("cancel");
+    var modalText = document.getElementById("modal-text");
+    var targetUrl = "";
+
+    document.getElementById("buttonMain").addEventListener("click", function() {
+      targetUrl = "https://wa.me/62857584124804?text=.menu";
+      modalText.innerHTML = "Klik ya untuk melanjutkan";
+      confirmBtn.style.display = "inline-block";
+      modal.style.display = "flex";
+    });
+
+    var pointer = null;
+
+    function showEgbotMessage(event) {
+      modalText.innerHTML = "Akses sudah tidak ada.<br>Silakan klik tombol <strong>Egbot Ai</strong> untuk melanjutkan.";
+      confirmBtn.style.display = "none";
+      modal.style.display = "flex";
+      var egbotButton = document.getElementById("buttonMain");
+      egbotButton.classList.add("highlight");
+
+      if (pointer) {
+        document.body.removeChild(pointer);
+      }
+
+      pointer = document.createElement("div");
+      pointer.classList.add("pointer");
+      pointer.innerHTML = "👇";
+      var egbotButtonRect = egbotButton.getBoundingClientRect();
+      pointer.style.top = (egbotButtonRect.top - 50) + "px";
+      pointer.style.left = egbotButtonRect.left + (egbotButtonRect.width / 2) - 10 + "px";
+      document.body.appendChild(pointer);
+
+      setTimeout(function() {
+        egbotButton.classList.remove("highlight");
+        document.body.removeChild(pointer);
+        pointer = null;
+      }, 4000);
+    }
+
+    document.getElementById("button1").addEventListener("click", showEgbotMessage);
+    document.getElementById("button2").addEventListener("click", showEgbotMessage);
+
+    closeBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    cancelBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    confirmBtn.onclick = function() {
+      window.location.href = targetUrl;
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
