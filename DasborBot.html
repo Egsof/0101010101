@@ -209,7 +209,7 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <p id="modal-text">Bot Gratis sudah Tidak Tersedia</p>
-      <button ="confirm" class="button"></button>
+      <button id="confirm" class="button"></button>
       <button id="cancel" class="button">Tidak</button>
     </div>
   </div>
@@ -223,7 +223,7 @@
     var targetUrl = "";
 
     document.getElementById("buttonMain").addEventListener("click", function() {
-      targetUrl = "https://wa.me/62857584124805?text=.menu";
+      targetUrl = "#";
       modalText.innerHTML = "Mengunakan bot secara gratis?";
       confirmBtn.style.display = "inline-block";
       modal.style.display = "flex";
