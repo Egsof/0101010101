@@ -42,7 +42,7 @@
     }
 
     .button {
-      background-color: #007BFF;
+      background-color: #28a745;
       border: none;
       color: white;
       padding: 12px 24px;
@@ -58,7 +58,7 @@
     }
 
     .button:hover {
-      background-color: #0056b3;
+      background-color: #218838;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
@@ -187,21 +187,33 @@
         font-size: 2em;
       }
     }
+
+    .bot-logo {
+      max-width: 50px;
+      border-radius: 50%;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="overlay"></div>
 
   <div class="container container-main">
-    <button id="buttonMain" class="button button-main">Egbot Ai</button>
+    <button id="buttonMain" class="button button-main" onclick="location.href='https://wasap.at/k28fgR'">Egbot Ai v1</button>
     <div class="main-button-container">
-      <img src="https://telegra.ph/file/89990f02a25a4c8693f55.jpg" alt="Bot Utama">
+      <img src="https://telegra.ph/file/aac9185e0d83729eb1016.jpg" alt="Bot Utama">
     </div>
   </div>
   
   <div class="container container-bots">
-    <button id="button1" class="button">Hikari Ai</button>
-    <button id="button2" class="button">Nozomi Ai</button>
+    <button id="button1" class="button" onclick="location.href='https://wasap.at/937SxM'">Egbot Ai v2</button>
+    <div class="main-button-container">
+      <img src="https://telegra.ph/file/aac9185e0d83729eb1016.jpg" alt="bot" class="bot-logo">
+    </div>
+    <button id="button2" class="button" onclick="location.href='https://wasap.at/RIndt3'">Egbot Ai v3</button>
+    <div class="main-button-container">
+      <img src="https://telegra.ph/file/aac9185e0d83729eb1016.jpg" alt="bot" class="bot-logo">
+    </div>
   </div>
 
   <!-- Modal Structure -->
@@ -223,42 +235,16 @@
     var targetUrl = "";
 
     document.getElementById("buttonMain").addEventListener("click", function() {
-      targetUrl = "https://wasap.at/k28fgR";
-      modalText.innerHTML = "Ingin Mengunakan bot secara gratis?";
-      confirmBtn.style.display = "inline-block";
-      modal.style.display = "flex";
+      window.location.href = targetUrl;
     });
 
-    var pointer = null;
+    document.getElementById("button1").addEventListener("click", function() {
+      window.location.href = targetUrl;
+    });
 
-    function showEgbotMessage(event) {
-      modalText.innerHTML = "Akses sudah tidak ada.<br>Silakan klik tombol <strong>Egbot Ai</strong> untuk melanjutkan.";
-      confirmBtn.style.display = "none";
-      modal.style.display = "flex";
-      var egbotButton = document.getElementById("buttonMain");
-      egbotButton.classList.add("highlight");
-
-      if (pointer) {
-        document.body.removeChild(pointer);
-      }
-
-      pointer = document.createElement("div");
-      pointer.classList.add("pointer");
-      pointer.innerHTML = "👇";
-      var egbotButtonRect = egbotButton.getBoundingClientRect();
-      pointer.style.top = (egbotButtonRect.top - 50) + "px";
-      pointer.style.left = egbotButtonRect.left + (egbotButtonRect.width / 2) - 10 + "px";
-      document.body.appendChild(pointer);
-
-      setTimeout(function() {
-        egbotButton.classList.remove("highlight");
-        document.body.removeChild(pointer);
-        pointer = null;
-      }, 4000);
-    }
-
-    document.getElementById("button1").addEventListener("click", showEgbotMessage);
-    document.getElementById("button2").addEventListener("click", showEgbotMessage);
+    document.getElementById("button2").addEventListener("click", function() {
+      window.location.href = targetUrl;
+    });
 
     closeBtn.onclick = function() {
       modal.style.display = "none";
