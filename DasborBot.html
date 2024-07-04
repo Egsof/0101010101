@@ -175,40 +175,47 @@
         <p id="confirmation" style="display: none; font-size: 1.5em; margin-top: 20px;"></p>
     </div>
 
-    <script>
-        function showOptions() {
-            var optionContainer = document.getElementById('optionContainer');
-            optionContainer.style.display = 'flex';
-        }
+ <script>
+    function showOptions() {
+        var button = document.querySelector('.button');
+        button.disabled = true; // Disable the button
 
-        function chooseOption(option) {
-            var confirmationText = document.getElementById('confirmation');
-            confirmationText.textContent = option;
-            confirmationText.style.display = 'block';
+        var optionContainer = document.getElementById('optionContainer');
+        optionContainer.style.display = 'none'; // Hide the options container
 
-            var optionContainer = document.getElementById('optionContainer');
-            optionContainer.style.display = 'none';
+        var confirmationText = document.getElementById('confirmation');
+        confirmationText.textContent = "Not available for now."; // Set the message
+        confirmationText.style.display = 'block'; // Show the message
+    }
 
-            if (option === 'Loading...') {
-                setTimeout(function() {
-                    window.location.href = 'https://wasap.at/937SxM';
-                }, 3200); // Delay second before redirecting to the specified URL
-            }
-        }
+    function chooseOption(option) {
+        var confirmationText = document.getElementById('confirmation');
+        confirmationText.textContent = option;
+        confirmationText.style.display = 'block';
 
-        function redirectNo() {
+        var optionContainer = document.getElementById('optionContainer');
+        optionContainer.style.display = 'none';
+
+        if (option === 'Loading...') {
             setTimeout(function() {
-                window.location.href = 'https://egsof.xyz/main-page';
-            }, 1000); // Delay 1 second before redirecting to the specified URL
+                window.location.href = 'https://wasap.at/937SxM';
+            }, 3200); // Delay second before redirecting to the specified URL
         }
+    }
 
-        function cancelSelection() {
-            var optionContainer = document.getElementById('optionContainer');
-            optionContainer.style.display = 'none';
+    function redirectNo() {
+        setTimeout(function() {
+            window.location.href = 'https://egsof.xyz/main-page';
+        }, 1000); // Delay 1 second before redirecting to the specified URL
+    }
 
-            var confirmationText = document.getElementById('confirmation');
-            confirmationText.style.display = 'none';
-        }
-    </script>
+    function cancelSelection() {
+        var optionContainer = document.getElementById('optionContainer');
+        optionContainer.style.display = 'none';
+
+        var confirmationText = document.getElementById('confirmation');
+        confirmationText.style.display = 'none';
+    }
+</script>
 </body>
 </html>
