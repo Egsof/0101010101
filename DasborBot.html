@@ -160,7 +160,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="https://telegra.ph/file/aac9185e0d83729eb1016.jpg" alt="Logo" class="logo">
+        <img src="https://telegra.ph/file/c5c8223cfd1d696753d80.jpg" alt="Logo" class="logo">
         <h1>Bot WhatsApp</h1>
         <hr>
         <p>Klik tombol di bawah ini untuk mengakses Egbot Ai</p>
@@ -168,54 +168,85 @@
             <button class="button" onclick="showOptions()">Dapat kan secara gratis</button>
         </div>
         <div class="option-container" id="optionContainer">
-            <button class="option-button" onclick="chooseOption('Loading...')">Yes</button>
+            <button class="option-button" onclick="chooseOption('Menunggu verifikasi')">Yes</button>
             <button class="option-button" onclick="redirectNo()">Tidak</button>
             <button class="cancel-button" onclick="cancelSelection()">X</button>
+        </div>
+        <div class="option-container" id="ageOptionContainer" style="display: none;">
+            <p>[ Verifikasi umur anda ]</p>
+            <div id="ageButtons"></div>
         </div>
         <p id="confirmation" style="display: none; font-size: 1.5em; margin-top: 20px;"></p>
     </div>
 
- <script>
-    function showOptions() {
-        var button = document.querySelector('.button');
-        button.disabled = true; // Disable the button
-
-        var optionContainer = document.getElementById('optionContainer');
-        optionContainer.style.display = 'none'; // Hide the options container
-
-        var confirmationText = document.getElementById('confirmation');
-        confirmationText.textContent = "Not available for now."; // Set the message
-        confirmationText.style.display = 'block'; // Show the message
-    }
-
-    function chooseOption(option) {
-        var confirmationText = document.getElementById('confirmation');
-        confirmationText.textContent = option;
-        confirmationText.style.display = 'block';
-
-        var optionContainer = document.getElementById('optionContainer');
-        optionContainer.style.display = 'none';
-
-        if (option === 'Loading...') {
-            setTimeout(function() {
-                window.location.href = 'https://wasap.at/937SxM';
-            }, 3200); // Delay second before redirecting to the specified URL
+    <script>
+        function showOptions() {
+            var optionContainer = document.getElementById('optionContainer');
+            optionContainer.style.display = 'flex';
         }
-    }
 
-    function redirectNo() {
-        setTimeout(function() {
-            window.location.href = 'https://egsof.xyz/main-page';
-        }, 1000); // Delay 1 second before redirecting to the specified URL
-    }
+        function chooseOption(option) {
+            var confirmationText = document.getElementById('confirmation');
+            confirmationText.textContent = option;
+            confirmationText.style.display = 'block';
 
-    function cancelSelection() {
-        var optionContainer = document.getElementById('optionContainer');
-        optionContainer.style.display = 'none';
+            var optionContainer = document.getElementById('optionContainer');
+            optionContainer.style.display = 'none';
 
-        var confirmationText = document.getElementById('confirmation');
-        confirmationText.style.display = 'none';
-    }
-</script>
+            if (option === 'Menunggu verifikasi') {
+                setTimeout(function() {
+                    var ageOptionContainer = document.getElementById('ageOptionContainer');
+                    ageOptionContainer.style.display = 'flex';
+                    showAgeOptions(); // Show age options after delay
+                }, 500); // Delay half a second before showing age options
+            }
+        }
+
+        function redirectNo() {
+            setTimeout(function() {
+                window.location.href = 'https://egsof.xyz/main-page';
+            }, 1000); // Delay 1 second before redirecting to the specified URL
+        }
+
+        function cancelSelection() {
+            var optionContainer = document.getElementById('optionContainer');
+            optionContainer.style.display = 'none';
+
+            var ageOptionContainer = document.getElementById('ageOptionContainer');
+            ageOptionContainer.style.display = 'none';
+
+            var confirmationText = document.getElementById('confirmation');
+            confirmationText.style.display = 'none';
+        }
+
+        function showAgeOptions() {
+            var ageButtonsContainer = document.getElementById('ageButtons');
+            ageButtonsContainer.innerHTML = '';
+
+            for (let age = 10; age <= 30; age++) {
+                var button = document.createElement('button');
+                button.className = 'option-button';
+                button.textContent = age;
+                button.addEventListener('click', function() {
+                    chooseAge(age);
+                });
+                ageButtonsContainer.appendChild(button);
+            }
+        }
+
+        function chooseAge(age) {
+            var confirmationText = document.getElementById('confirmation');
+            confirmationText.textContent = 'Umur: ' + age;
+            confirmationText.style.display = 'block';
+
+            var ageOptionContainer = document.getElementById('ageOptionContainer');
+            ageOptionContainer.style.display = 'none';
+
+            setTimeout(function() {
+                var url = 'https://wa.me/62857584124801?text=user|' + age;
+                window.location.href = url;
+            }, 2000); // Delay 2 second before redirecting
+        }
+    </script>
 </body>
 </html>
