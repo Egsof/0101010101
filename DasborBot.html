@@ -171,6 +171,16 @@
             margin-right: 10px;
         }
 
+        #ageRange {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        #ageValue {
+            font-size: 1.2em;
+            color: #007BFF;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -193,7 +203,7 @@
         <img src="https://telegra.ph/file/c5c8223cfd1d696753d80.jpg" alt="Logo" class="logo">
         <h1>Bot WhatsApp</h1>
         <hr>
-        <p>Klik tombol di bawah ini untuk mengakses Egbot Ai</p>
+        <p id="instructionText">Klik tombol di bawah ini untuk mengakses Egbot Ai</p>
         <div class="button-container" id="mainButtonContainer">
             <button class="button" onclick="showOptions()">Dapatkan secara gratis</button>
         </div>
@@ -204,7 +214,9 @@
         </div>
         <div class="option-container" id="ageOptionContainer" style="display: none;">
             <p>[ Verifikasi umur anda ]</p>
-            <div id="ageButtons"></div>
+            <input type="range" id="ageRange" min="10" max="30" value="10" oninput="updateAgeValue(this.value)">
+            <span id="ageValue">default</span>
+            <button class="option-button" onclick="chooseAge()" id="ageButton" disabled>Pilih</button>
         </div>
         <p id="confirmation" style="display: none; font-size: 1.5em; margin-top: 20px;"></p>
         <div class="loading" id="loading">Menghubungkan dengan server...</div>
@@ -221,6 +233,9 @@
 
             var mainButtonContainer = document.getElementById('mainButtonContainer');
             mainButtonContainer.style.display = 'none';
+
+            var instructionText = document.getElementById('instructionText');
+            instructionText.style.display = 'none';
         }
 
         function chooseOption(option) {
@@ -262,6 +277,9 @@
 
             var mainButtonContainer = document.getElementById('mainButtonContainer');
             mainButtonContainer.style.display = 'block';
+
+            var instructionText = document.getElementById('instructionText');
+            instructionText.style.display = 'block';
         }
 
         function showChecklist() {
@@ -276,34 +294,26 @@
                 setTimeout(function() {
                     checklistItem2.classList.add('completed');
                     setTimeout(function() {
-                        var checklistContainer = document.getElementById('checklistContainer');
                         checklistContainer.style.display = 'none';
 
                         var ageOptionContainer = document.getElementById('ageOptionContainer');
                         ageOptionContainer.style.display = 'flex';
-
-                        showAgeOptions();
                     }, 2000); 
                 }, 2000);  
             }, 1000); 
         }
         
-        function showAgeOptions() {
-            var ageButtonsContainer = document.getElementById('ageButtons');
-            ageButtonsContainer.innerHTML = '';
+        function updateAgeValue(value) {
+            var ageValue = document.getElementById('ageValue');
+            ageValue.textContent = value;
 
-            for (let age = 10; age <= 30; age++) {
-                var button = document.createElement('button');
-                button.className = 'option-button';
-                button.textContent = age;
-                button.addEventListener('click', function() {
-                    chooseAge(age);
-                });
-                ageButtonsContainer.appendChild(button);
-            }
+            var ageButton = document.getElementById('ageButton');
+            ageButton.disabled = false;
         }
 
-        function chooseAge(age) {
+        function chooseAge() {
+            var ageRange = document.getElementById('ageRange');
+            var age = ageRange.value;
             var confirmationText = document.getElementById('confirmation');
             confirmationText.textContent = 'Umur: ' + age;
             confirmationText.style.display = 'block';
@@ -323,4 +333,3 @@
     </script>
 </body>
 </html>
-
