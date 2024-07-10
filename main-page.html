@@ -9,6 +9,120 @@
     <meta name="keywords" content="WhatsApp Bot, Egsof" />
     <meta name="author" content="Egsof" />
     <style>
+.pricing-plan {
+    position: relative;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pricing-plan:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pricing-button {
+    background-color: #1976d2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px;
+}
+
+.pricing-button:hover {
+    background-color: #0d47a1;
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #1976d2;
+}
+
+.modal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal ul li:last-child {
+    border: none;
+}
+
+.modal-button {
+    background-color: #1976d2;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.modal-button:hover {
+    background-color: #0d47a1;
+    transform: scale(1.05);
+}
+    
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -328,7 +442,7 @@
             <h2>Gratis</h2>
             <ul>
                 <li>User Gratis</li>
-                <li>Limit 15</li>   
+                <li>Limit 10</li>   
                 <li>Jadi Bot ❌</li>
                 <li>Join Grup ✔️</li>
             </ul>
@@ -385,10 +499,32 @@
                 <li>Jadi Bot ✔️</li>
                 <li>Join Grup ✔️</li>
             </ul>
-            <div class="price">IDR60.000 / bulanan</div>
+            <div class="price">IDR50.000 / bulanan</div>
             <button onclick="window.location.href='https://wasap.at/zNySJQ'">Buy Now</button>
         </div>
+<div class="pricing-plan">
+    <div class="icon" style="font-size: 50px">🔒</div>
+    <h2>Limit</h2>
+    <ul>
+        <li>Tambah Limit</li>
+        <li>Beli Limit Saja</li>
+    </ul>
+    <div class="price">Mulai dari IDR10.000</div>
+    <button class="pricing-button" onclick="openLimitModal()">Lihat Harga</button>
+</div>
+
+<div id="limitModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeLimitModal()">&times;</span>
+        <h2>List Harga Limit</h2>
+        <ul>
+            <li>100 limit - IDR10.000 <button class="modal-button" onclick="window.location.href='https://wa.me/6285369942151?text=Permisi%20kak%20saya%20ingin%20order%20nambah%20limit%20(%20100%20Limit%2010.000IDR%20)'">Buy Now</button></li>
+            <li>188 limit - IDR18.000 <button class="modal-button" onclick="window.location.href='https://wa.me/6285369942151?text=Permisi%20kak%20saya%20ingin%20order%20nambah%20limit%20(%20188%20Limit%2018.000IDR%20)'">Buy Now</button></li>
+            <li>211 limit - IDR21.000 <button class="modal-button" onclick="window.location.href='https://wa.me/6285369942151?text=Permisi%20kak%20saya%20ingin%20order%20nambah%20limit%20(%20211%20Limit%2021.000IDR%20)'">Buy Now</button></li>
+            <li>300 limit - IDR30.000 <button class="modal-button" onclick="window.location.href='https://wa.me/6285369942151?text=Permisi%20kak%20saya%20ingin%20order%20nambah%20limit%20(%20300%20Limit%2030.000IDR%20)'">Buy Now</button></li>
+        </ul>
     </div>
+</div>
 
     <div class="help-section">
         <h2>Bantuan</h2>
@@ -417,6 +553,20 @@
 </footer>
 
 <script>
+function openLimitModal() {
+    document.getElementById("limitModal").style.display = "block";
+}
+
+function closeLimitModal() {
+    document.getElementById("limitModal").style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById("limitModal")) {
+        document.getElementById("limitModal").style.display = "none";
+    }
+}
+  
     function toggleTheme() {
         document.body.classList.toggle('dark-mode');
         var icon = document.getElementById('theme-icon');
@@ -430,4 +580,4 @@
     }
 </script>
 </body>
-</html>
+    </html>
