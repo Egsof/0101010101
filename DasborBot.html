@@ -203,17 +203,18 @@
         <img src="https://telegra.ph/file/4a5b0f35079e8c9fa6bda.jpg" alt="Logo" class="logo">
         <h1>Bot WhatsApp</h1>
         <hr>
-        <p id="instructionText">Klik tombol di bawah ini untuk mengakses Egbot Ai</p>
+        <p id="instructionText">Dapat Kan Bot WhatsApp Kamu Klik Tombol Di Bawah</p>
         <div class="button-container" id="mainButtonContainer">
-            <button class="button" onclick="showOptions()">Get Started</button>
+            <button class="button" onclick="showBotChoice()">Get Started</button>
         </div>
-        <div class="option-container" id="optionContainer">
-            <button class="option-button" onclick="chooseOption('Menunggu verifikasi')">Yes</button>
-            <button class="option-button" onclick="redirectNo()">Tidak</button>
+        <div class="option-container" id="botChoiceContainer" style="display: none;">
+            <p>( P I L I H A N - B O T )</p>
+            <button class="option-button" onclick="showAgeVerification()">Bot MD</button>
+            <button class="option-button" onclick="redirectToMenfess()">Bot Menfess</button>
             <button class="cancel-button" onclick="cancelSelection()">X</button>
         </div>
         <div class="option-container" id="ageOptionContainer" style="display: none;">
-            <p>[ Verifikasi umur anda ]</p>
+            <p>( Verifikasi Umur Anda )</p>
             <input type="range" id="ageRange" min="10" max="30" value="10" oninput="updateAgeValue(this.value)">
             <span id="ageValue">Geser untuk memilih</span>
             <button class="option-button" onclick="chooseAge()" id="ageButton" disabled>Verifikasi</button>
@@ -227,9 +228,9 @@
     </div>
 
     <script>
-        function showOptions() {
-            var optionContainer = document.getElementById('optionContainer');
-            optionContainer.style.display = 'flex';
+        function showBotChoice() {
+            var botChoiceContainer = document.getElementById('botChoiceContainer');
+            botChoiceContainer.style.display = 'flex';
 
             var mainButtonContainer = document.getElementById('mainButtonContainer');
             mainButtonContainer.style.display = 'none';
@@ -238,34 +239,30 @@
             instructionText.style.display = 'none';
         }
 
-        function chooseOption(option) {
-            var confirmationText = document.getElementById('confirmation');
-            confirmationText.textContent = option;
-            confirmationText.style.display = 'block';
+        function showAgeVerification() {
+            var botChoiceContainer = document.getElementById('botChoiceContainer');
+            botChoiceContainer.style.display = 'none';
 
-            var optionContainer = document.getElementById('optionContainer');
-            optionContainer.style.display = 'none';
-
-            if (option === 'Menunggu verifikasi') {
-                setTimeout(function() {
-                    showChecklist();
-                }, 500); 
-            }
+            var ageOptionContainer = document.getElementById('ageOptionContainer');
+            ageOptionContainer.style.display = 'flex';
         }
 
-        function redirectNo() {
+        function redirectToMenfess() {
+            var loading = document.getElementById('loading');
+            loading.style.display = 'block';
+
             setTimeout(function() {
-                window.location.href = 'https://egsof.xyz';
-            }, 1000);
+                loading.style.display = 'none';
+                window.location.href = 'https://wa.me/62857584124802?text=.menu';
+            }, 2000);
         }
 
         function cancelSelection() {
-            var optionContainer = document.getElementById('optionContainer');
-            optionContainer.style.display = 'none';
+            var botChoiceContainer = document.getElementById('botChoiceContainer');
+            botChoiceContainer.style.display = 'none';
 
             var ageOptionContainer = document.getElementById('ageOptionContainer');
             ageOptionContainer.style.display = 'none';
-
             var confirmationText = document.getElementById('confirmation');
             confirmationText.style.display = 'none';
 
