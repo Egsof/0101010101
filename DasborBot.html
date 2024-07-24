@@ -1,1 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DasborBot</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, blue, purple);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
+        .container {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #007BFF;
+            margin: 20px auto;
+            width: 50%;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        .option-container {
+            display: none;
+            margin-top: 20px;
+            flex-direction: column;
+        }
+
+        .option-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #007BFF;
+            background-color: #007BFF;
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .option-button:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .cancel-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-top: 10px;
+        }
+
+        .cancel-button:hover {
+            background-color: #c82333;
+        }
+
+        .loading {
+            display: none;
+            font-size: 1.2em;
+            color: #007BFF;
+            margin-top: 20px;
+        }
+
+        .checklist-container {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checklist-item.completed::before {
+            content: '✔️';
+            color: green;
+            margin-right: 10px;
+        }
+
+        .checklist-item::before {
+            content: '⏳';
+            color: gray;
+            margin-right: 10px;
+        }
+
+        #ageRange {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        #ageValue {
+            font-size: 1.2em;
+            color: #007BFF;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
+
+            .button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://telegra.ph/file/4a5b0f35079e8c9fa6bda.jpg" alt="Logo" class="logo">
+        <h1>Bot WhatsApp</h1>
+        <hr>
+        <p id="instructionText">Dapat Kan Bot WhatsApp Kamu Klik Tombol Di Bawah</p>
+        <div class="button-container" id="mainButtonContainer">
+            <button class="button" onclick="showBotChoice()">Get Started</button>
+        </div>
+        <div class="option-container" id="botChoiceContainer" style="display: none;">
+            <p>( P I L I H A N - B O T )</p>
+            <button class="option-button" onclick="showAgeVerification()">Bot MD</button>
+            <button class="option-button" onclick="redirectToMenfess()">Bot Menfess</button>
+            <button class="cancel-button" onclick="cancelSelection()">X</button>
+        </div>
+        <div class="option-container" id="ageOptionContainer" style="display: none;">
+            <p>( Verifikasi Umur Anda )</p>
+            <input type="range" id="ageRange" min="10" max="30" value="10" oninput="updateAgeValue(this.value)">
+            <span id="ageValue">Geser untuk memilih</span>
+            <button class="option-button" onclick="chooseAge()" id="ageButton" disabled>Verifikasi</button>
+        </div>
+        <p id="confirmation" style="display: none; font-size: 1.5em; margin-top: 20px;"></p>
+        <div class="loading" id="loading">Menghubungkan dengan server...</div>
+        <div class="checklist-container" id="checklistContainer">
+            <div class="checklist-item" id="checklistItem1">Verifikasi human...</div>
+            <div class="checklist-item" id="checklistItem2">Terhubung dengan server...</div>
+        </div>
+    </div>
+
+    <script>
+        function showBotChoice() {
+            var botChoiceContainer = document.getElementById('botChoiceContainer');
+            botChoiceContainer.style.display = 'flex';
+
+            var mainButtonContainer = document.getElementById('mainButtonContainer');
+            mainButtonContainer.style.display = 'none';
+
+            var instructionText = document.getElementById('instructionText');
+            instructionText.style.display = 'none';
+        }
+
+        function showAgeVerification() {
+            var botChoiceContainer = document.getElementById('botChoiceContainer');
+            botChoiceContainer.style.display = 'none';
+
+            var ageOptionContainer = document.getElementById('ageOptionContainer');
+            ageOptionContainer.style.display = 'flex';
+        }
+
+        function redirectToMenfess() {
+            var loading = document.getElementById('loading');
+            loading.style.display = 'block';
+
+            setTimeout(function() {
+                loading.style.display = 'none';
+                window.location.href = 'https://wa.me/62857584124802?text=.menu';
+            }, 2000);
+        }
+
+        function cancelSelection() {
+            var botChoiceContainer = document.getElementById('botChoiceContainer');
+            botChoiceContainer.style.display = 'none';
+
+            var ageOptionContainer = document.getElementById('ageOptionContainer');
+            ageOptionContainer.style.display = 'none';
+            var confirmationText = document.getElementById('confirmation');
+            confirmationText.style.display = 'none';
+
+            var loading = document.getElementById('loading');
+            loading.style.display = 'none';
+
+            var checklistContainer = document.getElementById('checklistContainer');
+            checklistContainer.style.display = 'none';
+
+            var mainButtonContainer = document.getElementById('mainButtonContainer');
+            mainButtonContainer.style.display = 'block';
+
+            var instructionText = document.getElementById('instructionText');
+            instructionText.style.display = 'block';
+        }
+
+        function showChecklist() {
+            var checklistContainer = document.getElementById('checklistContainer');
+            checklistContainer.style.display = 'block';
+
+            var checklistItem1 = document.getElementById('checklistItem1');
+            var checklistItem2 = document.getElementById('checklistItem2');
+
+            setTimeout(function() {
+                checklistItem1.classList.add('completed');
+                setTimeout(function() {
+                    checklistItem2.classList.add('completed');
+                    setTimeout(function() {
+                        checklistContainer.style.display = 'none';
+
+                        var ageOptionContainer = document.getElementById('ageOptionContainer');
+                        ageOptionContainer.style.display = 'flex';
+                    }, 2000); 
+                }, 2000);  
+            }, 1000); 
+        }
+        
+        function updateAgeValue(value) {
+            var ageValue = document.getElementById('ageValue');
+            ageValue.textContent = value;
+
+            var ageButton = document.getElementById('ageButton');
+            ageButton.disabled = false;
+        }
+
+        function chooseAge() {
+            var ageRange = document.getElementById('ageRange');
+            var age = ageRange.value;
+            var confirmationText = document.getElementById('confirmation');
+            confirmationText.textContent = 'Umur: ' + age;
+            confirmationText.style.display = 'block';
+
+            var ageOptionContainer = document.getElementById('ageOptionContainer');
+            ageOptionContainer.style.display = 'none';
+
+            var loading = document.getElementById('loading');
+            loading.style.display = 'block';
+
+            setTimeout(function() {
+                loading.style.display = 'none';
+                var url = 'https://wa.me/62857584124803?text=.reg%20user|' + age;
+                window.location.href = url;
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
