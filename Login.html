@@ -7,7 +7,7 @@
     <meta name="description" content="Layanan bot WhatsApp gratis dan terbaik dari Egsof. Dapatkan berbagai fitur unggulan untuk bot WhatsApp Anda.">
     <meta name="keywords" content="bot wa gratis, layanan bot whatsapp, bot whatsapp egsof, egsof bot, hosting bot wa">
     <meta name="title" content="Egsof - Login">
-    <title>Egsof - Layanan Bot WhatsApp Terpercaya</title>
+    <title>Egsof - Login</title>
     <link rel="icon" href="https://telegra.ph/file/fb11b727e38905c4f6b3c.jpg" type="image/jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -18,6 +18,7 @@
             color: #fff;
             text-align: center;
             margin: 0;
+            overflow: hidden; /* Menyembunyikan scroll saat loading screen muncul */
         }
         .container {
             display: flex;
@@ -26,6 +27,7 @@
             justify-content: center;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
         }
         .login-container {
             background: rgba(255, 255, 255, 0.1);
@@ -67,12 +69,6 @@
         .btn-login:hover {
             background-color: #45a049;
         }
-        .btn-reset {
-            background-color: #f44336;
-        }
-        .btn-reset:hover {
-            background-color: #e53935;
-        }
         .btn-quick-login {
             background-color: #3b5998;
         }
@@ -104,9 +100,39 @@
             vertical-align: middle;
             margin-right: 8px;
         }
+        /* CSS untuk loading screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .loading-spinner {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+    </div>
+
     <div class="container">
         <div class="login-container animate__animated animate__fadeIn">
             <h2 class="animate__animated animate__fadeInDown">Login Ke Egsof</h2>
@@ -141,7 +167,6 @@
                     <input type="tel" id="phone" name="phone" placeholder="Nomor HP" required>
                 </div>
                 <button type="submit" class="btn-custom btn-login" id="loginButton">Login</button>
-                <button type="button" class="btn-custom btn-reset" onclick="resetLogin()">Reset</button>
                 <button type="button" class="btn-custom btn-quick-login" onclick="quickLogin()">Login Tanpa Nomor</button>
             </form>
         </div>
@@ -167,16 +192,19 @@
         const countryCodeSelect = document.getElementById('countryCode');
         const phoneInput = document.getElementById('phone');
         const statsContainer = document.getElementById("statsContainer");
+        const loadingScreen = document.getElementById('loadingScreen');
 
+  
         const storedUsername = localStorage.getItem('username');
         const storedCountryCode = localStorage.getItem('countryCode');
         const storedPhone = localStorage.getItem('phone');
 
         if (storedUsername && storedCountryCode && storedPhone) {
-            usernameInput.value = storedUsername;
-            countryCodeSelect.value = storedCountryCode;
-            phoneInput.value = storedPhone;
-            document.getElementById('loginButton').textContent = 'Masuk';
+            // Tampilkan loading screen 
+            loadingScreen.style.display = 'flex';
+            setTimeout(() => {
+                window.location.href = 'https://egsof.xyz/DasborBot';
+            }, 1200);
         }
 
         function updatePhonePlaceholder() {
@@ -260,24 +288,17 @@
             localStorage.setItem('countryCode', countryCode);
             localStorage.setItem('phone', phone);
 
-            setTimeout(function() {
+            // Tampilkan loading screen 
+            loadingScreen.style.display = 'flex';
+            setTimeout(() => {
                 window.location.href = 'https://egsof.xyz/DasborBot';
             }, 1200);
         }
 
-        function resetLogin() {
-            localStorage.removeItem('username');
-            localStorage.removeItem('countryCode');
-            localStorage.removeItem('phone');
-
-            usernameInput.value = '';
-            countryCodeSelect.value = '62';
-            phoneInput.value = '';
-            document.getElementById('loginButton').textContent = 'Login';
-        }
-
         function quickLogin() {
-            setTimeout(function() {
+            // Tampilkan loading screen 
+            loadingScreen.style.display = 'flex';
+            setTimeout(() => {
                 window.location.href = 'https://egsof.xyz/DasborBot';
             }, 1200);
         }
@@ -302,3 +323,4 @@
     </script>
 </body>
 </html>
+
