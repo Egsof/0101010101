@@ -1,42 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<url>
-  <loc>https://egsof.xyz/</loc>
-  <lastmod>2024-07-26T00:18:04+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://egsof.xyz/about</loc>
-  <lastmod>2024-07-26T00:18:04+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://egsof.xyz/service</loc>
-  <lastmod>2024-07-26T00:18:04+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://egsof.xyz/price</loc>
-  <lastmod>2024-07-26T00:18:04+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://egsof.xyz/contact</loc>
-  <lastmod>2024-07-26T00:18:04+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://egsof.xyz/Login</loc>
-  <lastmod>2024-07-26T00:18:04+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://egsof.xyz/visi-misi-egsof</loc>
-  <lastmod>2024-07-26T00:18:04+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://egsof.xyz/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://egsof.xyz/visi-misi</loc>
+    <lastmod>2023-10-27</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>
