@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin/
 Disallow: /private/
 Allow: /public/
-Sitemap: https://egsof.xyz/sitemap.xml
+Sitemap: https://owalasoft.biz.id/sitemap.xml
