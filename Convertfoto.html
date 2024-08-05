@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Foto</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.03);
+        }
+        h1 {
+            color: #25D366; /* Warna hijau WhatsApp */
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            transition: color 0.3s ease;
+        }
+        h1:hover {
+            color: #128C7E; /* Hijau gelap WhatsApp */
+        }
+        .upload-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .upload-container input[type="file"] {
+            display: none;
+        }
+        .upload-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border: 2px solid #25D366; /* Warna hijau WhatsApp */
+            border-radius: 8px;
+            background: #25D366;
+            color: #ffffff;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            text-decoration: none;
+        }
+        .upload-btn:hover {
+            background-color: #128C7E; /* Hijau gelap WhatsApp */
+            border-color: #128C7E;
+        }
+        select,
+        input[type="number"] {
+            margin: 10px 0;
+            padding: 12px;
+            border: 2px solid #25D366; /* Warna hijau WhatsApp */
+            border-radius: 8px;
+            background: #f8f9fa;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+        select:focus,
+        input[type="number"]:focus {
+            border-color: #128C7E;
+            outline: none;
+        }
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: #ddd;
+            border: 2px solid #25D366; /* Warna hijau WhatsApp */
+            border-radius: 8px;
+            max-width: 100%;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .canvas-container:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        #downloadLink {
+            display: inline-block;
+            margin: 20px;
+            padding: 15px 25px;
+            background-color: #25D366; /* Warna hijau WhatsApp */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #downloadLink:hover {
+            background-color: #128C7E; /* Hijau gelap WhatsApp */
+            transform: scale(1.05);
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .loading-message {
+            margin: 20px 0;
+            font-size: 1.2em;
+            color: #888;
+            display: none;
+            position: relative;
+        }
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #25D366; /* Warna hijau WhatsApp */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .filter-select {
+            margin: 20px 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .filter-select label {
+            margin-bottom: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container fade-in">
+        <h1>Convert Foto</h1>
+        <div class="upload-container">
+            <label for="imageUpload" class="upload-btn">Upload Foto</label>
+            <input type="file" id="imageUpload" accept="image/*">
+        </div>
+        <div>
+            <label for="template">Pilih Template Ukuran:</label>
+            <select id="template">
+                <option value="custom">Custom</option>
+                <option value="original">Ukuran Otomatis (Original)</option>
+                <option value="1280x720">YouTube Thumbnail (1280x720)</option>
+                <option value="180x180">Profile Picture (180x180)</option>
+                <option value="1080x1080">Instagram Post (1080x1080)</option>
+                <option value="1920x1080">HD (1920x1080)</option>
+                <option value="2048x1152">YouTube Channel Art (2048x1152)</option>
+            </select>
+        </div>
+        <div id="customSizeInputs">
+            <label for="width">Lebar:</label>
+            <input type="number" id="width" value="300" min="1" max="2048">
+            <label for="height">Tinggi:</label>
+            <input type="number" id="height" value="300" min="1" max="2048">
+        </div>
+        <div class="filter-select">
+            <label for="filter">Pilih Filter:</label>
+            <select id="filter">
+                <option value="none">None</option>
+                <option value="grayscale(100%)">Hitam Putih</option>
+                <option value="sepia(100%)">Sepia</option>
+                <option value="brightness(150%)">Terang</option>
+                <option value="contrast(150%)">Kontras</option>
+                <option value="saturate(200%)">Saturasi</option>
+                <option value="invert(100%)">Negatif</option>
+                <option value="blur(5px)">Blur</option>
+                <option value="hue-rotate(90deg)">Hue Rotate</option>
+                <option value="drop-shadow(5px 5px 5px rgba(0,0,0,0.5))">Bayangan</option>
+                <option value="opacity(50%)">Transparansi</option>
+                <option value="contrast(50%)">Kontras Rendah</option>
+                <option value="brightness(50%)">Kegelapan</option>
+                <option value="saturate(50%)">Desaturasi</option>
+                <option value="blur(2px)">Blur Ringan</option>
+                <option value="hue-rotate(180deg)">Hue Rotate 180°</option>
+                <option value="invert(50%)">Negatif 50%</option>
+                <option value="sepia(50%)">Sepia 50%</option>
+                <option value="grayscale(50%)">Grayscale 50%</option>
+                <option value="drop-shadow(10px 10px 10px rgba(0,0,0,0.5))">Bayangan Besar</option>
+                <option value="hue-rotate(-90deg)">Hue Rotate -90°</option>
+                <option value="saturate(300%)">Saturasi Tinggi</option>
+                <option value="contrast(200%)">Kontras Tinggi</option>
+                <option value="brightness(200%)">Kecerahan Tinggi</option>
+                <option value="blur(10px)">Blur Tinggi</option>
+                <option value="opacity(25%)">Transparansi Tinggi</option>
+                <option value="grayscale(75%)">Grayscale 75%</option>
+                <option value="sepia(75%)">Sepia 75%</option>
+                <option value="hue-rotate(45deg)">Hue Rotate 45°</option>
+            </select>
+        </div>
+        <div class="loading-message" id="loadingMessage">
+            <div class="spinner"></div>
+            <p>Pengolahan...</p>
+        </div>
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
+        </div>
+        <a id="downloadLink" style="display: none;">Download Gambar</a>
+        <div class="footer">
+            <p>Copyright &copy; 2024 Owalasoft. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('imageUpload');
+        const widthInput = document.getElementById('width');
+        const heightInput = document.getElementById('height');
+        const templateSelect = document.getElementById('template');
+        const filterSelect = document.getElementById('filter');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const downloadLink = document.getElementById('downloadLink');
+        const customSizeInputs = document.getElementById('customSizeInputs');
+        const loadingMessage = document.getElementById('loadingMessage');
+
+        let img = new Image();
+        let debounceTimer;
+
+        function applyFilter(ctx, filter) {
+            ctx.filter = filter;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        }
+
+        function updateCanvas() {
+            const width = widthInput.value;
+            const height = heightInput.value;
+            const filter = filterSelect.value;
+
+            loadingMessage.style.display = 'block';
+
+            if (templateSelect.value === "original") {
+                canvas.width = img.width;
+                canvas.height = img.height;
+            } else {
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            applyFilter(ctx, filter);
+
+            const dataUrl = canvas.toDataURL('image/jpeg');
+
+            downloadLink.href = dataUrl;
+            downloadLink.download = 'converted_image.jpg';
+            downloadLink.style.display = 'block';
+            downloadLink.textContent = 'Download Gambar';
+
+            loadingMessage.style.display = 'none';
+        }
+
+        function handleFileChange(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    img.onload = function() {
+                        updateCanvas();
+                        widthInput.addEventListener('input', updateCanvas);
+                        heightInput.addEventListener('input', updateCanvas);
+                        filterSelect.addEventListener('change', updateCanvas);
+                    }
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleTemplateChange() {
+            const selectedTemplate = templateSelect.value.split('x');
+            if (templateSelect.value === "original") {
+                customSizeInputs.style.display = "none";
+                if (img.src) {
+                    updateCanvas();
+                }
+            } else {
+                customSizeInputs.style.display = "block";
+                widthInput.value = selectedTemplate[0];
+                heightInput.value = selectedTemplate[1];
+                const event = new Event('input');
+                widthInput.dispatchEvent(event);
+                heightInput.dispatchEvent(event);
+            }
+        }
+
+        fileInput.addEventListener('change', handleFileChange);
+        templateSelect.addEventListener('change', handleTemplateChange);
+    </script>
+</body>
+</html>
+
