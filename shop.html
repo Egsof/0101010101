@@ -16,6 +16,38 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <style>
+        .trending-items .item {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .trending-items .item .thumb {
+            width: 100%;
+            padding-bottom: 100%;
+            position: relative;
+            overflow: hidden;
+            background-color: #f8f8f8;
+        }
+
+        .trending-items .item .thumb img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: auto;
+            height: 100%;
+            transform: translate(-50%, -50%);
+        }
+
+        .trending-items .item .down-content {
+            padding: 10px;
+        }
+
+        .trending-items .item .price em {
+            font-size: 0.8em;
+        }
+    </style>
 </head>
 
 <body>
@@ -162,4 +194,5 @@
     <script src="assets/js/counter.js"></script>
     <script src="assets/js/custom.js"></script>
 </body>
+
 </html>
