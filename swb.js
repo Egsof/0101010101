@@ -63,7 +63,7 @@
             const chatBox = document.getElementById('chatBox');
             const questionMessage = document.createElement('div');
             questionMessage.className = 'message bot';
-            questionMessage.innerHTML = `Berapa hasil dari <b>${currentMath.str}</b>?`;
+            questionMessage.innerHTML = `Berapa hasil dari: <b>${currentMath.str}</b> Ketik <b>nyerah</b> untuk menyerah.`;
             chatBox.appendChild(questionMessage);
 
             chatBox.scrollTop = chatBox.scrollHeight;
