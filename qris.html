@@ -110,7 +110,7 @@
     </style>
 </head>
 <body>
-    <div class="container" id="loadingContainer">
+    <div class="container">
         <div class="qr-container">
             <img id="qrImage" class="qr-image" src="https://telegra.ph/file/d6dbec671a13f8f2e1a35.jpg" alt="QRIS Image">
             <div class="instruction">
@@ -137,75 +137,47 @@
             <p>7. Transaksi selesai. Simpan bukti pembayaran Anda</p>
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Check if QR ID is already in the URL
-            const urlParts = window.location.pathname.split('/');
-            const lastPart = urlParts[urlParts.length - 1];
+            const qrId = Math.random().toString(36).substring(2, 12).toUpperCase();
+            const expiryDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
 
-            if (!lastPart || lastPart.length !== 10) {
-                // Generate new QR ID and expiry time
-                const qrId = Math.random().toString(36).substring(2, 12).toUpperCase();
-                const newUrl = window.location.origin + '/qris/' + qrId;
+            document.getElementById('qrIdValue').innerText = qrId;
 
-                // Redirect to new URL
-                window.location.replace(newUrl);
-            } else {
-                // Display the content after URL is set with QR ID
-                const qrId = lastPart;
-                initializePage(qrId);
-            }
-
-            function initializePage(qrId) {
-                document.getElementById('qrIdValue').innerText = qrId;
-
-                const expiryDate = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
-
-                function updateExpiryTime() {
-                    const now = new Date();
-                    const timeLeft = expiryDate - now;
-                    if (timeLeft <= 0) {
-                        document.getElementById('qrImage').parentElement.style.display = 'none';
-                        document.getElementById('whatsappButton').style.display = 'none';
-                        document.getElementById('detailButton').style.display = 'none';
-                        alert('Gagal melakukan pembayaran');
-                        return;
-                    }
-                    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                    document.getElementById('expiryTime').innerText = `${hours}h ${minutes}m ${seconds}s`;
+            function updateExpiryTime() {
+                const now = new Date();
+                const timeLeft = expiryDate - now;
+                if (timeLeft <= 0) {
+                    document.getElementById('qrImage').parentElement.style.display = 'none';
+                    document.getElementById('whatsappButton').style.display = 'none';
+                    document.getElementById('detailButton').style.display = 'none';
+                    alert('Gagal melakukan pembayaran');
+                    return;
                 }
-
-                setInterval(updateExpiryTime, 1000); // Update every second
-
-                updateExpiryTime(); // Initial call to set the time immediately
-
-                // Event listener for Detail button
-                const detailButton = document.getElementById('detailButton');
-                const detailContent = document.getElementById('detailContent');
-
-                detailButton.addEventListener('click', function () {
-                    if (detailContent.style.display === 'block') {
-                        detailContent.style.display = 'none';
-                    } else {
-                        detailContent.style.display = 'block';
-                    }
-                });
-
-                document.getElementById('copyButton').addEventListener('click', function () {
-                    navigator.clipboard.writeText(qrId).then(() => {
-                        alert('ID berhasil disalin');
-                    }).catch(err => {
-                        alert('Gagal menyalin ID');
-                    });
-                });
-
-                document.getElementById('whatsappButton').addEventListener('click', function () {
-                    window.open('https://wa.me/6285369942151', '_blank');
-                });
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                document.getElementById('expiryTime').innerText = `${hours}h ${minutes}m ${seconds}s`;
             }
+
+            setInterval(updateExpiryTime, 1000); // Update every second
+
+            document.getElementById('detailButton').addEventListener('click', function () {
+                const detailContent = document.getElementById('detailContent');
+                detailContent.style.display = detailContent.style.display === 'none' || detailContent.style.display === '' ? 'block' : 'none';
+            });
+
+            document.getElementById('copyButton').addEventListener('click', function () {
+                navigator.clipboard.writeText(qrId).then(() => {
+                    alert('ID berhasil disalin');
+                }).catch(err => {
+                    alert('Gagal menyalin ID');
+                });
+            });
+
+            document.getElementById('whatsappButton').addEventListener('click', function () {
+                window.open('https://wa.me/6285369942151', '_blank');
+            });
         });
     </script>
 </body>
