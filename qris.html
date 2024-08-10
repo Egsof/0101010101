@@ -147,7 +147,7 @@
             if (!lastPart || lastPart.length !== 10) {
                 // Generate new QR ID and expiry time
                 const qrId = Math.random().toString(36).substring(2, 12).toUpperCase();
-                const newUrl = window.location.origin + window.location.pathname + '/' + qrId;
+                const newUrl = window.location.origin + '/qris/' + qrId;
 
                 // Redirect to new URL
                 window.location.replace(newUrl);
