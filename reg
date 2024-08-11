@@ -53,31 +53,6 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
 
-        .button-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .button {
-            padding: 15px 30px;
-            font-size: 18px;
-            color: white;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
         h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
@@ -102,8 +77,8 @@
         }
 
         .option-container {
-            display: none;
             margin-top: 20px;
+            display: flex;
             flex-direction: column;
         }
 
@@ -147,30 +122,6 @@
             margin-top: 20px;
         }
 
-        .checklist-container {
-            display: none;
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .checklist-item.completed::before {
-            content: '✔️';
-            color: green;
-            margin-right: 10px;
-        }
-
-        .checklist-item::before {
-            content: '⏳';
-            color: gray;
-            margin-right: 10px;
-        }
-
         #ageRange {
             width: 100%;
             margin: 20px 0;
@@ -191,7 +142,7 @@
                 height: 120px;
             }
 
-            .button {
+            .option-button {
                 padding: 12px 24px;
                 font-size: 16px;
             }
@@ -211,14 +162,9 @@
         </div>
         <p id="confirmation" style="display: none; font-size: 1.5em; margin-top: 20px;"></p>
         <div class="loading" id="loading">Menghubungkan dengan server...</div>
-        <div class="checklist-container" id="checklistContainer">
-            <div class="checklist-item" id="checklistItem1">Verifikasi human...</div>
-            <div class="checklist-item" id="checklistItem2">Terhubung dengan server...</div>
-        </div>
     </div>
 
     <script>
-        // Menampilkan verifikasi umur saat halaman dibuka
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('ageOptionContainer').style.display = 'flex';
         });
