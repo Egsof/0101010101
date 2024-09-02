@@ -6,260 +6,192 @@
     <title>Formulir</title>
     <style>
         body {
-            background-color: #f0f2f5;
-            color: #333;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
             margin: 0;
-            padding: 20px;
-            text-align: center;
-            overflow-x: hidden; /* Mencegah scroll horizontal */
+            padding: 0;
         }
-
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-            margin-bottom: 20px;
-            box-sizing: border-box; /* Memastikan padding dan border tidak menyebabkan scroll */
-        }
-
-        .service-message {
-            font-size: 1.5rem;
-            color: #007bff;
-            font-weight: bold;
-            margin: 0 0 20px 0;
-        }
-
-        .form-subheader {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .button {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 20px;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #007bff;
-            text-decoration: none;
-            border-radius: 10px;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            box-sizing: border-box;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
         .form-container {
             background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-            text-align: left;
-            margin-bottom: 20px;
-            box-sizing: border-box;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 20px auto;
         }
-
-        .input-container,
-        .textarea-container {
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .form-header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .form-group {
             margin-bottom: 15px;
         }
-
-        input,
-        textarea {
-            width: calc(100% - 20px);
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            background-color: #f8f9fa;
-            color: #333;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            height: 100px;
-            resize: none;
-        }
-
-        .submit-button {
-            width: 100%;
-            padding: 15px;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #28a745;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 10px;
-            display: none;
-            transition: background-color 0.3s ease;
-            cursor: not-allowed;
-            box-sizing: border-box;
-        }
-
-        .submit-button.enabled {
+        .form-group label {
             display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .submit-btn,
+        .whatsapp-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+            text-align: center;
+            display: block;
+            margin: 20px auto 0;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            text-decoration: none;
         }
-
-        .submit-button.enabled:hover {
-            background-color: #218838;
+        .submit-btn:hover,
+        .whatsapp-btn:hover {
+            background-color: #45a049;
         }
-
-        @media (max-width: 600px) {
-            .button {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-
-            .submit-button {
-                padding: 12px;
-                font-size: 0.9rem;
-            }
-
-            input,
-            textarea {
-                font-size: 0.9rem;
-            }
-        }
-
-        .checkbox-container {
+        .terms-container {
             display: flex;
             align-items: center;
-            margin: 15px 0;
-            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-size: 12px;
+            font-family: Arial, sans-serif;
         }
-
-        .checkbox-container input {
+        .terms-container input {
             margin-right: 10px;
         }
-
-        .checkbox-container label {
-            margin: 0;
-        }
-
-        .checkbox-container a {
-            color: #007bff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .checkbox-container a:hover {
-            color: #0056b3;
+        .terms-container label {
+            color: #555;
         }
     </style>
     <script>
-        function updateButtonState() {
-            const nama = document.getElementById('nama').value.trim();
-            const umur = document.getElementById('umur').value.trim();
-            const tempat = document.getElementById('tempat').value.trim();
-            const alasan = document.getElementById('alasan').value.trim();
-            const harapan = document.getElementById('harapan').value.trim();
-            const privacyPolicy = document.getElementById('privacyPolicy').checked;
-            const submitButton = document.getElementById('submitButton');
-
-            if (nama && umur && tempat && alasan && harapan && privacyPolicy) {
-                submitButton.classList.add('enabled');
-                submitButton.style.display = 'block';
-                submitButton.onclick = function() { submitForm(); };
-            } else {
-                submitButton.classList.remove('enabled');
-                submitButton.style.display = 'none';
-                submitButton.onclick = null;
+        function kirimKeWhatsApp() {
+            var nama = document.getElementById("nama").value;
+            var umur = document.getElementById("umur").value;
+            var tempat = document.getElementById("tempat").value;
+            var sekolah = document.getElementById("sekolah").value;
+            var email = document.getElementById("email").value;
+            var kodeNegara = document.getElementById("kodeNegara").value;
+            var nomorHp = document.getElementById("nomorHp").value;
+            var alasan = document.getElementById("alasan").value;
+            var harapan = document.getElementById("harapan").value;
+            var setuju = document.getElementById("setuju").checked;
+            
+            var regexNomor = /^[0-9]+$/;
+            if (!regexNomor.test(nomorHp)) {
+                alert("Nomor HP harus berupa angka saja.");
+                return;
             }
+
+            if (!setuju) {
+                alert("Anda harus menyetujui Kebijakan Privasi dan Syarat & Ketentuan terlebih dahulu.");
+                return;
+            }
+            
+            var nomorWA = "6285369942151";
+            var teksPesan = "Nama: " + nama + "%0A" +
+                            "Umur: " + umur + "%0A" +
+                            "Tempat: " + tempat + "%0A" +
+                            "Sekolah: " + sekolah + "%0A" +
+                            "Alamat Gmail: " + email + "%0A" +
+                            "Nomor HP: " + kodeNegara + nomorHp + "%0A" +
+                            "Alasan Menggunakan Layanan: " + alasan + "%0A" +
+                            "Harapan ke Depan: " + harapan;
+            
+            var url = "https://wa.me/" + nomorWA + "?text=" + teksPesan;
+            window.open(url, "_blank");
         }
-
-        function submitForm() {
-            const nama = document.getElementById('nama').value;
-            const umur = document.getElementById('umur').value;
-            const tempat = document.getElementById('tempat').value;
-            const sekolah = document.getElementById('sekolah').value;
-            const alasan = document.getElementById('alasan').value;
-            const harapan = document.getElementById('harapan').value;
-
-            const waLink = `https://wa.me/6285369942151?text=${encodeURIComponent(
-                `Nama: ${nama}\nUmur: ${umur}\nTempat: ${tempat}\nSekolah: ${sekolah || 'Tidak bersekolah'}\nAlasan menggunakan layanan: ${alasan}\nHarapan ke depan: ${harapan}`
-            )}`;
-
-            window.open(waLink, '_blank');
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('input, textarea').forEach(function(element) {
-                element.addEventListener('input', updateButtonState);
-            });
-            document.getElementById('privacyPolicy').addEventListener('change', updateButtonState);
-        });
     </script>
 </head>
 <body>
-    <div class="container">
-        <p class="service-message">Maaf, Layanan Gratis Tidak Tersedia.</p>
-    </div>
 
-    <div class="button-container">
-        <a href="https://whatsapp.com/channel/0029VaXUbMJG8l5N9AjkYK1F" class="button">Join Saluran WA</a>
-        <a href="https://wa.me/message/BNTMDGF3Y7GWP1" class="button">Hubungi Kami</a>
+<div class="form-container">
+    <div class="form-header">
+        <h2>Owalasoft Formulir</h2>
+        <p>Jika ingin menggunakan layanan secara gratis, silakan isi Formulir di bawah ini.</p>
     </div>
-
-    <div class="form-container">
-        <div class="form-subheader">Jika ingin tetap menggunakan layanan secara gratis, silakan isi Formulir di bawah ini:</div>
-        
-        <div class="input-container">
+    <form onsubmit="kirimKeWhatsApp(); return false;">
+        <div class="form-group">
             <label for="nama">Nama:</label>
-            <input type="text" id="nama" placeholder="Tuliskan nama Anda...">
+            <input type="text" id="nama" name="nama" placeholder="Tuliskan nama Anda..." required>
         </div>
-        <div class="input-container">
+        <div class="form-group">
             <label for="umur">Umur:</label>
-            <input type="number" id="umur" placeholder="Tuliskan umur Anda...">
+            <input type="number" id="umur" name="umur" placeholder="Tuliskan umur Anda..." required>
         </div>
-        <div class="input-container">
+        <div class="form-group">
             <label for="tempat">Tempat:</label>
-            <input type="text" id="tempat" placeholder="Tuliskan tempat tinggal Anda...">
+            <input type="text" id="tempat" name="tempat" placeholder="Tuliskan tempat tinggal Anda..." required>
         </div>
-        <div class="input-container">
+        <div class="form-group">
             <label for="sekolah">Sekolah (Opsional):</label>
-            <input type="text" id="sekolah" placeholder="Tuliskan nama sekolah Anda jika ada...">
+            <input type="text" id="sekolah" name="sekolah" placeholder="Tuliskan nama sekolah Anda jika ada...">
         </div>
-        <div class="textarea-container">
+        <div class="form-group">
+            <label for="email">Alamat Gmail:</label>
+            <input type="email" id="email" name="email" placeholder="Tuliskan alamat Gmail Anda..." required>
+        </div>
+        <div class="form-group">
+            <label for="nomorHp">Nomor HP:</label>
+            <select id="kodeNegara" name="kodeNegara" required>
+                <option value="+62">Indonesia (+62)</option>
+                <option value="+60">Malaysia (+60)</option>
+                <option value="+65">Singapura (+65)</option>
+                <option value="+66">Thailand (+66)</option>
+                <option value="+84">Vietnam (+84)</option>
+                <option value="+86">China (+86)</option>
+                <option value="+81">Jepang (+81)</option>
+                <option value="+82">Korea Selatan (+82)</option>
+                <option value="+91">India (+91)</option>
+                <option value="+95">Myanmar (+95)</option>
+                <option value="+94">Sri Lanka (+94)</option>
+                <option value="+92">Pakistan (+92)</option>
+            </select>
+            <input type="tel" id="nomorHp" name="nomorHp" placeholder="Tuliskan nomor HP Anda..." required>
+        </div>
+        <div class="form-group">
             <label for="alasan">Alasan Menggunakan Layanan:</label>
-            <textarea id="alasan" placeholder="Mengapa Anda ingin menggunakan layanan ini..."></textarea>
+            <textarea id="alasan" name="alasan" placeholder="Mengapa Anda ingin menggunakan layanan ini..." required></textarea>
         </div>
-        <div class="textarea-container">
+        <div class="form-group">
             <label for="harapan">Harapan ke Depan:</label>
-            <textarea id="harapan" placeholder="Apa harapan Anda untuk layanan ini di masa depan..."></textarea>
+            <textarea id="harapan" name="harapan" placeholder="Apa harapan Anda untuk layanan ini di masa depan..." required></textarea>
         </div>
-
-        <div class="checkbox-container">
-            <input type="checkbox" id="privacyPolicy">
-            <label for="privacyPolicy">Saya setuju dengan <a href="https://owalasoft.biz.id/s&k" target="_blank">Kebijakan Privasi</a> dan <a href="https://owalasoft.biz.id/s&k" target="_blank">Syarat Ketentuan</a></label>
+        <div class="terms-container">
+            <input type="checkbox" id="setuju" name="setuju" required>
+            <label for="setuju">Saya menyetujui <a href="https://owalasoft.biz.id/s&k">Kebijakan Privasi</a> dan <a href="https://owalasoft.biz.id/s&k">Syarat & Ketentuan</a></label>
         </div>
+        <button type="submit" class="submit-btn">Kirim Formulir</button>
+    </form>
+    <a href="https://whatsapp.com/channel/0029VaXUbMJG8l5N9AjkYK1F" class="whatsapp-btn" target="_blank">Ikuti Saluran WhatsApp</a>
+</div>
 
-        <a id="submitButton" class="submit-button">Kirim Formulir</a>
-    </div>
 </body>
 </html>
-
