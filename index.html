@@ -213,24 +213,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 offset-lg-2align-self-end">
-                    <div class="subscribe">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-heading">
-                                    <h6>Pengguna Baru</h6>
-                                    <h2>Dapatkan Diskon Terbaik Hanya Dengan Membeli <em>Langganan</em> Pengguna Baru!</h2>
-                                </div>
-                                <div class="search-input">
-                                    <form id="subscribe" action="https://owalasoft.biz.id/shop">
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby ="emailHelp" placeholder="Your email...">
-                                        <button type="submit">Subscribe Now</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -243,33 +225,32 @@
     </footer>
 
     <!-- Scripts -->
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-
-    <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/isotope.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/counter.js"></script>
+    <script src="assets/js/animation.js"></script>
+    <script src="assets/js/imagesloaded.js"></script>
     <script src="assets/js/custom.js"></script>
-
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    
     <script>
         // Initialize Swiper
         var swiper = new Swiper('.swiper-container', {
-            loop: true, // Enable loop mode
+            slidesPerView: 1,
+            spaceBetween: 10,
             autoplay: {
-                delay: 2500, // Change slide every 2.5 seconds
+                delay: 2500,
+                disableOnInteraction: false,
             },
-            speed: 500, // Transition speed
-            slidesPerView: 1, // Default to showing one slide at a time
             breakpoints: {
-                // Responsive breakpoints
                 768: {
-                    slidesPerView: 3, // Show three slides on desktop
-                },
-            },
+                    slidesPerView: 3, // 3 slides visible on larger screens
+                    spaceBetween: 20,
+                }
+            }
         });
     </script>
 </body>
+
 </html>
+
