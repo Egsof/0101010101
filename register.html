@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             margin: 0;
@@ -147,30 +148,6 @@
             margin-top: 20px;
         }
 
-        .checklist-container {
-            display: none;
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .checklist-item.completed::before {
-            content: '✔️';
-            color: green;
-            margin-right: 10px;
-        }
-
-        .checklist-item::before {
-            content: '⏳';
-            color: gray;
-            margin-right: 10px;
-        }
-
         #ageRange {
             width: 100%;
             margin: 20px 0;
@@ -179,6 +156,11 @@
         #ageValue {
             font-size: 1.2em;
             color: #007BFF;
+        }
+
+        .disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
         }
 
         @media (max-width: 768px) {
@@ -203,118 +185,39 @@
         <img src="https://telegra.ph/file/83eb2b17e8d23e05f7598.jpg" alt="Logo" class="logo">
         <h1>Bot WhatsApp</h1>
         <hr>
-        <p id="instructionText">Dapat Kan Bot WhatsApp Kamu Klik Tombol Di Bawah</p>
+        <p id="instructionText">Verifikasi Diri Anda Klik Tombol Di Bawah</p>
         <div class="button-container" id="mainButtonContainer">
-            <button class="button" onclick="showOptions()">Memulai</button>
-        </div>
-        <div class="option-container" id="optionContainer">
-            <button class="option-button" onclick="chooseOption('Menunggu verifikasi')">lanjutkan</button>
-            <button class="option-button" onclick="redirectNo()">Kembali</button>
-            <button class="cancel-button" onclick="cancelSelection()">X</button>
+            <button class="button" onclick="startProcess()">Reg</button>
         </div>
         <div class="option-container" id="ageOptionContainer" style="display: none;">
-            <p>( Verifikasi Umur Anda )</p>
-            <input type="range" id="ageRange" min="10" max="30" value="10" oninput="updateAgeValue(this.value)">
-            <span id="ageValue">Geser untuk memilih</span>
-            <button class="option-button" onclick="chooseAge()" id="ageButton" disabled>Verifikasi</button>
+            <p id="agePrompt">Geser slider untuk memilih umur Anda</p>
+            <input type="range" id="ageRange" min="10" max="45" value="10" oninput="updateAgeValue(this.value)">
+            <span id="ageValue">Umur: --</span>
+            <button class="option-button disabled" id="ageButton" onclick="chooseAge()" disabled>Verifikasi</button>
         </div>
-        <p id="confirmation" style="display: none; font-size: 1.5em; margin-top: 20px;"></p>
         <div class="loading" id="loading">Menghubungkan dengan server...</div>
-        <div class="checklist-container" id="checklistContainer">
-            <div class="checklist-item" id="checklistItem1">Verifikasi human...</div>
-            <div class="checklist-item" id="checklistItem2">Terhubung dengan server...</div>
-        </div>
     </div>
 
     <script>
-        function showOptions() {
-            var optionContainer = document.getElementById('optionContainer');
-            optionContainer.style.display = 'flex';
-
-            var mainButtonContainer = document.getElementById('mainButtonContainer');
-            mainButtonContainer.style.display = 'none';
-
-            var instructionText = document.getElementById('instructionText');
-            instructionText.style.display = 'none';
+        function startProcess() {
+            document.getElementById('mainButtonContainer').style.display = 'none';
+            document.getElementById('instructionText').style.display = 'none';
+            document.getElementById('ageOptionContainer').style.display = 'flex';
         }
 
-        function chooseOption(option) {
-            var confirmationText = document.getElementById('confirmation');
-            confirmationText.textContent = option;
-            confirmationText.style.display = 'block';
-
-            var optionContainer = document.getElementById('optionContainer');
-            optionContainer.style.display = 'none';
-
-            if (option === 'Menunggu verifikasi') {
-                setTimeout(function() {
-                    showChecklist();
-                }, 500); 
-            }
-        }
-
-        function redirectNo() {
-            setTimeout(function() {
-                window.location.href = 'https://Owalasoft.biz.id';
-            }, 1000);
-        }
-
-        function cancelSelection() {
-            var optionContainer = document.getElementById('optionContainer');
-            optionContainer.style.display = 'none';
-
-            var ageOptionContainer = document.getElementById('ageOptionContainer');
-            ageOptionContainer.style.display = 'none';
-
-            var confirmationText = document.getElementById('confirmation');
-            confirmationText.style.display = 'none';
-
-            var loading = document.getElementById('loading');
-            loading.style.display = 'none';
-
-            var checklistContainer = document.getElementById('checklistContainer');
-            checklistContainer.style.display = 'none';
-
-            var mainButtonContainer = document.getElementById('mainButtonContainer');
-            mainButtonContainer.style.display = 'block';
-
-            var instructionText = document.getElementById('instructionText');
-            instructionText.style.display = 'block';
-        }
-
-        function showChecklist() {
-            var checklistContainer = document.getElementById('checklistContainer');
-            checklistContainer.style.display = 'block';
-
-            var checklistItem1 = document.getElementById('checklistItem1');
-            var checklistItem2 = document.getElementById('checklistItem2');
-
-            setTimeout(function() {
-                checklistItem1.classList.add('completed');
-                setTimeout(function() {
-                    checklistItem2.classList.add('completed');
-                    setTimeout(function() {
-                        checklistContainer.style.display = 'none';
-
-                        var ageOptionContainer = document.getElementById('ageOptionContainer');
-                        ageOptionContainer.style.display = 'flex';
-                    }, 2000); 
-                }, 2000);  
-            }, 1000); 
-        }
-        
         function updateAgeValue(value) {
             var ageValue = document.getElementById('ageValue');
-            ageValue.textContent = value;
+            ageValue.textContent = 'Umur: ' + value;
 
             var ageButton = document.getElementById('ageButton');
-            ageButton.disabled = false;
+            ageButton.disabled = value < 10;
+            ageButton.classList.toggle('disabled', value < 10);
         }
 
         function chooseAge() {
             var ageRange = document.getElementById('ageRange');
             var age = ageRange.value;
-            var confirmationText = document.getElementById('confirmation');
+            var confirmationText = document.getElementById('agePrompt');
             confirmationText.textContent = 'Umur: ' + age;
             confirmationText.style.display = 'block';
 
@@ -326,9 +229,18 @@
 
             setTimeout(function() {
                 loading.style.display = 'none';
-                var url = 'https://wa.me/6285758412480?text=.reg%20user.' + age;
-                window.location.href = url;
-            }, 3500);
+                Swal.fire({
+                    title: 'Verifikasi Berhasil!',
+                    text: 'Anda telah berhasil diverifikasi dan terhubung ke server.',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1600,
+                    didClose: () => {
+                        var url = 'https://wa.me/6285758412480?text=.reg%20user.' + age;
+                        window.location.href = url;
+                    }
+                });
+            }, 2100); 
         }
     </script>
 </body>
