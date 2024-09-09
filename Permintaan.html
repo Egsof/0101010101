@@ -91,6 +91,7 @@
             color: #555;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function kirimKeWhatsApp() {
             var nama = document.getElementById("nama").value;
@@ -128,6 +129,21 @@
             var url = "https://wa.me/" + nomorWA + "?text=" + teksPesan;
             window.open(url, "_blank");
         }
+
+        function handleCheckboxClick() {
+            Swal.fire({
+                title: 'Persetujuan',
+                text: 'Saya setuju dengan Persyaratan dan kebajikan privasi dari Owalasoft.',
+                icon: 'info',
+                confirmButtonText: 'Saya Setuju'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("setuju").checked = true;
+                } else {
+                    document.getElementById("setuju").checked = false;
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -163,16 +179,6 @@
             <select id="kodeNegara" name="kodeNegara" required>
                 <option value="+62">Indonesia (+62)</option>
                 <option value="+60">Malaysia (+60)</option>
-                <option value="+65">Singapura (+65)</option>
-                <option value="+66">Thailand (+66)</option>
-                <option value="+84">Vietnam (+84)</option>
-                <option value="+86">China (+86)</option>
-                <option value="+81">Jepang (+81)</option>
-                <option value="+82">Korea Selatan (+82)</option>
-                <option value="+91">India (+91)</option>
-                <option value="+95">Myanmar (+95)</option>
-                <option value="+94">Sri Lanka (+94)</option>
-                <option value="+92">Pakistan (+92)</option>
             </select>
             <input type="tel" id="nomorHp" name="nomorHp" placeholder="Tuliskan nomor HP Anda..." required>
         </div>
@@ -185,8 +191,8 @@
             <textarea id="harapan" name="harapan" placeholder="Apa harapan Anda untuk layanan ini di masa depan..." required></textarea>
         </div>
         <div class="terms-container">
-            <input type="checkbox" id="setuju" name="setuju" required>
-            <label for="setuju">Saya menyetujui <a href="https://owalasoft.biz.id/s&k">Kebijakan Privasi</a> dan <a href="https://owalasoft.biz.id/s&k">Syarat & Ketentuan</a></label>
+            <input type="checkbox" id="setuju" name="setuju" onclick="handleCheckboxClick()" required>
+            <label for="setuju">Saya setuju dengan <a href="https://owalasoft.biz.id/s&k">Persyaratan</a> dan <a href="https://owalasoft.biz.id/s&k">kebajikan privasi</a> dari Owalasoft</label>
         </div>
         <button type="submit" class="submit-btn">Kirim Formulir</button>
     </form>
