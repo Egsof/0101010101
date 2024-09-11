@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owalasoft</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Mencegah scroll horizontal */
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        #searchBar {
+            width: 80%;
+            padding: 10px;
+            margin: 20px auto;
+            display: block;
+            font-size: 16px;
+        }
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Dua kolom */
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+            max-width: 100%; /* Pastikan lebar kontainer tidak melebihi 100% */
+            margin: 0 auto; /* Centering the grid */
+        }
+        .game-card {
+            background-color: white;
+            width: 100%; /* Ubah width agar sesuai dengan konten */
+            max-width: 200px; /* Batas maksimum lebar kartu game */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .game-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .game-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .game-card a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .game-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Owalasoft.biz.id</h1>
+</header>
+
+<input type="text" id="searchBar" placeholder="🔍 Search..." onkeyup="searchGame()">
+
+<div class="game-container" id="gameContainer">
+    <div class="game-card">
+        <img src="https://i.postimg.cc/hG7dgCd6/20240911-114625.jpg" alt="Chess Royal">
+        <h3>Chess Royal</h3>
+        <a href="https://owalasoft.biz.id/catur" target="_blank">Play Now</a>
+    </div>
+    <div class="game-card">
+        <img src="https://i.postimg.cc/7ZR2FvfS/20240911-114308.jpg" alt="Tic Tac Toe">
+        <h3>Tic Tac Toe</h3>
+        <a href="https://owalasoft.biz.id/ttt" target="_blank">Play Now</a>
+    </div>
+    <div class="game-card">
+        <img src="https://i.postimg.cc/FsCBfRYc/20240911-114224.jpg" alt="Bot Mtk Mu">
+        <h3>Bot Mtk Mu</h3>
+        <a href="https://owalasoft.biz.id/Botmtkmu" target="_blank">Play Now</a>
+    </div>
+    <div class="game-card">
+        <img src="https://i.postimg.cc/pLrjcVX2/20240911-114209.jpg" alt="Convert Foto ">
+        <h3>Convert Foto</h3>
+        <a href="https://owalasoft.biz.id/Convertfoto" target="_blank">Play Now</a>
+    </div>
+    <div class="game-card">
+        <img src="https://i.postimg.cc/VLDMF0wG/20240911-114255.jpg" alt="Flybol">
+        <h3>Flybol</h3>
+        <a href="https://owalasoft.biz.id/flybol" target="_blank">Play Now</a>
+    </div>
+    <div class="game-card">
+        <img src="https://i.postimg.cc/Bnm82rxd/20240911-174600.png" alt="Game 6">
+        <h3>Segera Hadir</h3>
+        <a href="#" target="_blank">⏳⌛</a>
+    </div>
+    <div class="game-card">
+        <img src="https://i.postimg.cc/Bnm82rxd/20240911-174600.png" alt="Game 7">
+        <h3>Segera Hadir</h3>
+        <a href="#" target="_blank">⏳⌛</a>
+    </div>
+    <div class="game-card">
+        <img src="https://i.postimg.cc/Bnm82rxd/20240911-174600.png" alt="Game 8">
+        <h3>Segera Hadir</h3>
+        <a href="#" target="_blank">⏳⌛</a>
+    </div>
+    <div class="game-card">
+        <img src="https://i.postimg.cc/Bnm82rxd/20240911-174600.png" alt="Game 9">
+        <h3>Segera Hadir</h3>
+        <a href="#" target="_blank">⏳⌛</a>
+    </div>
+    <div class="game-card">
+        <img src="https://i.postimg.cc/Bnm82rxd/20240911-174600.png" alt="Game 10">
+        <h3>Segera Hadir</h3>
+        <a href="#" target="_blank">⏳⌛</a>
+    </div>
+</div>
+
+<script>
+    function searchGame() {
+        let input = document.getElementById('searchBar').value.toLowerCase();
+        let gameCards = document.getElementsByClassName('game-card');
+
+        for (let i = 0; i < gameCards.length; i++) {
+            let gameTitle = gameCards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+            if (gameTitle.includes(input)) {
+                gameCards[i].style.display = "";
+            } else {
+                gameCards[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
