@@ -27,20 +27,20 @@
 <body>
     <div class="container" id="l">
         <div class="qr-container">
-            <img id="i" class="qr-image" src="https://telegra.ph/file/4ed9b4b0d53ece7b388c5.jpg" alt="QRIS Image">
+            <img id="i" class="qr-image" src="https://imgtr.ee/images/2024/09/19/4cf5ba3c1fb20ac6ba746a69ea8836eb.md.jpeg" alt="QRIS Image">
             <div class="instruction">
                 <div class="id-container">
                     <span class="id-text">ID Transaksi: <span id="a"></span></span>
                     <button class="copy-button" id="b">Copy ID</button>
                 </div>
-                 <p>Total Bayar: Rp30.000</p> 
-                 <p>Biaya Admin: Free</p>               
+                 <p>Total Bayar: Rp15.000</p> 
+                 <p>Biaya Admin: Gratis</p>               
                 <p>Expired At: <span id="c" class="expiry-time"></span></p>
                 <p>Lakukan pembayaran sesuai QRIS di atas</p>
             </div>
             <button class="whatsapp-button" id="d">
                 <img class="whatsapp-icon" src="https://telegra.ph/file/87f5f77d410b837c3a850.jpg" alt="WhatsApp Icon">
-                Order via WhatsApp
+                Konfirmasi Pembayaran
             </button>
         </div>
         <button class="detail-button" id="e">Detail</button>
@@ -55,7 +55,63 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded',function(){const u=new URLSearchParams(window.location.search);const q=u.get('id');if(!q||q.length!==10){const n=Math.random().toString(36).substring(2,12).toUpperCase();const r=window.location.origin+'/30?id='+n;window.location.replace(r)}else{function o(q){document.getElementById('a').innerText=q;const e=new Date(Date.now()+24*60*60*1000);function t(){const n=new Date();const r=e-n;if(r<=0){document.getElementById('i').parentElement.style.display='none';document.getElementById('d').style.display='none';document.getElementById('e').style.display='none';alert('Gagal melakukan pembayaran');return}const i=Math.floor(r/(1000*60*60));const s=Math.floor((r%(1000*60*60))/(1000*60));const c=Math.floor((r%(1000*60))/1000);document.getElementById('c').innerText=`${i}h ${s}m ${c}s`}setInterval(t,1000);t();document.getElementById('e').addEventListener('click',function(){const n=document.getElementById('f');n.style.display=n.style.display==='block'?'none':'block'});document.getElementById('b').addEventListener('click',function(){navigator.clipboard.writeText(q).then(()=>{alert('ID berhasil disalin')}).catch(()=>{alert('Gagal menyalin ID')})});document.getElementById('d').addEventListener('click',function(){window.open('https://wa.me/6285369942151','_blank')})}o(q)}});
+        document.addEventListener('DOMContentLoaded', function() {
+            const u = new URLSearchParams(window.location.search);
+            const q = u.get('id');
+            const total = "Rp30.000"; 
+            const phoneNumber = '6285369942151'; 
+
+            if (!q || q.length !== 10) {
+                const n = Math.random().toString(36).substring(2, 12).toUpperCase();
+                const r = window.location.origin + '/15?id=' + n;
+                window.location.replace(r);
+            } else {
+                function o(q) {
+                    document.getElementById('a').innerText = q;
+                    const e = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+                    function t() {
+                        const n = new Date();
+                        const r = e - n;
+                        if (r <= 0) {
+                            document.getElementById('i').parentElement.style.display = 'none';
+                            document.getElementById('d').style.display = 'none';
+                            document.getElementById('e').style.display = 'none';
+                            alert('Gagal melakukan pembayaran');
+                            return;
+                        }
+                        const i = Math.floor(r / (1000 * 60 * 60));
+                        const s = Math.floor((r % (1000 * 60 * 60)) / (1000 * 60));
+                        const c = Math.floor((r % (1000 * 60)) / 1000);
+                        document.getElementById('c').innerText = `${i}h ${s}m ${c}s`;
+                    }
+
+                    setInterval(t, 1000);
+                    t();
+
+                    document.getElementById('e').addEventListener('click', function() {
+                        const n = document.getElementById('f');
+                        n.style.display = n.style.display === 'block' ? 'none' : 'block';
+                    });
+
+                    document.getElementById('b').addEventListener('click', function() {
+                        navigator.clipboard.writeText(q).then(() => {
+                            alert('ID berhasil disalin');
+                        }).catch(() => {
+                            alert('Gagal menyalin ID');
+                        });
+                    });
+
+                    document.getElementById('d').addEventListener('click', function() {
+                     
+                        const message = `Halo, saya ingin mengkonfirmasi pembayaran.\n\nID Transaksi: ${q}\nTotal Bayar: ${total}`;
+                       
+                        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                    });
+                }
+                o(q);
+            }
+        });
     </script>
 </body>
 </html>
