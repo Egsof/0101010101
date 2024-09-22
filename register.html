@@ -194,101 +194,121 @@
         <button class="btn-help hidden" id="requestCodeBtn" onclick="requestCode()">Minta Kode</button>
     </div>
 
-    <script>
-        let captcha;
-        const secretCode = 'BangEg-Owalasoft:&7#5$+384_1&3#3@.co';
-        let incorrectAttempts = 0;
+<script>
+    let captcha;
+    const secretCode = 'BangEg-Owalasoft:&7#5$+384_1&3#3@.co';
+    let incorrectAttempts = 0;
 
-        function generateCaptcha() {
-            captcha = '';
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            for (let i = 0; i < 6; i++) {
-                captcha += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            document.getElementById('captchaCode').innerText = captcha;
-            document.getElementById('result').innerText = '';
+    function generateCaptcha() {
+        captcha = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        for (let i = 0; i < 6; i++) {
+            captcha += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        document.getElementById('captchaCode').innerText = captcha;
+        document.getElementById('result').innerText = '';
+        document.getElementById('userCaptchaInput').value = ''; // Kosongkan box teks
+    }
+
+    function validateCaptcha() {
+        const userCaptcha = document.getElementById('userCaptchaInput').value;
+        const result = document.getElementById('result');
+
+        if (userCaptcha === captcha) {
+            result.style.color = 'green';
+            result.innerText = 'CAPTCHA Terverifikasi! Masukkan Kode Rahasia.';
             document.getElementById('userCaptchaInput').value = ''; // Kosongkan box teks
-        }
-
-        function validateCaptcha() {
-            const userCaptcha = document.getElementById('userCaptchaInput').value;
-            const result = document.getElementById('result');
-
-            if (userCaptcha === captcha) {
-                result.style.color = 'green';
-                result.innerText = 'CAPTCHA Terverifikasi! Masukkan Kode Rahasia.';
-                document.getElementById('userCaptchaInput').value = ''; // Kosongkan box teks
-                document.getElementById('step1').classList.add('hidden');
-                document.getElementById('step2').classList.remove('hidden');
-            } else {
-                result.style.color = 'red';
-                result.innerText = 'CAPTCHA salah. Coba lagi.';
-                document.getElementById('userCaptchaInput').value = ''; // Kosongkan box teks
-                incorrectAttempts++;
-                if (incorrectAttempts >= 3) {
-                    document.getElementById('requestCodeBtn').classList.remove('hidden');
-                }
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        } else {
+            result.style.color = 'red';
+            result.innerText = 'CAPTCHA salah. Coba lagi.';
+            document.getElementById('userCaptchaInput').value = ''; // Kosongkan box teks
+            incorrectAttempts++;
+            if (incorrectAttempts >= 3) {
+                document.getElementById('requestCodeBtn').classList.remove('hidden');
             }
         }
+    }
 
-        function validateSecretCode() {
-            const userSecretCode = document.getElementById('secretCodeInput').value;
-            const resultSecret = document.getElementById('resultSecret');
+    function validateSecretCode() {
+        const userSecretCode = document.getElementById('secretCodeInput').value;
+        const resultSecret = document.getElementById('resultSecret');
 
-            // Sembunyikan tombol Minta Kode
-            document.getElementById('requestCodeBtn').classList.add('hidden');
+        // Sembunyikan tombol Minta Kode
+        document.getElementById('requestCodeBtn').classList.add('hidden');
 
-            if (userSecretCode === secretCode) {
-                resultSecret.style.color = 'green';
-                resultSecret.innerText = 'Kode Rahasia Terverifikasi! Lanjut ke verifikasi umur.';
-                document.getElementById('secretCodeInput').value = ''; // Kosongkan box teks
-                document.getElementById('step2').classList.add('hidden');
-                document.getElementById('step3').classList.remove('hidden');
-                document.getElementById('verificationTitle').classList.add('hidden'); // Sembunyikan judul
-            } else {
-                resultSecret.style.color = 'red';
-                resultSecret.innerText = 'Kode Rahasia salah. Coba lagi.';
-                document.getElementById('secretCodeInput').value = ''; // Kosongkan box teks
-                incorrectAttempts++;
-                if (incorrectAttempts >= 3) {
-                    document.getElementById('requestCodeBtn').classList.remove('hidden');
-                }
+        if (userSecretCode === secretCode) {
+            resultSecret.style.color = 'green';
+            resultSecret.innerText = 'Kode Rahasia Terverifikasi! Lanjut ke verifikasi umur.';
+            document.getElementById('secretCodeInput').value = ''; // Kosongkan box teks
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.remove('hidden');
+            document.getElementById('verificationTitle').classList.add('hidden'); // Sembunyikan judul
+        } else {
+            resultSecret.style.color = 'red';
+            resultSecret.innerText = 'Kode Rahasia salah. Coba lagi.';
+            document.getElementById('secretCodeInput').value = ''; // Kosongkan box teks
+            incorrectAttempts++;
+            if (incorrectAttempts >= 3) {
+                document.getElementById('requestCodeBtn').classList.remove('hidden');
             }
         }
+    }
 
-        function updateAgeValue(value) {
-            document.getElementById('ageValue').textContent = 'Umur: ' + value;
+    function updateAgeValue(value) {
+        document.getElementById('ageValue').textContent = 'Umur: ' + value;
 
-            const ageButton = document.getElementById('ageButton');
-            ageButton.disabled = value < 10;
-            ageButton.classList.toggle('disabled', value < 10);
+        const ageButton = document.getElementById('ageButton');
+        ageButton.disabled = value < 10;
+        ageButton.classList.toggle('disabled', value < 10);
+    }
+
+    function chooseAge() {
+        const loading = document.getElementById('loading');
+        loading.style.display = 'block';
+
+        setTimeout(function() {
+            loading.style.display = 'none';
+            Swal.fire({
+                title: 'Verifikasi Berhasil!',
+                text: 'Anda telah berhasil diverifikasi.',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1600
+            }).then(() => {
+                // Sembunyikan semua tombol setelah verifikasi berhasil
+                hideAllButtons();
+                
+                const randomUser = generateRandomUsername(); // Generate random username
+                const age = document.getElementById('ageRange').value; // Dapatkan umur dari slider
+                window.location.href = 'https://wa.me/6285758412480?text=.reg%20' + randomUser + '.' + age;
+            });
+        }, 2100); 
+    }
+
+    function requestCode() {
+        window.location.href = 'https://wa.me/message/BNTMDGF3Y7GWP1';
+    }
+
+    function generateRandomUsername() {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let randomUsername = '';
+        for (let i = 0; i < 10; i++) { // Panjang 10 karakter
+            randomUsername += characters.charAt(Math.floor(Math.random() * characters.length));
         }
+        return randomUsername;
+    }
 
-        function chooseAge() {
-            const loading = document.getElementById('loading');
-            loading.style.display = 'block';
+    function hideAllButtons() {
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.style.display = 'none'; // Sembunyikan setiap tombol
+        });
+    }
 
-            setTimeout(function() {
-                loading.style.display = 'none';
-                Swal.fire({
-                    title: 'Verifikasi Berhasil!',
-                    text: 'Anda telah berhasil diverifikasi.',
-                    icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1600
-                }).then(() => {
-                    // Sembunyikan tombol Minta Kode
-                    document.getElementById('requestCodeBtn').classList.add('hidden');
-                    window.location.href = 'https://wa.me/6285758412480?text=.reg%20user.' + document.getElementById('ageRange').value;
-                });
-            }, 2100); 
-        }
+    window.onload = generateCaptcha;
+</script>
 
-        function requestCode() {
-            window.location.href = 'https://wa.me/message/BNTMDGF3Y7GWP1';
-        }
-
-        window.onload = generateCaptcha;
-    </script>
 </body>
 </html>
