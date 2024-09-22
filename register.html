@@ -197,7 +197,8 @@
 <script>
     let captcha;
     const secretCode = 'BangEg-Owalasoft:&7#5$+384_1&3#3@.co';
-    let incorrectAttempts = 0;
+    let incorrectCaptchaAttempts = 0; // Menghitung kesalahan CAPTCHA
+    let incorrectSecretCodeAttempts = 0; // Menghitung kesalahan Kode Rahasia
 
     function generateCaptcha() {
         captcha = '';
@@ -224,19 +225,13 @@
             result.style.color = 'red';
             result.innerText = 'CAPTCHA salah. Coba lagi.';
             document.getElementById('userCaptchaInput').value = ''; // Kosongkan box teks
-            incorrectAttempts++;
-            if (incorrectAttempts >= 3) {
-                document.getElementById('requestCodeBtn').classList.remove('hidden');
-            }
+            incorrectCaptchaAttempts++;
         }
     }
 
     function validateSecretCode() {
         const userSecretCode = document.getElementById('secretCodeInput').value;
         const resultSecret = document.getElementById('resultSecret');
-
-        // Sembunyikan tombol Minta Kode
-        document.getElementById('requestCodeBtn').classList.add('hidden');
 
         if (userSecretCode === secretCode) {
             resultSecret.style.color = 'green';
@@ -245,12 +240,16 @@
             document.getElementById('step2').classList.add('hidden');
             document.getElementById('step3').classList.remove('hidden');
             document.getElementById('verificationTitle').classList.add('hidden'); // Sembunyikan judul
+            
+            // Sembunyikan tombol Minta Kode
+            document.getElementById('requestCodeBtn').classList.add('hidden');
         } else {
             resultSecret.style.color = 'red';
             resultSecret.innerText = 'Kode Rahasia salah. Coba lagi.';
             document.getElementById('secretCodeInput').value = ''; // Kosongkan box teks
-            incorrectAttempts++;
-            if (incorrectAttempts >= 3) {
+            incorrectSecretCodeAttempts++;
+            if (incorrectSecretCodeAttempts >= 3) {
+                // Tampilkan tombol Minta Kode setelah 3 kali kesalahan Kode Rahasia
                 document.getElementById('requestCodeBtn').classList.remove('hidden');
             }
         }
@@ -265,6 +264,9 @@
     }
 
     function chooseAge() {
+        // Sembunyikan tombol Minta Kode sebelum verifikasi umur dimulai
+        document.getElementById('requestCodeBtn').classList.add('hidden');
+
         const loading = document.getElementById('loading');
         loading.style.display = 'block';
 
