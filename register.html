@@ -196,9 +196,11 @@
 
 <script>
     let captcha;
-    const secretCode = 'BangEg-Owalasoft:&7#5$+384_1&3#3@.co';
-    let incorrectCaptchaAttempts = 0; // Menghitung kesalahan CAPTCHA
-    let incorrectSecretCodeAttempts = 0; // Menghitung kesalahan Kode Rahasia
+    const fixedPart = 'Owalasoft_Verify:Af7jPq0R4Zb6vH1LgW8yXm9dU3iKsBf5NoY2TtVc1zJQ7wMh0AxlD5e3pCnZ.ai'; 
+    let randomPart = generateRandomPart(); 
+    let secretCode = randomPart + '@' + fixedPart; 
+    let incorrectCaptchaAttempts = 0; 
+    let incorrectSecretCodeAttempts = 0; 
 
     function generateCaptcha() {
         captcha = '';
@@ -208,7 +210,7 @@
         }
         document.getElementById('captchaCode').innerText = captcha;
         document.getElementById('result').innerText = '';
-        document.getElementById('userCaptchaInput').value = ''; // Kosongkan box teks
+        document.getElementById('userCaptchaInput').value = ''; 
     }
 
     function validateCaptcha() {
@@ -218,13 +220,13 @@
         if (userCaptcha === captcha) {
             result.style.color = 'green';
             result.innerText = 'CAPTCHA Terverifikasi! Masukkan Kode Rahasia.';
-            document.getElementById('userCaptchaInput').value = ''; // Kosongkan box teks
+            document.getElementById('userCaptchaInput').value = ''; 
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
         } else {
             result.style.color = 'red';
             result.innerText = 'CAPTCHA salah. Coba lagi.';
-            document.getElementById('userCaptchaInput').value = ''; // Kosongkan box teks
+            document.getElementById('userCaptchaInput').value = ''; 
             incorrectCaptchaAttempts++;
         }
     }
@@ -233,23 +235,27 @@
         const userSecretCode = document.getElementById('secretCodeInput').value;
         const resultSecret = document.getElementById('resultSecret');
 
-        if (userSecretCode === secretCode) {
+        
+        const userParts = userSecretCode.split('-');
+
+       
+        if (userParts.length === 2 && userParts[1] === fixedPart) {
             resultSecret.style.color = 'green';
             resultSecret.innerText = 'Kode Rahasia Terverifikasi! Lanjut ke verifikasi umur.';
-            document.getElementById('secretCodeInput').value = ''; // Kosongkan box teks
+            document.getElementById('secretCodeInput').value = ''; 
             document.getElementById('step2').classList.add('hidden');
             document.getElementById('step3').classList.remove('hidden');
-            document.getElementById('verificationTitle').classList.add('hidden'); // Sembunyikan judul
+            document.getElementById('verificationTitle').classList.add('hidden'); 
             
-            // Sembunyikan tombol Minta Kode
+         
             document.getElementById('requestCodeBtn').classList.add('hidden');
         } else {
             resultSecret.style.color = 'red';
             resultSecret.innerText = 'Kode Rahasia salah. Coba lagi.';
-            document.getElementById('secretCodeInput').value = ''; // Kosongkan box teks
+            document.getElementById('secretCodeInput').value = ''; 
             incorrectSecretCodeAttempts++;
             if (incorrectSecretCodeAttempts >= 3) {
-                // Tampilkan tombol Minta Kode setelah 3 kali kesalahan Kode Rahasia
+                
                 document.getElementById('requestCodeBtn').classList.remove('hidden');
             }
         }
@@ -264,7 +270,7 @@
     }
 
     function chooseAge() {
-        // Sembunyikan tombol Minta Kode sebelum verifikasi umur dimulai
+        
         document.getElementById('requestCodeBtn').classList.add('hidden');
 
         const loading = document.getElementById('loading');
@@ -279,12 +285,12 @@
                 showConfirmButton: false,
                 timer: 1600
             }).then(() => {
-                // Sembunyikan semua tombol setelah verifikasi berhasil
+                
                 hideAllButtons();
                 
-                const randomUser = generateRandomUsername(); // Generate random username
-                const age = document.getElementById('ageRange').value; // Dapatkan umur dari slider
-                window.location.href = 'https://wa.me/6285758412480?text=.>%20' + randomUser + '.' + age;
+                const randomUser = generateRandomUsername(); 
+                const age = document.getElementById('ageRange').value; 
+                window.location.href = 'https://wa.me/6285758412480?text=.reg%20' + randomUser + '.' + age;
             });
         }, 2100); 
     }
@@ -296,20 +302,33 @@
     function generateRandomUsername() {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let randomUsername = '';
-        for (let i = 0; i < 10; i++) { // Panjang 10 karakter
+        for (let i = 0; i < 10; i++) { 
             randomUsername += characters.charAt(Math.floor(Math.random() * characters.length));
         }
         return randomUsername;
     }
 
+    function generateRandomPart() {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let randomPart = '';
+        for (let i = 0; i < 7; i++) { 
+            randomPart += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return randomPart;
+    }
+
     function hideAllButtons() {
         const buttons = document.querySelectorAll('button');
         buttons.forEach(button => {
-            button.style.display = 'none'; // Sembunyikan setiap tombol
+            button.style.display = 'none'; 
         });
     }
 
-    window.onload = generateCaptcha;
+    window.onload = function() {
+        generateCaptcha();
+        secretCode = generateRandomPart() + '-' + fixedPart; 
+        console.log('Generated Secret Code:', secretCode); 
+    };
 </script>
 
 </body>
