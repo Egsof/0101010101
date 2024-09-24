@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Code Rahasia</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5.0.16/dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+            margin: 0;
+            color: #fff;
+        }
+        .container {
+            background-color: #1c1e22;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #adb5bd;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #6c757d;
+            border-radius: 5px;
+            background-color: #343a40;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Request Code Rahasia</h2>
+        <div class="form-group">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" placeholder="Masukkan Nama" required>
+        </div>
+        <div class="form-group">
+            <label for="age">Umur:</label>
+            <input type="number" id="age" placeholder="Masukkan Umur" required>
+        </div>
+        <button class="btn" onclick="generateAndSend()">Buat Code</button>
+    </div>
+
+    <script>
+        function generateAndSend() {
+            var name = document.getElementById('name').value.trim();
+            var age = document.getElementById('age').value;
+
+            if (name.length < 3 || !/^[a-zA-Z\s]+$/.test(name)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Nama Tidak Valid',
+                    text: 'Harap masukkan nama yang valid (minimal 3 karakter dan hanya huruf).',
+                    confirmButtonColor: '#dc3545'
+                });
+                return;
+            }
+
+            if (age < 10 || age > 45) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Umur Tidak Valid',
+                    text: 'Umur harus antara 10 sampai 45 tahun.',
+                    confirmButtonColor: '#dc3545'
+                });
+                return;
+            }
+
+            var code = name + '.' + age + '-Owalasoft_Verify:Af7jPq0R4Zb6vH1LgW8yXm9dU3iKsBf5NoY2TtVc1zJQ7wMh0AxlD5e3pCnZ.ai';
+            var encodedCode = encodeURIComponent(code);
+            var whatsappLink = "https://wa.me/6285369942151?text=" + encodedCode;
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Code Dihasilkan',
+                text: 'Code berhasil dihasilkan dan akan dikirim ke WhatsApp.',
+                confirmButtonText: 'Buka WhatsApp',
+                confirmButtonColor: '#28a745'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.open(whatsappLink, '_blank');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
