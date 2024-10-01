@@ -6,15 +6,26 @@
     <title>Syarat dan Ketentuan Bot WhatsApp</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
+            background-color: #f0f0f0;
+            font-size: 16px;
+        }
+
+        .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f0f0f0;
         }
+
         header {
             background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
@@ -23,43 +34,58 @@
             border-radius: 10px 10px 0 0;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             margin: 0;
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
+
         .subtitle {
             font-size: 1.2em;
             margin-top: 10px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
+
         .content {
             background-color: white;
             padding: 20px;
             border-radius: 0 0 10px 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         h2 {
             color: #128C7E;
             margin-top: 20px;
             border-bottom: 2px solid #25D366;
             padding-bottom: 5px;
+            font-size: 1.5em;
         }
+
         ul {
             padding-left: 20px;
         }
+
         li {
             margin-bottom: 10px;
         }
+
         .icon {
             color: #25D366;
             margin-right: 10px;
         }
+
+        .white-icon {
+            color: white;
+            margin-right: 10px;
+        }
+
         .footer {
             text-align: center;
             margin-top: 20px;
             color: #666;
         }
+
         .back-button {
             display: inline-block;
             padding: 10px 20px;
@@ -69,123 +95,165 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             margin-top: 20px;
+            font-size: 1em;
         }
+
         .back-button:hover {
             background-color: #0E735E;
         }
+
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
+
         .fade-in.appear {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Responsive design */
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                padding: 20px 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            .back-button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1><i class="fab fa-whatsapp icon"></i> Syarat dan Ketentuan</h1>
-        <div class="subtitle">Penggunaan Bot WhatsApp</div>
-    </header>
-    <div class="content">
-        <div class="fade-in">
-            <h2><i class="fas fa-file-contract icon"></i>1. Penerimaan Syarat</h2>
-            <ul>
-                <li>Dengan menggunakan layanan bot WhatsApp kami, Anda setuju untuk mematuhi syarat dan ketentuan yang ditetapkan di sini. Jika Anda tidak menyetujui ketentuan ini, mohon untuk tidak menggunakan layanan ini.</li>
-            </ul>
-        </div>
+    <div class="container">
+        <header>
+            <h1><i class="fab fa-whatsapp white-icon"></i> Syarat dan Ketentuan</h1>
+            <div class="subtitle">Penggunaan Bot WhatsApp</div>
+        </header>
+        <div class="content">
+            <div class="fade-in">
+                <h2><i class="fas fa-file-contract icon"></i>1. Penerimaan Syarat</h2>
+                <ul>
+                    <li>Dengan menggunakan layanan bot WhatsApp kami, Anda setuju untuk mematuhi syarat dan ketentuan yang ditetapkan di sini. Jika Anda tidak menyetujui ketentuan ini, mohon untuk tidak menggunakan layanan ini.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-cogs icon"></i>2. Penggunaan Layanan</h2>
-            <ul>
-                <li>Bot WhatsApp kami disediakan untuk tujuan informasi dan dukungan. Penggunaan untuk tujuan ilegal atau yang melanggar hukum yang berlaku dilarang keras.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-cogs icon"></i>2. Penggunaan Layanan</h2>
+                <ul>
+                    <li>Bot WhatsApp kami disediakan untuk tujuan informasi dan dukungan. Penggunaan untuk tujuan ilegal atau yang melanggar hukum yang berlaku dilarang keras.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-user-shield icon"></i>3. Privasi dan Keamanan</h2>
-            <ul>
-                <li>Kami berkomitmen untuk menjaga kerahasiaan data pengguna dan tidak akan membagikannya kepada pihak ketiga tanpa izin dari Anda. Kami juga mengingatkan untuk tidak membagikan informasi pribadi yang sensitif melalui bot ini.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-user-shield icon"></i>3. Privasi dan Keamanan</h2>
+                <ul>
+                    <li>Kami berkomitmen untuk menjaga kerahasiaan data pengguna dan tidak akan membagikannya kepada pihak ketiga tanpa izin dari Anda. Kami juga mengingatkan untuk tidak membagikan informasi pribadi yang sensitif melalui bot ini.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-server icon"></i>4. Ketersediaan Layanan</h2>
-            <ul>
-                <li>Kami berusaha untuk menjaga agar layanan ini tetap beroperasi, namun kami tidak menjamin ketersediaannya setiap saat. Kami memiliki hak untuk menghentikan layanan kapan saja tanpa pemberitahuan sebelumnya.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-server icon"></i>4. Ketersediaan Layanan</h2>
+                <ul>
+                    <li>Kami berusaha untuk menjaga agar layanan ini tetap beroperasi, namun kami tidak menjamin ketersediaannya setiap saat. Kami memiliki hak untuk menghentikan layanan kapan saja tanpa pemberitahuan sebelumnya.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-trash-alt icon"></i>5. Penghapusan Data Pengguna</h2>
-            <ul>
-                <li>Data pengguna, grup, dan obrolan akan dihapus secara otomatis jika tidak ada aktivitas yang terdeteksi selama 7 hari, demi pembersihan basis data.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-trash-alt icon"></i>5. Penghapusan Data Pengguna</h2>
+                <ul>
+                    <li>Data pengguna, grup, dan obrolan akan dihapus secara otomatis jika tidak ada aktivitas yang terdeteksi selama 7 hari, demi pembersihan basis data.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-user-clock icon"></i>6. Batasan Penggunaan</h2>
-            <ul>
-                <li>Pengguna gratis mendapatkan 10 limit per hari yang akan diatur ulang setiap jam 00.00 Wib. Pengguna diharapkan untuk tidak melakukan spam dan harus memberi jeda selama 5 detik di antara setiap penggunaan perintah.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-user-clock icon"></i>6. Batasan Penggunaan</h2>
+                <ul>
+                    <li>Pengguna gratis mendapatkan 10 limit per hari yang akan diatur ulang setiap jam 00.00 Wib. Pengguna diharapkan untuk tidak melakukan spam dan harus memberi jeda selama 5 detik di antara setiap penggunaan perintah.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-phone-slash icon"></i>7. Larangan Panggilan</h2>
-            <ul>
-                <li>Pengguna tidak diperkenankan melakukan panggilan suara atau video (Telepon & Video Call) melalui bot ini. Pelanggaran terhadap ketentuan ini akan mengakibatkan pemblokiran.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-phone-slash icon"></i>7. Larangan Panggilan</h2>
+                <ul>
+                    <li>Pengguna tidak diperkenankan melakukan panggilan suara atau video (Telepon & Video Call) melalui bot ini. Pelanggaran terhadap ketentuan ini akan mengakibatkan pemblokiran.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-unlock icon"></i>8. Biaya Pembukaan Blokir</h2>
-            <ul>
-                <li>Jika Anda ingin membuka blokir atau unbanned, masing-masing akan dikenakan biaya sebesar Rp. 5.000,-.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-unlock icon"></i>8. Biaya Pembukaan Blokir</h2>
+                <ul>
+                    <li>Jika Anda ingin membuka blokir atau unbanned, masing-masing akan dikenakan biaya sebesar Rp. 5.000,-.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-ban icon"></i>9. Sanksi bagi Pelanggar</h2>
-            <ul>
-                <li>Spammer akan secara permanen dilarang menggunakan layanan bot, baik bagi pengguna gratis maupun premium.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-ban icon"></i>9. Sanksi bagi Pelanggar</h2>
+                <ul>
+                    <li>Spammer akan secara permanen dilarang menggunakan layanan bot, baik bagi pengguna gratis maupun premium.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-edit icon"></i>10. Perubahan Syarat dan Ketentuan</h2>
-            <ul>
-                <li>Kami berhak untuk memperbarui syarat dan ketentuan ini kapan saja tanpa pemberitahuan sebelumnya. Perubahan akan diumumkan melalui saluran bot dan berlaku segera setelah diposting.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-edit icon"></i>10. Perubahan Syarat dan Ketentuan</h2>
+                <ul>
+                    <li>Kami berhak untuk memperbarui syarat dan ketentuan ini kapan saja tanpa pemberitahuan sebelumnya. Perubahan akan diumumkan melalui saluran bot dan berlaku segera setelah diposting.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-headset icon"></i>11. Bantuan dan Dukungan</h2>
-            <ul>
-                <li>Untuk pertanyaan atau masalah terkait bot WhatsApp ini, silakan menghubungi tim dukungan kami melalui email di: Owalasoft@gmail.com.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-headset icon"></i>11. Bantuan dan Dukungan</h2>
+                <ul>
+                    <li>Untuk pertanyaan atau masalah terkait bot WhatsApp ini, silakan menghubungi tim dukungan kami melalui email di: Owalasoft@gmail.com.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <h2><i class="fas fa-gavel icon"></i>12. Penyelesaian Sengketa</h2>
-            <ul>
-                <li>Setiap sengketa yang timbul dari penggunaan bot ini akan diselesaikan sesuai dengan hukum yang berlaku di Indonesia.</li>
-            </ul>
-        </div>
+            <div class="fade-in">
+                <h2><i class="fas fa-gavel icon"></i>12. Penyelesaian Sengketa</h2>
+                <ul>
+                    <li>Setiap sengketa yang timbul dari penggunaan bot ini akan diselesaikan sesuai dengan hukum yang berlaku di Indonesia.</li>
+                </ul>
+            </div>
 
-        <div class="fade-in">
-            <p><strong>Harap diperhatikan bahwa semua Syarat & Ketentuan ini dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya.</strong></p>
+            <div class="fade-in">
+                <p><strong>Harap diperhatikan bahwa semua Syarat & Ketentuan ini dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya.</strong></p>
+            </div>
+            
+            <center>
+                <a href="https://owalasoft.biz.id" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Halaman Utama
+                </a>
+            </center>
         </div>
-        
-        <center>
-            <a href="https://owalasoft.biz.id" class="back-button">
-                <i class="fas fa-arrow-left"></i> Kembali ke Halaman Utama
-            </a>
-        </center>
-    </div>
-    <div class="footer">
-        <p>&copy; 2024 Owalasoft</p>
+        <div class="footer">
+            <p>&copy; 2024 Bot WhatsApp. Hak Cipta Dilindungi.</p>
+        </div>
     </div>
 
     <script>
@@ -211,4 +279,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
