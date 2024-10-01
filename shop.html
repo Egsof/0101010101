@@ -16,48 +16,64 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <style>
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px); /* Start 20px lower */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* End in the original position */
+            }
+        }
+
         .trending-items .item {
-            padding: 10px;
+            padding: 20px;
             text-align: center;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* Initially hidden */
+            animation: fadeInUp 0.5s forwards; /* Apply animation */
         }
 
-        .trending-items .item .thumb {
-            width: 100%;
-            padding-bottom: 100%;
-            position: relative;
-            overflow: hidden;
-            background-color: #f8f8f8;
+        .trending-items .item:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .trending-items .item .thumb img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: auto;
-            height: 100%;
-            transform: translate(-50%, -50%);
-        }
+        .trending-items .item:nth-child(1) { animation-delay: 0.1s; }
+        .trending-items .item:nth-child(2) { animation-delay: 0.2s; }
+        .trending-items .item:nth-child(3) { animation-delay: 0.3s; }
+        .trending-items .item:nth-child(4) { animation-delay: 0.4s; }
+        .trending-items .item:nth-child(5) { animation-delay: 0.5s; }
 
+        .trending-items .item .icon {
+            font-size: 2.5em;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .trending-items .item .features {
+            text-align: left;
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        .trending-items .item .features li {
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
         .trending-items .item .price {
-            font-size: 1em;
+            font-size: 1.2em;
             font-weight: bold;
-            color: #333;
+            color: #28a745;
+            margin-top: 15px;
         }
-
-        .trending-items .item .down-content {
-            padding: 10px;
-        }
-
-        .trending-items .item .down-content .category {
-            display: block;
-            margin-top: 5px;
-        }
-
-        /* Gaya untuk tanda Paling Populer */
         .most-popular {
-            background-color: #ffcc00;
+            background-color: #ffc107;
             color: #000;
             padding: 5px 10px;
             font-size: 0.9em;
@@ -126,28 +142,41 @@
     <div class="section trending">
         <div class="container">
             <ul class="trending-filter">
-                <li>
-                    <a class="is_active" href="#!" data-filter="*">Semua</a>
-                </li>
-                <li>
-                    <a href="#!" data-filter=".adv">Gratis</a>
-                </li>
-                <li>
-                    <a href="#!" data-filter=".str">Mingguan</a>
-                </li>
-                <li>
-                    <a href="#!" data-filter=".rac">Bulanan</a>
-                </li>
+                <li><a class="is_active" href="#!" data-filter="*">Semua</a></li>
+                <li><a href="#!" data-filter=".adv">Gratis</a></li>
+                <li><a href="#!" data-filter=".str">Mingguan</a></li>
+                <li><a href="#!" data-filter=".rac">Bulanan</a></li>
             </ul>
             <div class="row trending-box">
                 <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items str">
                     <div class="item">
-                        <div class="thumb">
-                            <a href="Pro02"><img src="assets/images/harga1.jpg" alt=""></a>
-                        </div>
+                        <div class="icon"><i class="fas fa-robot"></i></div>
                         <div class="down-content">
                             <span class="category">Langganan</span>
-                            <h4>User Premium</h4>
+                            <h4>User Premium 3 Hari</h4>
+                            <ul class="features">
+                                <li>> Untuk 1 Pengguna</li>
+                                <li>> Akses fitur premium</li>
+                                <li>> Tambahan limit 3.000</li>
+                                <li>> Aktif 3 hari</li>
+                            </ul>
+                            <span class="price">Rp8.000 <em>Rp10.000</em></span>
+                            <a href="Pro05"><i class="fa fa-shopping-bag"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items str">
+                    <div class="item">
+                        <div class="icon"><i class="fas fa-crown"></i></div>
+                        <div class="down-content">
+                            <span class="category">Langganan</span>
+                            <h4>User Premium 7 Hari</h4>
+                            <ul class="features">
+                                <li>> Tambahkan bot ke grup</li>
+                                <li>> Akses fitur premium</li>
+                                <li>> Tambahan limit 5.000</li>
+                                <li>> Aktif 7 hari</li>
+                            </ul>
                             <span class="price">Rp20.000 <em>Rp22.000</em></span>
                             <a href="Pro02"><i class="fa fa-shopping-bag"></i></a>
                         </div>
@@ -155,12 +184,16 @@
                 </div>
                 <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items rac">
                     <div class="item">
-                        <div class="thumb">
-                            <a href="Pro03"><img src="assets/images/harga2.jpg" alt=""></a>
-                        </div>
+                        <div class="icon"><i class="fas fa-gem"></i></div>
                         <div class="down-content">
                             <span class="category">Langganan</span>
-                            <h4>User Premium</h4>
+                            <h4>User Premium 15 Hari</h4>
+                            <ul class="features">
+                                <li>> Tambahkan bot ke grup</li>
+                                <li>> Akses fitur premium</li>
+                                <li>> Tambahan limit 5.000</li>
+                                <li>> Aktif 15 hari</li>
+                            </ul>
                             <span class="price">Rp40.000 <em>Rp45.000</em></span>
                             <a href="Pro03"><i class="fa fa-shopping-bag"></i></a>
                         </div>
@@ -168,12 +201,16 @@
                 </div>
                 <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items rac">
                     <div class="item">
-                        <div class="thumb">
-                            <a href="Pro04"><img src="assets/images/harga3.jpg" alt=""></a>
-                        </div>
+                        <div class="icon"><i class="fas fa-trophy"></i></div>
                         <div class="down-content">
                             <span class="category">Langganan</span>
-                            <h4>User Premium</h4>
+                            <h4>User Premium 30 Hari</h4>
+                            <ul class="features">
+                                <li>> Tambahkan bot ke grup</li>
+                                <li>> Akses fitur premium</li>
+                                <li>> Tambahan limit 10.000</li>
+                                <li>> Aktif 30 hari</li>
+                            </ul>
                             <span class="price">Rp60.000 <em>Rp65.000</em></span>
                             <a href="Pro04"><i class="fa fa-shopping-bag"></i></a>
                             <div class="most-popular">Paling Laris 🔥</div>
@@ -182,32 +219,21 @@
                 </div>
                 <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items adv">
                     <div class="item">
-                        <div class="thumb">
-                            <a href="Pro01"><img src="assets/images/harga0.jpg" alt=""></a>
-                        </div>
+                        <div class="icon"><i class="fas fa-star"></i></div>
                         <div class="down-content">
                             <span class="category">Gratis</span>
                             <h4>User Gratis</h4>
+                            <ul class="features">
+                                <li>> Untuk 1 Pengguna</li>
+                                <li>> Akses fitur di batasi</li>
+                                <li>> Limit di batasi 10</li>
+                                <li>> Batas waktu tidak di tentukan</li>
+                            </ul>
                             <span class="price">Gratis <em>Rp10.000</em></span>
                             <a href="Pro01"><i class="fa fa-shopping-bag"></i></a>
                         </div>
                     </div>
                 </div>
-                <!-- Produk Baru Versi 3 Hari -->
-                <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items str">
-                    <div class="item">
-                        <div class="thumb">
-                            <a href="Pro05"><img src="assets/images/harga4.jpg" alt=""></a>
-                        </div>
-                        <div class="down-content">
-                            <span class="category">Langganan</span>
-                            <h4>User Premium</h4>
-                            <span class="price">Rp8.000 <em>Rp10.000</em></span>
-                            <a href="Pro05"><i class="fa fa-shopping-bag"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Akhir Produk Baru -->
             </div>
         </div>
     </div>
@@ -231,3 +257,4 @@
 </body>
 
 </html>
+                
