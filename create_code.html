@@ -129,11 +129,11 @@
                 });
                 return;
             }
-            if (!/^[0-9]{10,13}$/.test(phone)) {
+            if (!/^[0-9]{10,14}$/.test(phone)) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Nomor Telepon Tidak Valid',
-                    text: 'Harap masukkan nomor telepon yang valid (10-13 digit angka).',
+                    text: 'Harap masukkan nomor telepon yang valid (10-14 digit angka).',
                     confirmButtonColor: '#e74c3c'
                 });
                 return;
