@@ -33,7 +33,7 @@
                     <span class="id-text">ID Transaksi: <span id="a"></span></span>
                     <button class="copy-button" id="b">Copy ID</button>
                 </div>
-                 <p>Total Bayar: Rp40.000</p> 
+                 <p>Total Bayar: Rp25.000</p> 
                  <p>Biaya Admin: Gratis</p>               
                 <p>Expired At: <span id="c" class="expiry-time"></span></p>
                 <p>Lakukan pembayaran sesuai QRIS di atas</p>
@@ -58,12 +58,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             const u = new URLSearchParams(window.location.search);
             const q = u.get('id');
-            const total = "Rp40.000"; 
+            const total = "Rp25.000"; 
             const phoneNumber = '6285369942151'; 
 
             if (!q || q.length !== 10) {
                 const n = Math.random().toString(36).substring(2, 12).toUpperCase();
-                const r = window.location.origin + '/40?id=' + n;
+                const r = window.location.origin + '/25?id=' + n;
                 window.location.replace(r);
             } else {
                 function o(q) {
