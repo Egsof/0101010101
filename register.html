@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verifikasi Owalasoft</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to bottom right, blue, purple);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             margin: 0;
             padding: 0;
             display: flex;
@@ -19,92 +20,122 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             text-align: center;
             box-sizing: border-box;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.6s ease-out;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 28px;
+            margin-bottom: 30px;
             color: #333;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .captcha-box {
-            margin-bottom: 20px;
-            padding: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
             background-color: #f0f2f5;
-            border: 1px solid #e0e0e0;
-            width: 50%;
-            border-radius: 8px;
-            font-size: 24px;
-            letter-spacing: 3px;
+            border: 2px solid #e0e0e0;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 12px;
+            font-size: 28px;
+            letter-spacing: 5px;
             font-family: 'Courier New', Courier, monospace;
             color: #555;
             display: flex; 
             justify-content: center;
             align-items: center;
-            height: 20px;
-            user-select: none; /* Cegah penyalinan */
+            height: 30px;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .captcha-box::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff00002b, #00ff002b, #0000ff2b);
+            z-index: -1;
+            filter: blur(20px);
+            animation: glowing 10s linear infinite;
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
         }
 
         .btn {
-            background-color: #007bff;
-            color: #ffffff;
+            background-color: #4CAF50;
+            color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
+            padding: 14px 24px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s, transform 0.2s;
-            margin-bottom: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
             width: 100%;
             box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn:hover {
-            background-color: #0056b3;
+            background-color: #45a049;
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn i {
+            margin-right: 10px;
         }
 
         .input-box {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 14px;
+            margin-bottom: 25px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
-            transition: border 0.3s;
+            transition: all 0.3s ease;
         }
 
         .input-box:focus {
-            border-color: #007bff;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
             outline: none;
         }
 
-        #result {
+        #result, #resultSecret {
             font-size: 16px;
             font-weight: 500;
-            margin-top: 10px;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f0f2f5;
         }
 
         .hidden {
@@ -114,105 +145,111 @@
         .loading {
             display: none;
             font-size: 1.2em;
-            color: #007BFF;
+            color: #4CAF50;
             margin-top: 20px;
         }
 
-        .btn-help {
-            background-color: #dc3545;
-            color: #ffffff;
-            margin-top: 20px;
+        .loading i {
+            animation: spin 1s linear infinite;
         }
 
-        .btn-help:hover {
-            background-color: #c82333;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Gaya untuk slider */
-        input[type=range] {
-            -webkit-appearance: none;
-            width: 100%;
-            margin: 10px 0;
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
         }
 
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #007bff;
+        .step {
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            cursor: pointer;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 10px;
+            font-weight: bold;
+            color: #fff;
+            transition: all 0.3s ease;
         }
 
-        input[type=range]::-webkit-slider-runnable-track {
-            height: 5px;
-            background: #ddd;
-            border-radius: 5px;
+        .step.active {
+            background-color: #4CAF50;
         }
 
-        input[type=range]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: #007bff;
-            border-radius: 50%;
-            cursor: pointer;
+        .step-connector {
+            flex-grow: 1;
+            height: 2px;
+            background-color: #ddd;
+            align-self: center;
         }
 
-        input[type=range]::-moz-range-track {
-            height: 5px;
-            background: #ddd;
-            border-radius: 5px;
+        .step-connector.active {
+            background-color: #4CAF50;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 id="verificationTitle">Verifikasi Anda Bukan Robot</h1>
+        <h1 id="verificationTitle">Verifikasi Owalasoft</h1>
+        
+        <div class="step-indicator">
+            <div class="step active" id="step1Indicator">1</div>
+            <div class="step-connector" id="connector1"></div>
+            <div class="step" id="step2Indicator">2</div>
+            <div class="step-connector" id="connector2"></div>
+            <div class="step" id="step3Indicator">3</div>
+        </div>
+
         <div id="step1">
             <div class="captcha-box" id="captchaCode"></div>
-            <button type="button" class="btn" onclick="generateCaptcha()">Regenerate CAPTCHA</button>
+            <button type="button" class="btn" onclick="generateCaptcha()"><i class="fas fa-sync-alt"></i> Regenerate CAPTCHA</button>
             <input type="text" id="userCaptchaInput" class="input-box" placeholder="Masukkan CAPTCHA" required>
-            <button type="button" class="btn" onclick="validateCaptcha()">Verifikasi CAPTCHA</button>
+            <button type="button" class="btn" onclick="validateCaptcha()"><i class="fas fa-check-circle"></i> Verifikasi CAPTCHA</button>
             <p id="result"></p>
         </div>
 
         <div id="step2" class="hidden">
-            <input type="text" id="secretCodeInput" class="input-box" placeholder="Masukkan Kode Rahasia" required>
-            <button type="button" class="btn" onclick="validateSecretCode()">Verifikasi Kode Rahasia</button>
+            <h2>Verifikasi Keamanan</h2>
+            <div class="checkbox-container">
+                <input type="checkbox" id="humanVerification" name="humanVerification">
+                <label for="humanVerification">Saya bisa membedakan antara manusia dengan bot</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="termsAgreement" name="termsAgreement">
+                <label for="termsAgreement">Saya sudah membaca syarat ketentuan Owalasoft</label>
+            </div>
+            <button type="button" class="btn" onclick="validateSecurityQuestions()"><i class="fas fa-shield-alt"></i> Verifikasi Keamanan</button>
             <p id="resultSecret"></p>
         </div>
 
         <div id="step3" class="hidden">
             <p id="agePrompt">Geser slider untuk memilih umur Anda</p>
-            <input type="range" id="ageRange" min="10" max="45" value="10" oninput="updateAgeValue(this.value)" style="margin-top: 10px;">
-            <span id="ageValue" style="margin-top: 10px; display: block;">Umur: --</span>
-            <button class="btn disabled" id="ageButton" onclick="chooseAge()" disabled style="margin-top: 10px;">Verifikasi Umur</button>
+            <input type="range" id="ageRange" min="10" max="45" value="10" oninput="updateAgeValue(this.value)">
+            <span id="ageValue">Umur: 00</span>
+            <button class="btn disabled" id="ageButton" onclick="chooseAge()" disabled><i class="fas fa-user-check"></i> Verifikasi Umur</button>
         </div>
 
-        <div class="loading" id="loading">Menghubungkan dengan server...</div>
-        <button class="btn-help hidden" id="requestCodeBtn" onclick="requestCode()">Minta Kode</button>
+        <div class="loading" id="loading"><i class="fas fa-spinner"></i> Menghubungkan dengan server...</div>
     </div>
 
 <script>
     let captcha;
-    const fixedPart = 'Owalasoft_Verify:Owalasoft.biz.id/register';
-    let randomPart = generateRandomPart();
-    let secretCode = randomPart + '-' + fixedPart;
-    let incorrectCaptchaAttempts = 0;
-    let incorrectSecretCodeAttempts = 0;
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
 
     function generateCaptcha() {
         captcha = '';
@@ -231,7 +268,7 @@
 
         if (userCaptcha === captcha) {
             result.style.color = 'green';
-            result.innerText = 'CAPTCHA Terverifikasi! Masukkan Kode Rahasia.';
+            result.innerText = 'CAPTCHA Terverifikasi! Lanjut ke verifikasi keamanan.';
             Toast.fire({
                 icon: "success",
                 title: "CAPTCHA Valid!"
@@ -239,6 +276,7 @@
             document.getElementById('userCaptchaInput').value = '';
             document.getElementById('step1').classList.add('hidden');
             document.getElementById('step2').classList.remove('hidden');
+            updateStepIndicator(2);
         } else {
             result.style.color = 'red';
             result.innerText = 'CAPTCHA salah. Coba lagi.';
@@ -247,42 +285,33 @@
                 title: "CAPTCHA Salah!"
             });
             document.getElementById('userCaptchaInput').value = '';
-            incorrectCaptchaAttempts++;
+            generateCaptcha();
         }
     }
 
-    function validateSecretCode() {
-        const userSecretCode = document.getElementById('secretCodeInput').value;
+    function validateSecurityQuestions() {
+        const humanVerification = document.getElementById('humanVerification').checked;
+        const termsAgreement = document.getElementById('termsAgreement').checked;
         const resultSecret = document.getElementById('resultSecret');
 
-        const userParts = userSecretCode.split('-');
-
-        if (userParts.length === 2 && userParts[1] === fixedPart) {
+        if (humanVerification && termsAgreement) {
             resultSecret.style.color = 'green';
-            resultSecret.innerText = 'Kode Rahasia Terverifikasi! Lanjut ke verifikasi umur.';
+            resultSecret.innerText = 'Verifikasi Keamanan Berhasil! Lanjut ke verifikasi umur.';
             Toast.fire({
                 icon: "success",
-                title: "Kode Rahasia Valid!"
+                title: "Verifikasi Keamanan Berhasil!"
             });
-            document.getElementById('secretCodeInput').value = '';
             document.getElementById('step2').classList.add('hidden');
             document.getElementById('step3').classList.remove('hidden');
             document.getElementById('verificationTitle').classList.add('hidden');
-
-            // Sembunyikan tombol Minta Kode
-            document.getElementById('requestCodeBtn').classList.add('hidden');
+            updateStepIndicator(3);
         } else {
             resultSecret.style.color = 'red';
-            resultSecret.innerText = 'Kode Rahasia salah. Coba lagi.';
+            resultSecret.innerText = 'Mohon centang kedua pernyataan untuk melanjutkan.';
             Toast.fire({
                 icon: "error",
-                title: "Kode Rahasia Salah!"
+                title: "Verifikasi Keamanan Gagal!"
             });
-            document.getElementById('secretCodeInput').value = '';
-            incorrectSecretCodeAttempts++;
-            if (incorrectSecretCodeAttempts >= 3) {
-                document.getElementById('requestCodeBtn').classList.remove('hidden');
-            }
         }
     }
 
@@ -295,8 +324,6 @@
     }
 
     function chooseAge() {
-        document.getElementById('requestCodeBtn').classList.add('hidden');
-
         const loading = document.getElementById('loading');
         loading.style.display = 'block';
 
@@ -309,17 +336,11 @@
                 showConfirmButton: false,
                 timer: 1600
             }).then(() => {
-                hideAllButtons();
-
                 const randomUser = generateRandomUsername();
                 const age = document.getElementById('ageRange').value;
                 window.location.href = 'https://wa.me/6285758412480?text=.>%20' + randomUser + '.' + age;
             });
         }, 2100); 
-    }
-
-    function requestCode() {
-        window.location.href = 'https://owalasoft.biz.id/create_code';
     }
 
     function generateRandomUsername() {
@@ -331,28 +352,36 @@
         return randomUsername;
     }
 
-    function generateRandomPart() {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let randomPart = '';
-        for (let i = 0; i < 7; i++) {
-            randomPart += characters.charAt(Math.floor(Math.random() * characters.length));
+    function updateStepIndicator(step) {
+        for (let i = 1; i <= 3; i++) {
+            document.getElementById(`step${i}Indicator`).classList.remove('active');
+            if (i < 3) {
+                document.getElementById(`connector${i}`).classList.remove('active');
+            }
         }
-        return randomPart;
+        for (let i = 1; i <= step; i++) {
+            document.getElementById(`step${i}Indicator`).classList.add('active');
+            if (i < step) {
+                document.getElementById(`connector${i}`).classList.add('active');
+            }
+        }
     }
 
-    function hideAllButtons() {
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-            button.style.display = 'none';
-        });
-    }
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
 
-    window.onload = function() {
-        generateCaptcha();
-        secretCode = generateRandomPart() + '-' + fixedPart;
-        console.log('Generated Secret Code:', secretCode);
-    };
+    // Generate captcha when page loads
+    window.onload = generateCaptcha;
 </script>
 
 </body>
-    </html>
+</html>
