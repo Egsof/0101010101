@@ -17,6 +17,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
@@ -29,6 +30,39 @@
             text-align: center;
             box-sizing: border-box;
             animation: fadeIn 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, #4CAF50, transparent 30%);
+            animation: rotate 4s linear infinite;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: white;
+            border-radius: 16px;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes fadeIn {
@@ -41,6 +75,7 @@
             margin-bottom: 30px;
             color: #333;
             font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .captcha-box {
@@ -48,21 +83,22 @@
             padding: 20px;
             background-color: #f0f2f5;
             border: 2px solid #e0e0e0;
-            width: 60%;
+            width: 80%;
             margin-left: auto;
             margin-right: auto;
             border-radius: 12px;
-            font-size: 28px;
+            font-size: 24px;
             letter-spacing: 5px;
             font-family: 'Courier New', Courier, monospace;
             color: #555;
             display: flex; 
             justify-content: center;
             align-items: center;
-            height: 30px;
+            height: 40px;
             user-select: none;
             position: relative;
             overflow: hidden;
+            transform: skew(-5deg);
         }
 
         .captcha-box::before {
@@ -100,6 +136,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
@@ -136,6 +189,7 @@
             padding: 10px;
             border-radius: 8px;
             background-color: #f0f2f5;
+            transition: all 0.3s ease;
         }
 
         .hidden {
@@ -176,10 +230,12 @@
             font-weight: bold;
             color: #fff;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .step.active {
             background-color: #4CAF50;
+            transform: scale(1.1);
         }
 
         .step-connector {
@@ -187,69 +243,188 @@
             height: 2px;
             background-color: #ddd;
             align-self: center;
+            transition: all 0.3s ease;
         }
 
         .step-connector.active {
             background-color: #4CAF50;
+            height: 3px;
         }
 
         .checkbox-container {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
+            position: relative;
         }
 
         .checkbox-container input[type="checkbox"] {
             margin-right: 10px;
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked {
+            background-color: #4CAF50;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked::before {
+            content: '\2714';
+            display: block;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .checkbox-container label {
+            cursor: pointer;
+        }
+
+        #ageRange {
+            width: 100%;
+            margin-top: 20px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 10px;
+            background: #ddd;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        #ageRange::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #4CAF50;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        #ageRange::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #4CAF50;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        #ageValue {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .security-question {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .security-question select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .captcha-box {
+                font-size: 20px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 id="verificationTitle">Verifikasi Owalasoft</h1>
-        
-        <div class="step-indicator">
-            <div class="step active" id="step1Indicator">1</div>
-            <div class="step-connector" id="connector1"></div>
-            <div class="step" id="step2Indicator">2</div>
-            <div class="step-connector" id="connector2"></div>
-            <div class="step" id="step3Indicator">3</div>
-        </div>
-
-        <div id="step1">
-            <div class="captcha-box" id="captchaCode"></div>
-            <button type="button" class="btn" onclick="generateCaptcha()"><i class="fas fa-sync-alt"></i> Regenerate CAPTCHA</button>
-            <input type="text" id="userCaptchaInput" class="input-box" placeholder="Masukkan CAPTCHA" required>
-            <button type="button" class="btn" onclick="validateCaptcha()"><i class="fas fa-check-circle"></i> Verifikasi CAPTCHA</button>
-            <p id="result"></p>
-        </div>
-
-        <div id="step2" class="hidden">
-            <h2>Verifikasi Keamanan</h2>
-            <div class="checkbox-container">
-                <input type="checkbox" id="humanVerification" name="humanVerification">
-                <label for="humanVerification">Saya bisa membedakan antara manusia dengan bot</label>
+        <div class="content">
+            <h1 id="verificationTitle">Verifikasi Owalasoft</h1>
+            
+            <div class="step-indicator">
+                <div class="step active" id="step1Indicator">1</div>
+                <div class="step-connector" id="connector1"></div>
+                <div class="step" id="step2Indicator">2</div>
+                <div class="step-connector" id="connector2"></div>
+                <div class="step" id="step3Indicator">3</div>
+                <div class="step-connector" id="connector3"></div>
+                <div class="step" id="step4Indicator">4</div>
             </div>
-            <div class="checkbox-container">
-                <input type="checkbox" id="termsAgreement" name="termsAgreement">
-                <label for="termsAgreement">Saya sudah membaca syarat ketentuan Owalasoft</label>
+
+            <div id="step1">
+                <div class="captcha-box" id="captchaCode"></div>
+                <button type="button" class="btn" onclick="generateCaptcha()"><i class="fas fa-sync-alt"></i> Regenerasi CAPTCHA</button>
+                <input type="text" id="userCaptchaInput" class="input-box" placeholder="Masukkan CAPTCHA" required>
+                <button type="button" class="btn" onclick="validateCaptcha()"><i class="fas fa-check-circle"></i> Verifikasi CAPTCHA</button>
+                <p id="result"></p>
             </div>
-            <button type="button" class="btn" onclick="validateSecurityQuestions()"><i class="fas fa-shield-alt"></i> Verifikasi Keamanan</button>
-            <p id="resultSecret"></p>
-        </div>
 
-        <div id="step3" class="hidden">
-            <p id="agePrompt">Geser slider untuk memilih umur Anda</p>
-            <input type="range" id="ageRange" min="10" max="45" value="10" oninput="updateAgeValue(this.value)">
-            <span id="ageValue">Umur: 00</span>
-            <button class="btn disabled" id="ageButton" onclick="chooseAge()" disabled><i class="fas fa-user-check"></i> Verifikasi Umur</button>
-        </div>
+            <div id="step2" class="hidden">
+                <h2>Verifikasi Keamanan</h2>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="humanVerification" name="humanVerification">
+                    <label for="humanVerification">Saya bisa membedakan antara manusia dengan bot</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="termsAgreement" name="termsAgreement">
+                    <label for="termsAgreement">Saya sudah membaca syarat ketentuan Owalasoft</label>
+                </div>
+                <div class="security-question">
+                    <label for="securityQuestion">Pilih pertanyaan keamanan:</label>
+                    <select id="securityQuestion">
+                        <option value="">-- Pilih pertanyaan --</option>
+                        <option value="1">Untuk tujuan apa anda menggunakan layanan chatbot Owalasoft?</option>
+                        <option value="2">Mengapa anda memilih menggunakan layanan chatbot Owalasoft?</option>
+                    </select>
+                </div>
+                <input type="text" id="securityAnswer" class="input-box" placeholder="Jawaban pertanyaan keamanan" required>
+                <button type="button" class="btn" onclick="validateSecurityQuestions()"><i class="fas fa-shield-alt"></i> Verifikasi Keamanan</button>
+                <p id="resultSecret"></p>
+            </div>
 
-        <div class="loading" id="loading"><i class="fas fa-spinner"></i> Menghubungkan dengan server...</div>
+            <div id="step3" class="hidden">
+                <h2>Verifikasi Umur</h2>
+                <p id="agePrompt">Geser slider untuk memilih umur Anda</p>
+                <input type="range" id="ageRange" min="10" max="40" value="10" oninput="updateAgeValue(this.value)">
+                <span id="ageValue">Umur: </span>
+                <button class="btn disabled" id="ageButton" onclick="validateAge()" disabled><i class="fas fa-user-check"></i> Verifikasi Umur</button>
+            </div>
+
+            <div id="step4" class="hidden">
+                <h2>Verifikasi Final</h2>
+                <p>Silakan selesaikan captcha matematika berikut:</p>
+                <div id="mathCaptcha"></div>
+                <input type="text" id="mathCaptchaInput" class="input-box" placeholder="Masukkan hasil perhitungan" required>
+                <button type="button" class="btn" onclick="validateMathCaptcha()"><i class="fas fa-calculator"></i> Verifikasi Perhitungan</button>
+            </div>
+
+            <div class="loading" id="loading"><i class="fas fa-spinner"></i> Menghubungkan dengan server...</div>
+        </div>
     </div>
-
 <script>
     let captcha;
+    let mathCaptchaAnswer;
 
     function generateCaptcha() {
         captcha = '';
@@ -292,9 +467,11 @@
     function validateSecurityQuestions() {
         const humanVerification = document.getElementById('humanVerification').checked;
         const termsAgreement = document.getElementById('termsAgreement').checked;
+        const securityQuestion = document.getElementById('securityQuestion').value;
+        const securityAnswer = document.getElementById('securityAnswer').value;
         const resultSecret = document.getElementById('resultSecret');
 
-        if (humanVerification && termsAgreement) {
+        if (humanVerification && termsAgreement && securityQuestion && securityAnswer) {
             resultSecret.style.color = 'green';
             resultSecret.innerText = 'Verifikasi Keamanan Berhasil! Lanjut ke verifikasi umur.';
             Toast.fire({
@@ -303,11 +480,10 @@
             });
             document.getElementById('step2').classList.add('hidden');
             document.getElementById('step3').classList.remove('hidden');
-            document.getElementById('verificationTitle').classList.add('hidden');
             updateStepIndicator(3);
         } else {
             resultSecret.style.color = 'red';
-            resultSecret.innerText = 'Mohon centang kedua pernyataan untuk melanjutkan.';
+            resultSecret.innerText = 'Mohon lengkapi semua informasi untuk melanjutkan.';
             Toast.fire({
                 icon: "error",
                 title: "Verifikasi Keamanan Gagal!"
@@ -317,13 +493,57 @@
 
     function updateAgeValue(value) {
         document.getElementById('ageValue').textContent = 'Umur: ' + value;
-
         const ageButton = document.getElementById('ageButton');
         ageButton.disabled = value < 10;
         ageButton.classList.toggle('disabled', value < 10);
     }
 
-    function chooseAge() {
+    function validateAge() {
+        const age = document.getElementById('ageRange').value;
+        if (age >= 10) {
+            Toast.fire({
+                icon: "success",
+                title: "Verifikasi Umur Berhasil!"
+            });
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('step4').classList.remove('hidden');
+            updateStepIndicator(4);
+            generateMathCaptcha();
+        } else {
+            Toast.fire({
+                icon: "error",
+                title: "Anda harus berumur minimal 10 tahun!"
+            });
+        }
+    }
+
+    function generateMathCaptcha() {
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        const operator = Math.random() < 0.5 ? '+' : '-';
+        mathCaptchaAnswer = operator === '+' ? num1 + num2 : num1 - num2;
+        document.getElementById('mathCaptcha').innerText = `${num1} ${operator} ${num2} = ?`;
+    }
+
+    function validateMathCaptcha() {
+        const userAnswer = parseInt(document.getElementById('mathCaptchaInput').value);
+        if (userAnswer === mathCaptchaAnswer) {
+            Toast.fire({
+                icon: "success",
+                title: "Verifikasi Perhitungan Berhasil!"
+            });
+            finalizeVerification();
+        } else {
+            Toast.fire({
+                icon: "error",
+                title: "Perhitungan Salah! Coba lagi."
+            });
+            generateMathCaptcha();
+            document.getElementById('mathCaptchaInput').value = '';
+        }
+    }
+
+    function finalizeVerification() {
         const loading = document.getElementById('loading');
         loading.style.display = 'block';
 
@@ -353,9 +573,9 @@
     }
 
     function updateStepIndicator(step) {
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 4; i++) {
             document.getElementById(`step${i}Indicator`).classList.remove('active');
-            if (i < 3) {
+            if (i < 4) {
                 document.getElementById(`connector${i}`).classList.remove('active');
             }
         }
@@ -379,7 +599,6 @@
         }
     });
 
-    // Generate captcha when page loads
     window.onload = generateCaptcha;
 </script>
 
