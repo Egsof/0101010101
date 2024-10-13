@@ -274,67 +274,68 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.getElementById('loading-overlay').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
-            }, 1500);
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            document.getElementById('loading-overlay').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }, 1500);
 
-            const urlParams = new URLSearchParams(window.location.search);
-            const transactionId = urlParams.get('id');
-            const total = "Rp8.000"; 
-            const phoneNumber = '6285369942151'; 
+        const urlParams = new URLSearchParams(window.location.search);
+        const transactionId = urlParams.get('id');
+        const total = "Rp8.000"; 
+        const phoneNumber = '6285369942151'; 
 
-            if (!transactionId || transactionId.length !== 10) {
-                const newId = Math.random().toString(36).substring(2, 12).toUpperCase();
-                const redirectUrl = window.location.origin + '/8?id=' + newId;
-                window.location.replace(redirectUrl);
-            } else {
-                function initializePayment(transactionId) {
-                    document.getElementById('transaction-id').innerText = transactionId;
-                    const expiryTime = new Date(Date.now() + 24 * 60 * 60 * 1000);
+        if (!transactionId || transactionId.length !== 10) {
+            const newId = Math.random().toString(36).substring(2, 12).toUpperCase();
+            const redirectUrl = window.location.origin + '/8?id=' + newId;
+            window.location.replace(redirectUrl);
+        } else {
+            function initializePayment(transactionId) {
+                document.getElementById('transaction-id').innerText = transactionId;
+                const expiryTime = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-                    function updateExpiryTime() {
-                        const now = new Date();
-                        const timeLeft = expiryTime - now;
-                        if (timeLeft <= 0) {
-                            document.querySelector('.qr-container').style.display = 'none';
-                            document.getElementById('whatsapp-button').style.display = 'none';
-                            document.getElementById('detail-button').style.display = 'none';
-                            alert('Pembayaran telah kadaluarsa');
-                            return;
-                        }
-                        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-                        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                        document.getElementById('expiry-time').innerText = `${hours}j ${minutes}m ${seconds}d`;
+                function updateExpiryTime() {
+                    const now = new Date();
+                    const timeLeft = expiryTime - now;
+                    if (timeLeft <= 0) {
+                        document.querySelector('.qr-container').style.display = 'none';
+                        document.getElementById('whatsapp-button').style.display = 'none';
+                        document.getElementById('detail-button').style.display = 'none';
+                        alert('Pembayaran telah kadaluarsa');
+                        return;
                     }
-
-                    setInterval(updateExpiryTime, 1000);
-                    updateExpiryTime();
-
-                    document.getElementById('detail-button').addEventListener('click', function() {
-                        const detailContent = document.getElementById('detail-content');
-                        detailContent.style.display = detailContent.style.display === 'block' ? 'none' : 'block';
-                    });
-
-                    document.getElementById('copy-button').addEventListener('click', function() {
-                        navigator.clipboard.writeText(transactionId).then(() => {
-                            alert('ID transaksi berhasil disalin');
-                        }).catch(() => {
-                            alert('Gagal menyalin ID transaksi');
-                        });
-                    });
-
-                    document.getElementById('whatsapp-button').addEventListener('click', function() {
-                        const message = `Halo, saya ingin mengkonfirmasi pembayaran.\n\nID Transaksi: ${transactionId}\nTotal Bayar: ${total}`;
-                        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-                    });
+                    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    document.getElementById('expiry-time').innerText = `${hours}j ${minutes}m ${seconds}d`;
                 }
-                initializePayment(transactionId);
+
+                setInterval(updateExpiryTime, 1000);
+                updateExpiryTime();
+
+                document.getElementById('detail-button').addEventListener('click', function() {
+                    const detailContent = document.getElementById('detail-content');
+                    detailContent.style.display = detailContent.style.display === 'block' ? 'none' : 'block';
+                    detailContent.scrollIntoView({ behavior: 'smooth' });
+                });
+
+                document.getElementById('copy-button').addEventListener('click', function() {
+                    navigator.clipboard.writeText(transactionId).then(() => {
+                        alert('ID transaksi berhasil disalin');
+                    }).catch(() => {
+                        alert('Gagal menyalin ID transaksi');
+                    });
+                });
+
+                document.getElementById('whatsapp-button').addEventListener('click', function() {
+                    const message = `Halo, saya ingin mengkonfirmasi pembayaran.\n\nID Transaksi: ${transactionId}\nTotal Bayar: ${total}`;
+                    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                });
             }
-        });
-    </script>
+            initializePayment(transactionId);
+        }
+    });
+</script>
 </body>
 </html>
