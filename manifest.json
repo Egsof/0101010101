@@ -3,8 +3,8 @@
   "short_name": "Owalasoft",
   "start_url": "https://owalasoft.biz.id",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#0171F9",
+  "theme_color": "#0171F9",
   "description": "Layanan bot WhatsApp gratis dan terbaik dari Owalasoft.",
   "icons": [
     {
