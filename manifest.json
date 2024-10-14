@@ -1,0 +1,21 @@
+{
+  "name": "Owalasoft",
+  "short_name": "Owalasoft",
+  "start_url": "https://owalasoft.biz.id",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "Layanan bot WhatsApp gratis dan terbaik dari Owalasoft.",
+  "icons": [
+    {
+      "src": "https://telegra.ph/file/d7ccc315ef53c49a29b07.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://telegra.ph/file/d7ccc315ef53c49a29b07.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
