@@ -288,5 +288,53 @@
             },
         });
     </script>
+    
+<script>
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker terdaftar dengan scope:', registration.scope);
+                })
+                .catch(error => {
+                    console.error('Pendaftaran Service Worker gagal:', error);
+                });
+        });
+    }
+
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+
+        e.preventDefault();
+
+        deferredPrompt = e;
+  
+        showInstallButton(); 
+    });
+
+    function showInstallButton() {
+ 
+        const installButton = document.createElement('button');
+        installButton.innerText = 'Instal Aplikasi';
+        document.body.appendChild(installButton);
+
+        installButton.addEventListener('click', async () => {
+
+            deferredPrompt.prompt();
+
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('Pengguna menerima prompt A2HS');
+            } else {
+                console.log('Pengguna menolak prompt A2HS');
+            }
+
+            deferredPrompt = null;
+            installButton.remove(); 
+        });
+    }
+</script>
+    
 </body>
-    </html>
+</html>
