@@ -22,15 +22,38 @@
         .trending-items .item {
             padding: 20px;
             text-align: center;
-            border: 1px solid #e0e0e0;
+            border: 2px solid #e0e0e0;  /* Garis pembatas di setiap sudut */
             border-radius: 10px;
             transition: all 0.3s ease;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;  /* Untuk penempatan elemen absolut */
         }
 
         .trending-items .item:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .trending-items .item::before,
+        .trending-items .item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: #007bff;  /* Warna garis sudut */
+            border-style: solid;
+        }
+
+        .trending-items .item::before {
+            top: -2px;
+            left: -2px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .trending-items .item::after {
+            bottom: -2px;
+            right: -2px;
+            border-width: 0 2px 2px 0;
         }
 
         .trending-items .item .icon {
@@ -52,6 +75,9 @@
             font-weight: bold;
             color: #28a745;
             margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            display: block;
         }
         .most-popular {
             background-color: #ffc107;
@@ -245,4 +271,4 @@
     <script src="assets/js/custom.js"></script>
 </body>
 
-                                                 </html>
+                                </html>
