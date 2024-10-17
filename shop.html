@@ -22,12 +22,12 @@
         .trending-items .item {
             padding: 20px;
             text-align: center;
-            border: 2px solid #e0e0e0;  /* Garis pembatas di setiap sudut */
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
             transition: all 0.3s ease;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative;  /* Untuk penempatan elemen absolut */
+            position: relative;
         }
 
         .trending-items .item:hover {
@@ -40,7 +40,7 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            border-color: #007bff;  /* Warna garis sudut */
+            border-color: #007bff;
             border-style: solid;
         }
 
@@ -97,10 +97,82 @@
             margin-top: 10px;
             display: inline-block;
         }
+
+        /* Gaya yang diperbarui untuk notifikasi */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f8f9fa;
+            border: 1px solid #25D366; /* Warna WhatsApp */
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+            max-width: 90%;
+            width: 400px;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .notification-text {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .notification-icon {
+            font-size: 24px;
+            color: #25D366; /* Warna WhatsApp */
+            margin-right: 10px;
+        }
+
+        .notification-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .notification-button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .join-button {
+            background-color: #25D366; /* Warna WhatsApp */
+            color: white;
+        }
+
+        .close-button {
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 
 <body>
+    <!-- Notification -->
+    <div id="whatsapp-notification" class="notification">
+        <div class="notification-content">
+            <div class="notification-text">
+                <i class="fab fa-whatsapp notification-icon"></i>
+                Ayo gabung di saluran WhatsApp kami untuk mendapatkan info terbaru mengenai update owabot!
+            </div>
+            <div class="notification-buttons">
+                <button class="notification-button join-button" onclick="joinWhatsApp()">Join</button>
+                <button class="notification-button close-button" onclick="closeNotification()">Close</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
@@ -269,6 +341,25 @@
     <script src="assets/js/owl-carousel.js"></script>
     <script src="assets/js/counter.js"></script>
     <script src="assets/js/custom.js"></script>
+
+    <script>
+        // Show notification when page loads
+        window.onload = function() {
+            document.getElementById('whatsapp-notification').style.display = 'block';
+        };
+
+        // Function to join WhatsApp channel
+        function joinWhatsApp() {
+            window.open('https://whatsapp.com/channel/0029VaXUbMJG8l5N9AjkYK1F', '_blank');
+            closeNotification();
+        }
+
+        // Function to close notification
+        function closeNotification() {
+            document.getElementById('whatsapp-notification').style.display = 'none';
+        }
+    </script>
 </body>
 
-                                </html>
+</html>
+</antArtifact
