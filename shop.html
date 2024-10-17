@@ -20,28 +20,17 @@
 
     <style>
         .trending-items .item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .trending-items .item.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .trending-items .item {
             padding: 20px;
             text-align: center;
             border: 1px solid #e0e0e0;
             border-radius: 10px;
             transition: all 0.3s ease;
             background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .trending-items .item:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .trending-items .item .icon {
@@ -254,36 +243,6 @@
     <script src="assets/js/owl-carousel.js"></script>
     <script src="assets/js/counter.js"></script>
     <script src="assets/js/custom.js"></script>
-
-    <script>
-        // Fungsi untuk mengecek apakah elemen dalam viewport
-        function isElementInViewport(el) {
-            var rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
-
-        // Fungsi untuk menambahkan kelas 'show' pada elemen yang terlihat
-        function handleScrollAnimation() {
-            var items = document.querySelectorAll('.trending-items .item');
-            items.forEach(function(item) {
-                if (isElementInViewport(item)) {
-                    item.classList.add('show');
-                }
-            });
-        }
-
-        // Menambahkan event listener untuk scroll
-        window.addEventListener('scroll', handleScrollAnimation);
-        window.addEventListener('load', handleScrollAnimation);
-
-        // Trigger animasi saat halaman dimuat
-        handleScrollAnimation();
-    </script>
 </body>
 
-                                </html>
+                                                 </html>
