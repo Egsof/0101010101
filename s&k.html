@@ -16,7 +16,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f0f0f0;
+            background-color: #e6f2ff;
             font-size: 16px;
         }
 
@@ -27,7 +27,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #25D366, #128C7E);
+            background: linear-gradient(135deg, #4da6ff, #0066cc);
             color: white;
             text-align: center;
             padding: 40px 20px;
@@ -55,9 +55,9 @@
         }
 
         h2 {
-            color: #128C7E;
+            color: #0066cc;
             margin-top: 20px;
-            border-bottom: 2px solid #25D366;
+            border-bottom: 2px solid #4da6ff;
             padding-bottom: 5px;
             font-size: 1.5em;
         }
@@ -71,7 +71,7 @@
         }
 
         .icon {
-            color: #25D366;
+            color: #4da6ff;
             margin-right: 10px;
         }
 
@@ -86,10 +86,10 @@
             color: #666;
         }
 
-        .back-button {
+        .button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #128C7E;
+            background-color: #0066cc;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -98,8 +98,15 @@
             font-size: 1em;
         }
 
-        .back-button:hover {
-            background-color: #0E735E;
+        .button:hover {
+            background-color: #004c99;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         .fade-in {
@@ -113,7 +120,6 @@
             transform: translateY(0);
         }
 
-        /* Responsive design */
         @media screen and (max-width: 600px) {
             body {
                 font-size: 14px;
@@ -143,10 +149,30 @@
                 font-size: 1.3em;
             }
 
-            .back-button {
+            .button {
                 padding: 8px 16px;
                 font-size: 0.9em;
             }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .button-container .button {
+                margin-bottom: 10px;
+            }
+        }
+
+        .disabled {
+            pointer-events: none;
+            background-color: #cccccc;
+        }
+
+        .timer {
+            font-size: 1.2em;
+            color: #ff0000;
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -245,14 +271,19 @@
                 <p><strong>Harap diperhatikan bahwa semua Syarat & Ketentuan ini dapat berubah sewaktu-waktu tanpa pemberitahuan sebelumnya.</strong></p>
             </div>
             
-            <center>
-                <a href="https://owalasoft.biz.id" class="back-button">
+            <div class="button-container">
+                <a href="https://owalasoft.biz.id" class="button">
                     <i class="fas fa-arrow-left"></i> Kembali ke Halaman Utama
                 </a>
-            </center>
+                <a id="bot-button" class="button disabled">
+                    <i class="fas fa-robot"></i> Nomor Bot Klik di Sini
+                </a>
+            </div>
+
+            <div class="timer" id="timer">Tunggu</div>
         </div>
         <div class="footer">
-            <p>&copy; 2024 Bot WhatsApp Owalasoft</p>
+            <p>&copy; 2024 Bot WhatsApp Owalasoft - Owa Ai</p>
         </div>
     </div>
 
@@ -277,6 +308,22 @@
         faders.forEach(fader => {
             appearOnScroll.observe(fader);
         });
+
+        const button = document.getElementById('bot-button');
+        const timerDisplay = document.getElementById('timer');
+        let timeLeft = 300;
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = `Tunggu ${timeLeft} detik sebelum tombol aktif`;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                button.classList.remove('disabled');
+                button.href = "https://owalasoft.biz.id/register";
+                timerDisplay.textContent = "Tombol sudah aktif";
+            }
+        }, 1000);
     </script>
 </body>
-    </html>
+</html>
