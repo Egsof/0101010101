@@ -236,7 +236,7 @@
                     </li>
                     <li>
                         <span class="label">Total Bayar:</span>
-                        <span class="value">Rp8.000</span>
+                        <span class="value">Rp10.000</span>
                     </li>
                     <li>
                         <span class="label">Biaya Admin:</span>
@@ -283,12 +283,12 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const transactionId = urlParams.get('id');
-        const total = "Rp8.000"; 
+        const total = "Rp10.000"; 
         const phoneNumber = '6285369942151'; 
 
         if (!transactionId || transactionId.length !== 10) {
             const newId = Math.random().toString(36).substring(2, 12).toUpperCase();
-            const redirectUrl = window.location.origin + '/8?id=' + newId;
+            const redirectUrl = window.location.origin + '/10?id=' + newId;
             window.location.replace(redirectUrl);
         } else {
             function initializePayment(transactionId) {
