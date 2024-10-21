@@ -1,235 +1,606 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<style>
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
-/*Variables*/
-.left-section .inner-content {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Owalasoft</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #4da6ff 0%, #0066cc 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-* {
-  box-sizing: border-box;
-}
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-sizing: border-box;
+            animation: fadeIn 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
 
-html, body {
-  margin: 0;
-  padding: 0;
-}
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, red, transparent 30%);
+            animation: rotate 4s linear infinite;
+        }
 
-body {
-  font-family: "Fira Sans", sans-serif;
-  color: #f5f6fa;
-}
+        .container::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: white;
+            border-radius: 16px;
+            z-index: 1;
+        }
 
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(#0C0E10, #446182);
-}
-.background .ground {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 25vh;
-  background: #0C0E10;
-}
-@media (max-width: 770px) {
-  .background .ground {
-    height: 0vh;
-  }
-}
+        .content {
+            position: relative;
+            z-index: 2;
+        }
 
-.container {
-  position: relative;
-  margin: 0 auto;
-  width: 85%;
-  height: 100vh;
-  padding-bottom: 25vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-@media (max-width: 770px) {
-  .container {
-    flex-direction: column;
-    padding-bottom: 0vh;
-  }
-}
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
-.left-section, .right-section {
-  position: relative;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.left-section {
-  width: 40%;
-}
-@media (max-width: 770px) {
-  .left-section {
-    width: 100%;
-    height: 40%;
-    position: absolute;
-    top: 0;
-  }
-}
-@media (max-width: 770px) {
-  .left-section .inner-content {
-    position: relative;
-    padding: 1rem 0;
-  }
-}
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #333;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
 
-.heading {
-  text-align: center;
-  font-size: 9em;
-  line-height: 1.3em;
-  margin: 2rem 0 0.5rem 0;
-  padding: 0;
-  text-shadow: 0 0 1rem #fefefe;
-}
-@media (max-width: 770px) {
-  .heading {
-    font-size: 7em;
-    line-height: 1.15;
-    margin: 0;
-  }
-}
+        .captcha-box {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f0f2f5;
+            border: 2px solid #e0e0e0;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 12px;
+            font-size: 24px;
+            letter-spacing: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #555;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+            transform: skew(-5deg);
+        }
 
-.subheading {
-  text-align: center;
-  max-width: 480px;
-  font-size: 1.5em;
-  line-height: 1.15em;
-  padding: 0 1rem;
-  margin: 0 auto;
-}
-@media (max-width: 770px) {
-  .subheading {
-    font-size: 1.3em;
-    line-height: 1.15;
-    max-width: 100%;
-  }
-}
+        .captcha-box::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff00002b, #00ff002b, #0000ff2b);
+            z-index: -1;
+            filter: blur(20px);
+            animation: glowing 10s linear infinite;
+        }
 
-.right-section {
-  width: 50%;
-}
-@media (max-width: 770px) {
-  .right-section {
-    width: 100%;
-    height: 60%;
-    position: absolute;
-    bottom: 0;
-  }
-}
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
 
-.svgimg {
-  position: absolute;
-  bottom: 0;
-  padding-top: 10vh;
-  padding-left: 1vh;
-  max-width: 100%;
-  max-height: 100%;
-}
-@media (max-width: 770px) {
-  .svgimg {
-    padding: 0;
-  }
-}
-.svgimg .bench-legs {
-  fill: #0C0E10;
-}
-.svgimg .top-bench, .svgimg .bottom-bench {
-  stroke: #0C0E10;
-  stroke-width: 1px;
-  fill: #5B3E2B;
-}
-.svgimg .bottom-bench path:nth-child(1) {
-  fill: #432d20;
-}
-.svgimg .lamp-details {
-  fill: #202425;
-}
-.svgimg .lamp-accent {
-  fill: #2c3133;
-}
-.svgimg .lamp-bottom {
-  fill: linear-gradient(#202425, #0C0E10);
-}
-.svgimg .lamp-light {
-  fill: #EFEFEF;
-}
+        .btn {
+            background-color: #004c99;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-@keyframes glow {
-  0% {
-    text-shadow: 0 0 1rem #fefefe;
-  }
-  50% {
-    text-shadow: 0 0 1.85rem #ededed;
-  }
-  100% {
-    text-shadow: 0 0 1rem #fefefe;
-  }
-}
-</style>
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background-color: #004c99;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 25px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .input-box:focus {
+            border-color: #004c99;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+
+        #result, #resultSecret {
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f0f2f5;
+            transition: all 0.3s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            font-size: 1.2em;
+            color: #004c99;
+            margin-top: 20px;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 10px;
+            font-weight: bold;
+            color: #fff;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .step.active {
+            background-color: #004c99;
+            transform: scale(1.1);
+        }
+
+        .step-connector {
+            flex-grow: 1;
+            height: 2px;
+            background-color: #ddd;
+            align-self: center;
+            transition: all 0.3s ease;
+        }
+
+        .step-connector.active {
+            background-color: #004c99;
+            height: 3px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px;
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #004c99;
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked {
+            background-color: #004c99;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked::before {
+            content: '\2714';
+            display: block;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .checkbox-container label {
+            cursor: pointer;
+        }
+
+        #ageRange {
+            width: 100%;
+            margin-top: 20px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 10px;
+            background: #ddd;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        #ageRange::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #004c99;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        #ageRange::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #004c99;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        #ageValue {
+            font-size: 18px;
+            font-weight: bold;
+            color: #004c99;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .security-question {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .security-question select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .captcha-box {
+                font-size: 20px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
 <body>
-<div class="background">
-	<div class="ground"></div>
-</div>
-<div class="container">
-	<div class="left-section">
-		<div class="inner-content">
-			<h1 class="heading">404</h1>
-			<p class="subheading">Maaf Situs Tidak Dapat Di Lihat Kami Bangkrut :( Chat Saya Di Wa: +6285369942151</p>
-		</div>
-	</div>
-	<div class="right-section">
-		<svg class="svgimg" xmlns="http://www.w3.org/2000/svg" viewBox="51.5 -15.288 385 505.565">
-        <g class="bench-legs">
-          <path d="M202.778,391.666h11.111v98.611h-11.111V391.666z M370.833,390.277h11.111v100h-11.111V390.277z M183.333,456.944h11.111
-          v33.333h-11.111V456.944z M393.056,456.944h11.111v33.333h-11.111V456.944z" />
-        </g>
-        <g class="top-bench">
-          <path d="M396.527,397.917c0,1.534-1.243,2.777-2.777,2.777H190.972c-1.534,0-2.778-1.243-2.778-2.777v-8.333
-          c0-1.535,1.244-2.778,2.778-2.778H393.75c1.534,0,2.777,1.243,2.777,2.778V397.917z M400.694,414.583
-          c0,1.534-1.243,2.778-2.777,2.778H188.194c-1.534,0-2.778-1.244-2.778-2.778v-8.333c0-1.534,1.244-2.777,2.778-2.777h209.723
-          c1.534,0,2.777,1.243,2.777,2.777V414.583z M403.473,431.25c0,1.534-1.244,2.777-2.778,2.777H184.028
-          c-1.534,0-2.778-1.243-2.778-2.777v-8.333c0-1.534,1.244-2.778,2.778-2.778h216.667c1.534,0,2.778,1.244,2.778,2.778V431.25z"
-          />
-        </g>
-        <g class="bottom-bench">
-          <path d="M417.361,459.027c0,0.769-1.244,1.39-2.778,1.39H170.139c-1.533,0-2.777-0.621-2.777-1.39v-4.86
-          c0-0.769,1.244-0.694,2.777-0.694h244.444c1.534,0,2.778-0.074,2.778,0.694V459.027z" />
-          <path d="M185.417,443.75H400c0,0,18.143,9.721,17.361,10.417l-250-0.696C167.303,451.65,185.417,443.75,185.417,443.75z" />
-        </g>
-        <g id="lamp">
-          <path class="lamp-details" d="M125.694,421.997c0,1.257-0.73,3.697-1.633,3.697H113.44c-0.903,0-1.633-2.44-1.633-3.697V84.917
-          c0-1.257,0.73-2.278,1.633-2.278h10.621c0.903,0,1.633,1.02,1.633,2.278V421.997z"
-          />
-          <path class="lamp-accent" d="M128.472,93.75c0,1.534-1.244,2.778-2.778,2.778h-13.889c-1.534,0-2.778-1.244-2.778-2.778V79.861
-          c0-1.534,1.244-2.778,2.778-2.778h13.889c1.534,0,2.778,1.244,2.778,2.778V93.75z" />
-          
-          <circle class="lamp-light" cx="119.676" cy="44.22" r="40.51" />
-          <path class="lamp-details" d="M149.306,71.528c0,3.242-13.37,13.889-29.861,13.889S89.583,75.232,89.583,71.528c0-4.166,13.369-13.889,29.861-13.889
-          S149.306,67.362,149.306,71.528z"/>
-          <radialGradient class="light-gradient" id="SVGID_1_" cx="119.676" cy="44.22" r="65" gradientUnits="userSpaceOnUse">
-            <stop  offset="0%" style="stop-color:#FFFFFF; stop-opacity: 1"/>
-            <stop  offset="50%" style="stop-color:#EDEDED; stop-opacity: 0.5">
-              <animate attributeName="stop-opacity" values="0.0; 0.5; 0.0" dur="5000ms" repeatCount="indefinite"></animate>
-            </stop>
-            <stop  offset="100%" style="stop-color:#EDEDED; stop-opacity: 0"/>
-          </radialGradient>
-          <circle class="lamp-light__glow" fill="url(#SVGID_1_)" cx="119.676" cy="44.22" r="65"/>
-          <path class="lamp-bottom" d="M135.417,487.781c0,1.378-1.244,2.496-2.778,2.496H106.25c-1.534,0-2.778-1.118-2.778-2.496v-74.869
-          c0-1.378,1.244-2.495,2.778-2.495h26.389c1.534,0,2.778,1.117,2.778,2.495V487.781z" />
-        </g>
-      </svg>
-	</div>
-</div>
+    <div class="container">
+        <div class="content">
+            <h1 id="verificationTitle">Verifikasi Owalasoft</h1>
+            
+            <div class="step-indicator">
+                <div class="step active" id="step1Indicator">1</div>
+                <div class="step-connector" id="connector1"></div>
+                <div class="step" id="step2Indicator">2</div>
+                <div class="step-connector" id="connector2"></div>
+                <div class="step" id="step3Indicator">3</div>
+                <div class="step-connector" id="connector3"></div>
+                <div class="step" id="step4Indicator">4</div>
+            </div>
+
+            <div id="step1">
+                <div class="captcha-box" id="captchaCode"></div>
+                <button type="button" class="btn" onclick="generateCaptcha()"><i class="fas fa-sync-alt"></i> Regenerasi CAPTCHA</button>
+                <input type="text" id="userCaptchaInput" class="input-box" placeholder="Masukkan CAPTCHA" required>
+                <button type="button" class="btn" onclick="validateCaptcha()"><i class="fas fa-check-circle"></i> Verifikasi CAPTCHA</button>
+                <p id="result"></p>
+            </div>
+
+            <div id="step2" class="hidden">
+                <h2>Verifikasi Keamanan</h2>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="humanVerification" name="humanVerification">
+                    <label for="humanVerification">Saya bisa membedakan antara manusia dengan bot</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="termsAgreement" name="termsAgreement">
+                    <label for="termsAgreement">Saya sudah membaca syarat ketentuan Owalasoft</label>
+                </div>
+                <div class="security-question">
+                    <label for="securityQuestion">Pilih pertanyaan keamanan:</label>
+                    <select id="securityQuestion">
+                        <option value="">-- Pilih pertanyaan --</option>
+                        <option value="1">Untuk tujuan apa anda menggunakan layanan chatbot Owalasoft?</option>
+                        <option value="2">Mengapa anda memilih menggunakan layanan chatbot Owalasoft?</option>
+                    </select>
+                </div>
+                <input type="text" id="securityAnswer" class="input-box" placeholder="Jawaban pertanyaan keamanan" required>
+                <button type="button" class="btn" onclick="validateSecurityQuestions()"><i class="fas fa-shield-alt"></i> Verifikasi Keamanan</button>
+                <p id="resultSecret"></p>
+            </div>
+
+            <div id="step3" class="hidden">
+                <h2>Verifikasi Umur</h2>
+                <p id="agePrompt">Geser slider untuk memilih umur Anda</p>
+                <input type="range" id="ageRange" min="10" max="40" value="10" oninput="updateAgeValue(this.value)">
+                <span id="ageValue">Umur: </span>
+                <button class="btn disabled" id="ageButton" onclick="validateAge()" disabled><i class="fas fa-user-check"></i> Verifikasi Umur</button>
+            </div>
+
+            <div id="step4" class="hidden">
+                <h2>Verifikasi Final</h2>
+                <p>Silakan selesaikan captcha matematika berikut:</p>
+                <div id="mathCaptcha"></div>
+                <input type="text" id="mathCaptchaInput" class="input-box" placeholder="Masukkan hasil perhitungan" required>
+                <button type="button" class="btn" onclick="validateMathCaptcha()"><i class="fas fa-calculator"></i> Verifikasi Perhitungan</button>
+            </div>
+
+            <div class="loading" id="loading"><i class="fas fa-spinner"></i> Menghubungkan dengan server...</div>
+        </div>
+    </div>
+<script>
+    let captcha;
+    let mathCaptchaAnswer;
+
+    function generateCaptcha() {
+        captcha = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        for (let i = 0; i < 6; i++) {
+            captcha += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        document.getElementById('captchaCode').innerText = captcha;
+        document.getElementById('result').innerText = '';
+        document.getElementById('userCaptchaInput').value = '';
+    }
+
+    function validateCaptcha() {
+        const userCaptcha = document.getElementById('userCaptchaInput').value;
+        const result = document.getElementById('result');
+
+        if (userCaptcha === captcha) {
+            result.style.color = 'green';
+            result.innerText = 'CAPTCHA Terverifikasi! Lanjut ke verifikasi keamanan.';
+            Toast.fire({
+                icon: "success",
+                title: "CAPTCHA Valid!"
+            });
+            document.getElementById('userCaptchaInput').value = '';
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+            updateStepIndicator(2);
+        } else {
+            result.style.color = 'red';
+            result.innerText = 'CAPTCHA salah. Coba lagi.';
+            Toast.fire({
+                icon: "error",
+                title: "CAPTCHA Salah!"
+            });
+            document.getElementById('userCaptchaInput').value = '';
+            generateCaptcha();
+        }
+    }
+
+    function validateSecurityQuestions() {
+        const humanVerification = document.getElementById('humanVerification').checked;
+        const termsAgreement = document.getElementById('termsAgreement').checked;
+        const securityQuestion = document.getElementById('securityQuestion').value;
+        const securityAnswer = document.getElementById('securityAnswer').value;
+        const resultSecret = document.getElementById('resultSecret');
+
+        if (humanVerification && termsAgreement && securityQuestion && securityAnswer) {
+            resultSecret.style.color = 'green';
+            resultSecret.innerText = 'Verifikasi Keamanan Berhasil! Lanjut ke verifikasi umur.';
+            Toast.fire({
+                icon: "success",
+                title: "Verifikasi Keamanan Berhasil!"
+            });
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.remove('hidden');
+            updateStepIndicator(3);
+        } else {
+            resultSecret.style.color = 'red';
+            resultSecret.innerText = 'Mohon lengkapi semua informasi untuk melanjutkan.';
+            Toast.fire({
+                icon: "error",
+                title: "Verifikasi Keamanan Gagal!"
+            });
+        }
+    }
+
+    function updateAgeValue(value) {
+        document.getElementById('ageValue').textContent = 'Umur: ' + value;
+        const ageButton = document.getElementById('ageButton');
+        ageButton.disabled = value < 10;
+        ageButton.classList.toggle('disabled', value < 10);
+    }
+
+    function validateAge() {
+        const age = document.getElementById('ageRange').value;
+        if (age >= 10) {
+            Toast.fire({
+                icon: "success",
+                title: "Verifikasi Umur Berhasil!"
+            });
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('step4').classList.remove('hidden');
+            updateStepIndicator(4);
+            generateMathCaptcha();
+        } else {
+            Toast.fire({
+                icon: "error",
+                title: "Anda harus berumur minimal 10 tahun!"
+            });
+        }
+    }
+
+    function generateMathCaptcha() {
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        const operator = Math.random() < 0.5 ? '+' : '-';
+        mathCaptchaAnswer = operator === '+' ? num1 + num2 : num1 - num2;
+        document.getElementById('mathCaptcha').innerText = `${num1} ${operator} ${num2} = ?`;
+    }
+
+    function validateMathCaptcha() {
+        const userAnswer = parseInt(document.getElementById('mathCaptchaInput').value);
+        if (userAnswer === mathCaptchaAnswer) {
+            Toast.fire({
+                icon: "success",
+                title: "Verifikasi Perhitungan Berhasil!"
+            });
+            finalizeVerification();
+        } else {
+            Toast.fire({
+                icon: "error",
+                title: "Perhitungan Salah! Coba lagi."
+            });
+            generateMathCaptcha();
+            document.getElementById('mathCaptchaInput').value = '';
+        }
+    }
+
+    function finalizeVerification() {
+        const loading = document.getElementById('loading');
+        loading.style.display = 'block';
+
+        setTimeout(function() {
+            loading.style.display = 'none';
+            Swal.fire({
+                title: 'Verifikasi Berhasil!',
+                text: 'Anda telah berhasil diverifikasi.',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1600
+            }).then(() => {
+                const randomUser = generateRandomUsername();
+                const age = document.getElementById('ageRange').value;
+                window.location.href = 'https://wa.me/62?text=.>@data?user=%20' + randomUser + '.' + age;
+            });
+        }, 2100); 
+    }
+
+    function generateRandomUsername() {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let randomUsername = '';
+        for (let i = 0; i < 10; i++) {
+            randomUsername += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return randomUsername;
+    }
+
+    function updateStepIndicator(step) {
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById(`step${i}Indicator`).classList.remove('active');
+            if (i < 4) {
+                document.getElementById(`connector${i}`).classList.remove('active');
+            }
+        }
+        for (let i = 1; i <= step; i++) {
+            document.getElementById(`step${i}Indicator`).classList.add('active');
+            if (i < step) {
+                document.getElementById(`connector${i}`).classList.add('active');
+            }
+        }
+    }
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+
+    window.onload = generateCaptcha;
+</script>
+
 </body>
 </html>
