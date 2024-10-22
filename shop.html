@@ -386,5 +386,37 @@
         }
     </script>
 </body>
+<script>
+
+    window.onload = function() {
+        document.getElementById('whatsapp-notification').style.display = 'flex';
+
+        const closeButton = document.querySelector('.close-button');
+        closeButton.disabled = true;
+
+        let countdown = 30;
+        closeButton.textContent = `Tutup (${countdown}s)`;
+
+        const interval = setInterval(function() {
+            countdown--;
+            closeButton.textContent = `Tutup (${countdown}s)`;
+            if (countdown <= 0) {
+                clearInterval(interval);
+                closeButton.textContent = 'Tutup';
+                closeButton.disabled = false;
+            }
+        }, 1000);
+    };
+
+    function joinWhatsApp() {
+        window.open('https://whatsapp.com/channel/0029VaXUbMJG8l5N9AjkYK1F', '_blank');
+        closeNotification();
+    }
+
+    function closeNotification() {
+        document.getElementById('whatsapp-notification').style.display = 'none';
+    }
+
+</script>
 
 </html>
