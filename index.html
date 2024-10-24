@@ -269,7 +269,7 @@
     <script src="assets/js/custom.js"></script>
 
     <script>
-        // Initialize Swiper
+
         var swiper = new Swiper('.swiper-container', {
             loop: true, 
             autoplay: {
@@ -284,7 +284,7 @@
             },
         });
 
-        // Check if the browser supports service workers
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js')
@@ -297,23 +297,30 @@
             });
         }
 
-        // Function to check if the app is already installed
+
         function isAppInstalled() {
-            // Check if the app is running in standalone mode (PWA)
+
             if (window.matchMedia('(display-mode: standalone)').matches) {
                 return true;
             }
-            // Check for iOS "Add to Home Screen"
+
             if (window.navigator.standalone === true) {
                 return true;
             }
             return false;
         }
 
-        // Show the custom install prompt after a delay
+
+function showCustomInstallPrompt() {
+    if (!isAppInstalled()) {
+
+    }
+}
+
+
         setTimeout(showCustomInstallPrompt, 3000);
 
-        // Still listen for the beforeinstallprompt event for browsers that support it
+
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
