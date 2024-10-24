@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .navbar {
+            background-color: #075e54;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero {
+            margin-top: 4rem;
+            padding: 4rem 1rem;
+            background: linear-gradient(45deg, #075e54, #128C7E);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 1rem auto;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #25D366;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button.secondary {
+            background: #128C7E;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #075e54;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #075e54;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .numbered-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .numbered-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .numbered-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .highlight {
+            background: #e1f5fe;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                margin: 2rem 1rem;
+                padding: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                padding: 0 1rem;
+            }
+
+            .feature-card {
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <i class="fab fa-whatsapp"></i>
+                Owa bot
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Asisten AI WhatsApp</h1>
+        <p>Owa AI adalah chatbot berbasis kecerdasan buatan yang tersedia di WhatsApp</p>
+        <div class="cta-buttons">
+            <a href="#" class="cta-button">
+                <i class="fas fa-robot"></i>
+               Coba Bot
+            </a>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-star feature-icon"></i>Keunggulan Utama</h2>
+        <p>Keunggulan utama Owa AI, produk dari Owalasoft, terletak pada kemampuannya yang menyerupai interaksi manusia nyata, tanpa memerlukan penggunaan prefix atau tanda khusus di awal setiap perintah untuk AI.</p>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-cogs feature-icon"></i>Penggunaan Bot</h2>
+        <p>Namun, untuk memanfaatkan fitur bot, pengguna harus menggunakan prefix atau titik (.) di setiap perintah. Misalnya, untuk melihat daftar fitur yang tersedia, cukup ketik <span class="highlight">.menu</span></p>
+        
+        <p>Setelah itu, akan muncul tiga pilihan tombol:</p>
+        <ul class="numbered-list">
+            <li>
+                <i class="fas fa-chevron-right"></i>
+                <span>Saluran</span>
+            </li>
+            <li>
+                <i class="fas fa-chevron-right"></i>
+                <span>Syarat & Ketentuan (S&K)</span>
+            </li>
+            <li>
+                <i class="fas fa-chevron-right"></i>
+                <span>Semua Fitur</span>
+            </li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-list feature-icon"></i>List Semua Fitur</h2>
+        <p>Pada tombol <span class="highlight">Semua Fitur</span>, pengguna dapat memilih fitur yang ingin digunakan. Berikut ini adalah fitur nya:</p>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Halaman Utama</h3>
+                <p>Akses cepat ke halaman utama.</p>
+            </div>        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h3>Konverter</h3>
+                <p>Ubah berbagai format file, video, audio sesuai kebutuhan Anda</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h3>Downloader</h3>
+                <p>Unduh konten dari berbagai platform media sosial</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Searching</h3>
+                <p>Dapatkan informasi, foto, video, lagu yang Anda butuhkan dengan cepat</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-ninja"></i>
+                </div>
+                <h3>Karakter Anime</h3>
+                <p>Dapatkan foto karakter anime favorit.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Assistant AI</h3>
+                <p>Bantu tugas sehari-hari Anda.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>E-Perpus</h3>
+                <p>Temukan berbagai bacaan menarik Crpen.</p>
+            </div>
+             <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-laugh"></i>
+                </div>
+                <h3>Lelucon</h3>
+                <p>Temukan berbagai fitur-fitur hiburan.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <h3>Islamic</h3>
+                <p>Dapatkan kutipan dan doa Islam.</p>
+            </div>
+             <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hat-wizard"></i>
+                </div>
+                <h3>Ramalan</h3>
+                <p>Lihat prediksi harian dan keberuntungan Anda.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3>User Profile</h3>
+                <p>Akses profil dan pengaturan.</p>
+            </div>            
+        </div>
+    </section>
+
+    <section class="section">
+        <h2><i class="fas fa-info-circle feature-icon"></i>Cara Berinteraksi</h2>
+        <p>Gunakan tanda titik di awal perintah untuk berinteraksi dengan bot, tetapi untuk percakapan dengan AI, tidak diperlukan tanda titik atau prefix—cukup kirim pesan seperti biasa.</p>
+    </section>
+
+</body>
+  </html>
