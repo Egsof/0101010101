@@ -297,58 +297,9 @@
             });
         }
 
-        // Function to check if the app is already installed
-        function isAppInstalled() {
-            // Check if the app is running in standalone mode (PWA)
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                return true;
-            }
-            // Check for iOS "Add to Home Screen"
-            if (window.navigator.standalone === true) {
-                return true;
-            }
-            return false;
-        }
-
-        // Function to show custom install prompt
-        function showCustomInstallPrompt() {
-            if (!isAppInstalled()) {
-                const installBanner = document.createElement('div');
-                installBanner.innerHTML = `
-                    <div style="position: fixed; bottom: 0; left: 0; right: 0; background-color: #f1f1f1; padding: 10px; text-align: center; z-index: 9999;">
-                        <p>Instal aplikasi kami untuk pengalaman\nyang lebih baik!</p>
-                        <button id="installButton" style="background-color: #0171F9; color: white; padding: 10px 20px; border: none; cursor: pointer;">Install Now</button>
-                        <button id="closeButton" style="background-color: #EE626B; color: white; padding: 10px 20px; border: none; cursor: pointer; margin-left: 10px;">Close</button>
-                    </div>
-                `;
-                document.body.appendChild(installBanner);
-
-                document.getElementById('installButton').addEventListener('click', () => {
-                    // Instructions for installation based on the user's browser/device
-                    alert('Untuk menginstal aplikasi kami:\n\n' +
-'1. Untuk iOS: Ketuk tombol bagikan dan pilih "Tambahkan ke Layar Utama"\n' + '2. Untuk Android: Ketuk tombol menu dan pilih "Tambahkan ke Layar Utama"\n' + '3. Untuk desktop: Cari ikon instal di bilah alamat');
-                });
-
-                document.getElementById('closeButton').addEventListener('click', () => {
-                    installBanner.remove();
-                });
-            }
-        }
-
-        // Show the custom install prompt after a delay
-        setTimeout(showCustomInstallPrompt, 3000);
-
-        // Still listen for the beforeinstallprompt event for browsers that support it
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            showInstallButton();
-        });
-
         function showInstallButton() {
             const installButton = document.createElement('button');
-            installButton.innerText = 'Install App';
+            installButton.innerText = 'Install Aplikasi';
             installButton.style.position = 'fixed';
             installButton.style.bottom = '20px';
             installButton.style.right = '20px';
@@ -378,4 +329,3 @@
     </script>
 </body>
 </html>
-                    
