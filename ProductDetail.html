@@ -189,14 +189,51 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="logo">
-                <i class="fab fa-whatsapp"></i>
-                Owa bot
-            </div>
+<nav class="navbar">
+    <div class="nav-content">
+        <div class="logo">
+            <i class="fab fa-whatsapp"></i>
+            Owa bot
         </div>
-    </nav>
+        <div class="nav-buttons">
+            <button class="cta-button secondary" id="listen-button" onclick="playAudio()">
+                <i class="fas fa-volume-up"></i> Dengarkan
+            </button>
+            <audio id="audio-player" src="https://l.top4top.io/m_3219lwfxw0.mp3"></audio>
+        </div>
+    </div>
+</nav>
+
+<script>
+    function playAudio() {
+        var audio = document.getElementById('audio-player');
+        var button = document.getElementById('listen-button');
+
+        audio.play();
+
+        button.classList.add('blinking');
+
+        audio.onended = function() {
+            button.classList.remove('blinking');
+        };
+    }
+</script>
+
+<style>
+    @keyframes blink {
+        0%, 100% {
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        50% {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    .blinking {
+        animation: blink 1s infinite;
+    }
+</style>
+
 
     <section class="hero">
         <h1>Asisten AI WhatsApp</h1>
