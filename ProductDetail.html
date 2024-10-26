@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="p.css">
 </head>
 <body>
 <nav class="navbar">
@@ -42,7 +41,7 @@
         notification.classList.add('notification');
 
         const title = document.createElement('h3');
-        title.textContent = "Apa yang Anda inginkan?";
+        title.textContent = "Apa yang Anda ingin gunakan?";
         title.classList.add('notification-title');
         notification.appendChild(title);
 
@@ -52,13 +51,13 @@
         const btnBot = document.createElement('a');
         btnBot.href = "https://wa.me/6285758412480?text=.menu";
         btnBot.target = "_blank";
-        btnBot.innerHTML = "<i class='fas fa-robot'></i> Menggunakan Bot";
+        btnBot.innerHTML = "<i class='fas fa-robot'></i> Bot";
         btnBot.classList.add('option-button', 'left');
 
         const btnAI = document.createElement('a');
         btnAI.href = "https://wa.me/6285758412480?text=Halo";
         btnAI.target = "_blank";
-        btnAI.innerHTML = "<i class='fas fa-brain'></i> Menggunakan AI";
+        btnAI.innerHTML = "<i class='fas fa-brain'></i> AI";
         btnAI.classList.add('option-button', 'right');
 
         buttonContainer.appendChild(btnBot);
@@ -107,17 +106,17 @@
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #fff;
-        padding: 30px;
-        border-radius: 12px;
+        padding: 20px;
+        border-radius: 10px;
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
         text-align: center;
         z-index: 1000;
-        width: 300px;
+        width: 280px;
     }
 
     .notification-title {
-        margin-bottom: 20px;
-        font-size: 18px;
+        margin-bottom: 15px;
+        font-size: 16px;
         color: #333;
     }
 
@@ -131,17 +130,19 @@
         align-items: center;
         justify-content: center;
         width: 45%;
-        padding: 10px;
-        font-size: 16px;
+        padding: 8px;
+        font-size: 14px;
         color: #fff;
         text-decoration: none;
         border-radius: 6px;
         cursor: pointer;
         transition: background-color 0.3s;
+        font-weight: bold;
     }
 
     .option-button i {
-        margin-right: 8px;
+        margin-right: 5px;
+        font-size: 16px;
     }
 
     .left {
@@ -294,7 +295,6 @@
         <h2><i class="fas fa-info-circle feature-icon"></i>Cara Berinteraksi</h2>
         <p>Gunakan tanda titik di awal perintah untuk berinteraksi dengan bot, tetapi untuk percakapan dengan AI, tidak diperlukan tanda titik atau prefix—cukup kirim pesan seperti biasa.</p>
     </section>
-
 
 <footer>
     &copy; 2024 Owalasoft. All rights reserved.
