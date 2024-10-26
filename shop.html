@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -179,7 +178,6 @@
         }
     </style>
 </head>
-
 <body>
     <!-- Notification -->
     <div id="whatsapp-notification" class="notification-overlay" style="display: none;">
@@ -193,7 +191,7 @@
                     Ikutin saluran WhatsApp kami untuk mendapatkan info terbaru mengenai update owabot!
                 </div>
                 <div class="notification-buttons">
-                    <button class="notification-button close-button" onclick="closeNotification()">Tutup</button>
+                    <button class="notification-button close-button" onclick="closeNotification()">Tunggu</button>
                     <button class="notification-button join-button" onclick="joinWhatsApp()">Ikuti</button>
                 </div>
             </div>
@@ -241,7 +239,6 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
-
     <div class="page-heading header-text">
         <div class="container">
             <div class="row">
@@ -273,8 +270,8 @@
                                 <li>> Tambahan limit 3.000</li>
                                 <li>> Aktif 3 hari</li>
                             </ul>
-                            <span class="price">Rp10.000</span>
-                            <a href="https://owalasoft.biz.id/10"><i class="fa fa-shopping-bag"></i></a>
+                            <span class="price">Rp8.000</span>
+                            <a href="Pro05"><i class="fa fa-shopping-bag"></i></a>
                         </div>
                     </div>
                 </div>
@@ -285,13 +282,13 @@
                             <span class="category">Langganan</span>
                             <h4>User Premium 7 Hari</h4>
                             <ul class="features">
-                                <li>> Untuk 1 Pengguna</li>
+                                <li>> Untuk 1-2 Pengguna</li>
                                 <li>> Akses fitur premium</li>
                                 <li>> Tambahan limit 5.000</li>
                                 <li>> Aktif 7 hari</li>
                             </ul>
                             <span class="price">Rp20.000</span>
-                            <a href="https://owalasoft.biz.id/20"><i class="fa fa-shopping-bag"></i></a>
+                            <a href="Pro02"><i class="fa fa-shopping-bag"></i></a>
                         </div>
                     </div>
                 </div>
@@ -308,7 +305,7 @@
                                 <li>> Aktif 15 hari</li>
                             </ul>
                             <span class="price">Rp25.000</span>
-                            <a href="https://owalasoft.biz.id/25"><i class="fa fa-shopping-bag"></i></a>
+                            <a href="Pro03"><i class="fa fa-shopping-bag"></i></a>
                         </div>
                     </div>
                 </div>
@@ -322,36 +319,36 @@
                                 <li>> Untuk 1 Pengguna</li>
                                 <li>> Akses fitur premium</li>
                                 <li>> Tambahan limit 10.000</li>
-                                <li>> Join Group 1</li>
                                 <li>> Aktif 30 hari</li>
                             </ul>
-                            <span class="price">Rp50.000</span>
-                            <a href="https://owalasoft.biz.id/50"><i class="fa fa-shopping-bag"></i></a>
+                            <span class="price">Rp30.000</span>
+                            <a href="Pro04"><i class="fa fa-shopping-bag"></i></a>
+                            <div class="most-popular">Paling Laris</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items adv">
-                    <div class="item">
-                        <div class="icon"><i class="fas fa-star"></i></div>
-                        <div class="down-content">
-                            <span class="category">Gratis</span>
-                            <h4>User Gratis</h4>
-                            <ul class="features">
-                                <li>> Untuk 1 Pengguna</li>
-                                <li>> Akses fitur di batasi</li>
-                                <li>> Limit 10 saja</li>
-                                <li>> Only Privat Chat</li>
-                                <li>> Dapatkan ini Gratis</li>
-                            </ul>
-                            <span class="price">Gratis</span>
-                            <a href="https://owalasoft.biz.id/s&k"><i class="fa fa-shopping-bag"></i></a>
-                        </div>
+            <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items adv">
+                <div class="item">
+                    <div class="icon"><i class="fas fa-star"></i></div>
+                    <div class="down-content">
+                        <span class="category">Gratis</span>
+                        <h4>User Gratis</h4>
+                        <ul class="features">
+                            <li>> Untuk 1 Pengguna</li>
+                            <li>> Akses fitur di batasi</li>
+                            <li>> Limit 10 saja</li>
+                            <li>> Only Privat Chat</li>
+                            <li>> Dapatkan ini Gratis</li>
+                        </ul>
+                        <span class="price">Gratis</span>
+                        <a href="#" onclick="showNotification('https://owalasoft.biz.id/s&k')"><i class="fa fa-shopping-bag"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="col-lg-12">
@@ -361,7 +358,6 @@
     </footer>
 
     <!-- Scripts -->
-    <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/isotope.min.js"></script>
@@ -370,54 +366,38 @@
     <script src="assets/js/custom.js"></script>
 
     <script>
+        let redirectUrl = '';
 
-        window.onload = function() {
+        function showNotification(url) {
+            redirectUrl = url;
             document.getElementById('whatsapp-notification').style.display = 'flex';
-        };
+            
+            const closeButton = document.querySelector('.close-button');
+            closeButton.disabled = true;
 
+            let countdown = 15;
+            closeButton.textContent = `Tunggu (${countdown}s)`;
+
+            const interval = setInterval(function() {
+                countdown--;
+                closeButton.textContent = `Tunggu (${countdown}s)`;
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    closeButton.textContent = 'Selesai';
+                    closeButton.disabled = false;
+                    window.location.href = redirectUrl; 
+                }
+            }, 1000);
+        }
 
         function joinWhatsApp() {
             window.open('https://whatsapp.com/channel/0029VaXUbMJG8l5N9AjkYK1F', '_blank');
             closeNotification();
         }
 
-
         function closeNotification() {
             document.getElementById('whatsapp-notification').style.display = 'none';
         }
     </script>
 </body>
-<script>
-
-    window.onload = function() {
-        document.getElementById('whatsapp-notification').style.display = 'flex';
-
-        const closeButton = document.querySelector('.close-button');
-        closeButton.disabled = true;
-
-        let countdown = 5;
-        closeButton.textContent = `Tutup (${countdown}s)`;
-
-        const interval = setInterval(function() {
-            countdown--;
-            closeButton.textContent = `Tutup (${countdown}s)`;
-            if (countdown <= 0) {
-                clearInterval(interval);
-                closeButton.textContent = 'Tutup';
-                closeButton.disabled = false;
-            }
-        }, 1000);
-    };
-
-    function joinWhatsApp() {
-        window.open('https://whatsapp.com/channel/0029VaXUbMJG8l5N9AjkYK1F', '_blank');
-        closeNotification();
-    }
-
-    function closeNotification() {
-        document.getElementById('whatsapp-notification').style.display = 'none';
-    }
-
-</script>
-
-</html>
+                                    </html>
