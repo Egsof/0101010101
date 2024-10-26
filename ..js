@@ -1,4 +1,4 @@
-    <script>
+
         const terminalContent = document.getElementById('terminalContent');
         const ramDisplay = document.getElementById('ram');
         const cpuDisplay = document.getElementById('cpu');
@@ -51,4 +51,3 @@
         setInterval(updateCpuUsage, 1000);
         setInterval(simulateTerminal, 3000);
         setInterval(simulateDiskActivity, 4000);
-    </script>
