@@ -42,7 +42,8 @@
         notification.classList.add('notification');
 
         const title = document.createElement('h3');
-        title.textContent = "Apa yang Anda ingin gunakan?";
+        title.textContent = "Apa yang Anda inginkan?";
+        title.classList.add('notification-title');
         notification.appendChild(title);
 
         const buttonContainer = document.createElement('div');
@@ -64,6 +65,14 @@
         buttonContainer.appendChild(btnAI);
         notification.appendChild(buttonContainer);
 
+        const overlay = document.createElement('div');
+        overlay.classList.add('overlay');
+        overlay.onclick = function() {
+            document.body.removeChild(notification);
+            document.body.removeChild(overlay);
+        };
+
+        document.body.appendChild(overlay);
         document.body.appendChild(notification);
     }
 </script>
@@ -82,21 +91,34 @@
         animation: blink 1s infinite;
     }
 
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
     .notification {
         position: fixed;
-        top: 20%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
         text-align: center;
         z-index: 1000;
+        width: 300px;
     }
 
-    .notification h3 {
-        margin: 0 0 15px;
+    .notification-title {
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #333;
     }
 
     .button-container {
@@ -107,12 +129,13 @@
     .option-button {
         display: flex;
         align-items: center;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
+        justify-content: center;
+        width: 45%;
+        padding: 10px;
         font-size: 16px;
         color: #fff;
         text-decoration: none;
+        border-radius: 6px;
         cursor: pointer;
         transition: background-color 0.3s;
     }
@@ -135,6 +158,13 @@
 
     .right:hover {
         background-color: #1e7e34;
+    }
+
+    footer {
+        margin-top: 30px;
+        text-align: center;
+        color: #777;
+        font-size: 14px;
     }
 </style>
 
@@ -264,6 +294,11 @@
         <h2><i class="fas fa-info-circle feature-icon"></i>Cara Berinteraksi</h2>
         <p>Gunakan tanda titik di awal perintah untuk berinteraksi dengan bot, tetapi untuk percakapan dengan AI, tidak diperlukan tanda titik atau prefix—cukup kirim pesan seperti biasa.</p>
     </section>
+
+
+<footer>
+    &copy; 2024 Owalasoft. All rights reserved.
+</footer>
 
 </body>
 </html>
