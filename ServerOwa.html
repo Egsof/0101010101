@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Owalasoft</title>
+    <!-- Import Lucide Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .panel {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            width: 500px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #60a5fa;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .server-info {
+            background-color: #334155;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .server-info p {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .server-info strong {
+            color: #93c5fd;
+            min-width: 100px;
+        }
+
+        .terminal {
+            background-color: #0f172a;
+            border-radius: 8px;
+            padding: 15px;
+            height: 180px;
+            overflow-y: auto;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            white-space: pre-wrap;
+            color: #4ade80;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border: 1px solid #334155;
+        }
+
+        .terminal-content {
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        .status-running {
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-warning {
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+
+        @media (max-width: 600px) {
+            .panel {
+                width: 100%;
+                padding: 15px;
+            }
+            
+            .server-info p {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <h1>
+            Server Owalasoft
+        </h1>
+        <div class="server-info">
+            <p>
+                <strong><i data-lucide="cpu" class="icon"></i>RAM:</strong>
+                <span id="ram">0 MiB / 1024 GiB</span>
+            </p>
+            <p>
+                <strong><i data-lucide="activity" class="icon"></i>CPU:</strong>
+                <span id="cpu">0% / 100%</span>
+            </p>
+            <p>
+                <strong><i data-lucide="hard-drive" class="icon"></i>Disk:</strong>
+                <span id="disk">0 GB / 1024 GB</span>
+            </p>
+            <p>
+                <strong><i data-lucide="activity" class="icon"></i>Status:</strong>
+                <span id="status" class="status-running">Running</span>
+            </p>
+            <p>
+                <strong><i data-lucide="clock" class="icon"></i>Uptime:</strong>
+                <span id="uptime">2 years 1 months</span>
+            </p>
+            <p>
+                <strong><i data-lucide="globe" class="icon"></i>Domain:</strong>
+                <span>owa.bot.online:2001</span>
+            </p>
+            <p>
+                <strong><i data-lucide="fingerprint" class="icon"></i>Server ID:</strong>
+                <span id="serverId"></span>
+            </p>
+            <p>
+                <strong><i data-lucide="map-pin" class="icon"></i>Region:</strong>
+                <span>SG01 - VIP</span>
+            </p>
+        </div>
+        
+        <div class="terminal" id="terminal">
+            <div class="terminal-content" id="terminalContent"></div>
+        </div>
+    </div>
+<script src="..js"></script>    
+</body>
+</html>
