@@ -36,6 +36,36 @@
             button.classList.remove('blinking');
         };
     }
+
+    function showNotification() {
+        const notification = document.createElement('div');
+        notification.classList.add('notification');
+
+        const title = document.createElement('h3');
+        title.textContent = "Apa yang Anda ingin gunakan?";
+        notification.appendChild(title);
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-container');
+
+        const btnBot = document.createElement('a');
+        btnBot.href = "https://wa.me/6285758412480?text=.menu";
+        btnBot.target = "_blank";
+        btnBot.innerHTML = "<i class='fas fa-robot'></i> Menggunakan Bot";
+        btnBot.classList.add('option-button', 'left');
+
+        const btnAI = document.createElement('a');
+        btnAI.href = "https://wa.me/6285758412480?text=Halo";
+        btnAI.target = "_blank";
+        btnAI.innerHTML = "<i class='fas fa-brain'></i> Menggunakan AI";
+        btnAI.classList.add('option-button', 'right');
+
+        buttonContainer.appendChild(btnBot);
+        buttonContainer.appendChild(btnAI);
+        notification.appendChild(buttonContainer);
+
+        document.body.appendChild(notification);
+    }
 </script>
 
 <style>
@@ -51,21 +81,74 @@
     .blinking {
         animation: blink 1s infinite;
     }
+
+    .notification {
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        z-index: 1000;
+    }
+
+    .notification h3 {
+        margin: 0 0 15px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .option-button {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .option-button i {
+        margin-right: 8px;
+    }
+
+    .left {
+        background-color: #007bff;
+    }
+
+    .right {
+        background-color: #28a745;
+    }
+
+    .left:hover {
+        background-color: #0056b3;
+    }
+
+    .right:hover {
+        background-color: #1e7e34;
+    }
 </style>
 
+<section class="hero">
+    <h1>Asisten AI WhatsApp</h1>
+    <p>Owa AI adalah chatbot berbasis kecerdasan buatan yang tersedia di WhatsApp</p>
+    <div class="cta-buttons">
+        <button class="cta-button" onclick="showNotification()">
+            <i class="fas fa-robot"></i> Coba Bot
+        </button>
+    </div>
+</section>
 
-    <section class="hero">
-        <h1>Asisten AI WhatsApp</h1>
-        <p>Owa AI adalah chatbot berbasis kecerdasan buatan yang tersedia di WhatsApp</p>
-        <div class="cta-buttons">
-            <a href="https://wa.me/6285758412480?text=Halo" class="cta-button">
-                <i class="fas fa-robot"></i>
-               Coba Bot
-            </a>
-        </div>
-    </section>
-
-    <section class="section">
+<section class="section">
         <h2><i class="fas fa-star feature-icon"></i>Keunggulan Utama</h2>
         <p>Keunggulan utama Owa AI, produk dari Owalasoft, terletak pada kemampuannya yang menyerupai interaksi manusia nyata, tanpa memerlukan penggunaan prefix atau tanda khusus di awal setiap perintah untuk AI.</p>
     </section>
@@ -183,4 +266,4 @@
     </section>
 
 </body>
-  </html>
+</html>
