@@ -105,26 +105,7 @@
         } else {
             function initializePayment(transactionId) {
                 document.getElementById('transaction-id').innerText = transactionId;
-                const expiryTime = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-                function updateExpiryTime() {
-                    const now = new Date();
-                    const timeLeft = expiryTime - now;
-                    if (timeLeft <= 0) {
-                        document.querySelector('.qr-container').style.display = 'none';
-                        document.getElementById('whatsapp-button').style.display = 'none';
-                        document.getElementById('detail-button').style.display = 'none';
-                        alert('Pembayaran telah kadaluarsa');
-                        return;
-                    }
-                    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                    document.getElementById('expiry-time').innerText = `${hours}j ${minutes}m ${seconds}d`;
-                }
-
-                setInterval(updateExpiryTime, 1000);
-                updateExpiryTime();
 
                 document.getElementById('detail-button').addEventListener('click', function() {
                     const detailContent = document.getElementById('detail-content');
