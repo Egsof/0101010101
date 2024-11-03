@@ -1,305 +1,417 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Detail</title>
-    <link rel="stylesheet" href="p.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Nomor Owa Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f2f5;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .listen-btn {
+            background: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .listen-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            flex: 1;
+        }
+
+        /* Robot Container */
+        .robot-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .robot-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .robot-image {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .overlay-text {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-button {
+            background: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Info Text */
+        .info-text {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 2rem;
+        }
+
+        .toggle-comments {
+            background: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .toggle-comments:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .comments-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .comment {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .comment:last-child {
+            border-bottom: none;
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+        }
+
+        .username {
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 0.25rem;
+        }
+
+        .comment-text {
+            color: #4b5563;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .action-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar">
-    <div class="nav-content">
-        <div class="logo">
-            <i class="fab fa-whatsapp"></i>
-            Owa Bot
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="brand">
+                <i class="fab fa-whatsapp"></i>
+                <span>Owa Bot</span>
+            </div>
+            <div class="listen-btn" id="listenBtn">
+            <i class="fas fa-volume-up"></i>
+            <span>Dengar Kan</span>
         </div>
-        <div class="nav-buttons">
-            <button class="cta-button secondary" id="listen-button" onclick="playAudio()">
-                <i class="fas fa-volume-up"></i> Dengarkan
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Robot Container -->
+        <div class="robot-container" id="robotContainer">
+            <img src="https://storage.googleapis.com/a1aa/image/mLp61UiYcY4sHZv9xfVCbzCQjcOPgZYW1SeebBWJ85y7GaanA.jpg" 
+                 alt="Owa Bot AI Assistant" 
+                 class="robot-image">
+            <div class="overlay-text" id="overlayText">
+                Klik di sini untuk melihat panduan penggunaan
+            </div>
+        </div>
+
+<!-- Button Container -->
+<div class="button-container" id="buttonContainer">
+    <button class="action-button" onclick="gunakanBot()">
+        <i class="fas fa-robot"></i>
+        Gunakan Bot
+    </button>
+    <button class="action-button" onclick="gunakanAI()">
+        <i class="fas fa-brain"></i>
+        Gunakan AI
+    </button>
+</div>
+
+        <!-- Info Text -->
+        <div class="info-text" id="infoText">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
+                Panduan Penggunaan Owa Bot
+            </h2>
+            <p style="line-height: 1.6;">
+                1. Pilih tombol gunakan "Owa Bot"<br>
+                2. Kirim pesan ".menu" untuk memulai gunakan titik<br>
+                3. Pilih fitur yang ingin Anda gunakan<br>
+                4. Ikuti instruksi yang diberikan<br>
+            </p>
+           
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
+                Panduan Penggunaan Owa Ai
+            </h2>  
+            <p style="line-height: 1.6;">
+                1. Pilih tombol gunakan "Owa Ai"<br>
+                2. Kirim pesan "Halo" untuk memulai gunakan tanpa titik<br>
+                3. Lanjut kan percakapan apa pun yang anda ingin kan bot akan menyesuaikan<br>
+            </p>  
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">
+                Ringkasan Penggunaan
+            </h2>  
+            <p style="line-height: 1.6;">
+                1. Gunakan tanda titik di awal perintah untuk berinteraksi dengan bot, tetapi untuk percakapan dengan AI, tidak diperlukan tanda titik atau prefix—cukup kirim pesan seperti biasa.
+            </p>                        
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <button class="toggle-comments" id="toggleComments">
+                Tampilkan Komentar
             </button>
-            <audio id="audio-player" src="https://l.top4top.io/m_3219lwfxw0.mp3"></audio>
+            <div class="comments-container" id="commentsContainer">
+                <div class="comment">
+                    <div class="stars">★★★★★</div>
+                    <div class="username">Budi Santoso</div>
+                    <div class="comment-text">Mirip banget sama ChatGPT! Tapi enaknya ini langsung di WA, jadi gak perlu buka web atau app lain. Sangat membantu buat bikin konten marketing.</div>
+                </div>
+                <div class="comment">
+                    <div class="stars">★★★★★</div>
+                    <div class="username">Linda Wijaya</div>
+                    <div class="comment-text">Kualitas jawaban setara ChatGPT, bahkan kadang lebih natural. Suka banget karena bisa diakses lewat WA yang udah biasa dipake sehari-hari.</div>
+                </div>
+                <div class="comment">
+                    <div class="stars">★★★★★</div>
+                    <div class="username">Ahmad Rizki</div>
+                    <div class="comment-text">Awalnya pake Character.AI, tapi sekarang lebih suka ini karena lebih praktis di WA. Responnya cepet dan pinter banget buat bantuin tugas kuliah!</div>
+                </div>
+                 <div class="comment">
+                    <div class="stars">★★★★★</div>
+                    <div class="username">Maya Anggraini</div>
+                    <div class="comment-text">Kayak punya tim CS profesional 24/7! Bisa jawab customer, bikin caption produk, sampai analisis market. Super membantu untuk bisnis online.</div>
+                </div>
+                 <div class="comment">
+                    <div class="stars">★★★★★</div>
+                    <div class="username">Fajar Ramadhan</div>
+                    <div class="comment-text">Udah nyoba Claude juga, tapi untuk daily use lebih enak ini karena di WA. Bantuin debug code, bikin dokumentasi, semuanya cepet dan akurat.</div>
+                </div>
+                 <div class="comment">
+                    <div class="stars">★★★★★</div>
+                    <div class="username">Diana Putri</div>
+                    <div class="comment-text">Awalnya pake Gemini, sekarang pindah ke ini karena lebih gampang. Bantu cari resep, tips parenting, sampai bantuin anak ngerjain PR.</div>
+                </div>
+                  <div class="comment">
+                    <div class="stars">★★★★★</div>
+                    <div class="username">Amba tukam</div>
+                    <div class="comment-text">Gacor king Bisa Make ai lewat Wa doang jadi lebih simpel dan Sensasi yang berbeda.</div>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
-    
-<script>
-    function playAudio() {
-        var audio = document.getElementById('audio-player');
-        var button = document.getElementById('listen-button');
+    </main>
 
-        audio.play();
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© Owalasoft Digital 2024</p>
+    </footer>
 
-        button.classList.add('blinking');
+    <!-- JavaScript -->
+    <script>
+        // Robot Container Click Event
+        document.getElementById('robotContainer').addEventListener('click', function() {
+            const buttonContainer = document.getElementById('buttonContainer');
+            const infoText = document.getElementById('infoText');
+            const overlayText = document.getElementById('overlayText');
 
-        audio.onended = function() {
-            button.classList.remove('blinking');
-        };
-    }
+            if (infoText.style.display === 'block') {
+                infoText.style.display = 'none';
+                buttonContainer.style.display = 'flex';
+                overlayText.style.display = 'block';
+            } else {
+                buttonContainer.style.display = 'none';
+                infoText.style.display = 'block';
+                overlayText.style.display = 'none';
+            }
+        });
+function gunakanBot() {
+    window.location.href = "https://wa.me/6285758412480?text=.menu"; 
+}
 
-    function showNotification() {
-        const notification = document.createElement('div');
-        notification.classList.add('notification');
+function gunakanAI() {
+    window.location.href = "https://wa.me/6285758412480?text=Halo"; 
+}
 
-        const title = document.createElement('h3');
-        title.textContent = "Apa yang Anda ingin gunakan?";
-        title.classList.add('notification-title');
-        notification.appendChild(title);
+        // Toggle Comments
+        document.getElementById('toggleComments').addEventListener('click', function() {
+            const commentsContainer = document.getElementById('commentsContainer');
+            const toggleButton = document.getElementById('toggleComments');
 
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('button-container');
+            if (commentsContainer.style.display === 'block') {
+                commentsContainer.style.display = 'none';
+                toggleButton.textContent = 'Tampilkan Komentar';
+            } else {
+                commentsContainer.style.display = 'block';
+                toggleButton.textContent = 'Sembunyikan Komentar';
+            }
+        });
+    </script>
+ <script>
+    const listenBtn = document.getElementById('listenBtn');
+    const audio = new Audio('https://a.top4top.io/m_3229s88ot0.mp3');
+    let isPlaying = false;
 
-        const btnBot = document.createElement('a');
-        btnBot.href = "https://wa.me/6285758412480?text=.menu";
-        btnBot.target = "_blank";
-        btnBot.innerHTML = "<i class='fas fa-robot'></i> Bot";
-        btnBot.classList.add('option-button', 'left');
+    listenBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            audio.pause();
+            listenBtn.innerHTML = '<i class="fas fa-volume-up"></i> <span>Dengar Kan</span>';
+        } else {
+            audio.play();
+            listenBtn.innerHTML = '<i class="fas fa-pause"></i> <span>Hentikan</span>';
+        }
+        isPlaying = !isPlaying;
+    });
 
-        const btnAI = document.createElement('a');
-        btnAI.href = "https://wa.me/6285758412480?text=Halo";
-        btnAI.target = "_blank";
-        btnAI.innerHTML = "<i class='fas fa-brain'></i> AI";
-        btnAI.classList.add('option-button', 'right');
-
-        buttonContainer.appendChild(btnBot);
-        buttonContainer.appendChild(btnAI);
-        notification.appendChild(buttonContainer);
-
-        const overlay = document.createElement('div');
-        overlay.classList.add('overlay');
-        overlay.onclick = function() {
-            document.body.removeChild(notification);
-            document.body.removeChild(overlay);
-        };
-
-        document.body.appendChild(overlay);
-        document.body.appendChild(notification);
-    }
+    audio.addEventListener('ended', function() {
+        isPlaying = false;
+        listenBtn.innerHTML = '<i class="fas fa-volume-up"></i> <span>Dengar Kan</span>';
+    });
 </script>
-
-<style>
-    @keyframes blink {
-        0%, 100% {
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-        50% {
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-    }
-
-    .blinking {
-        animation: blink 1s infinite;
-    }
-
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-    }
-
-    .notification {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        z-index: 1000;
-        width: 280px;
-    }
-
-    .notification-title {
-        margin-bottom: 15px;
-        font-size: 16px;
-        color: #333;
-    }
-
-    .button-container {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .option-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 45%;
-        padding: 8px;
-        font-size: 14px;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        font-weight: bold;
-    }
-
-    .option-button i {
-        margin-right: 5px;
-        font-size: 16px;
-    }
-
-    .left {
-        background-color: #007bff;
-    }
-
-    .right {
-        background-color: #28a745;
-    }
-
-    .left:hover {
-        background-color: #0056b3;
-    }
-
-    .right:hover {
-        background-color: #1e7e34;
-    }
-
-    footer {
-        margin-top: 30px;
-        text-align: center;
-        color: #777;
-        font-size: 14px;
-    }
-</style>
-
-<section class="hero">
-    <h1>Nomor Bot Owa</h1>
-    <p>Sebelum menggunakan bot ini, silakan baca atau dengarkan panduan pada halaman ini untuk memahami cara penggunaannya</p>
-    <div class="cta-buttons">
-        <button class="cta-button" onclick="showNotification()">
-            <i class="fas fa-robot"></i> Coba Bot
-        </button>
-    </div>
-</section>
-
-<section class="section">
-        <h2><i class="fas fa-star feature-icon"></i>Keunggulan Utama</h2>
-        <p>Keunggulan utama Owa AI, produk dari Owalasoft, terletak pada kemampuannya yang menyerupai interaksi manusia nyata, tanpa memerlukan penggunaan prefix atau tanda khusus di awal setiap perintah untuk AI.</p>
-    </section>
-
-    <section class="section">
-        <h2><i class="fas fa-cogs feature-icon"></i>Penggunaan Bot</h2>
-        <p>Namun, untuk memanfaatkan fitur bot, pengguna harus menggunakan prefix atau titik (.) di setiap perintah. Misalnya, untuk melihat daftar fitur yang tersedia, cukup ketik <span class="highlight">.menu</span></p>
-        
-        <p>Setelah itu, akan muncul tiga pilihan tombol:</p>
-        <ul class="numbered-list">
-            <li>
-                <i class="fas fa-chevron-right"></i>
-                <span>Saluran</span>
-            </li>
-            <li>
-                <i class="fas fa-chevron-right"></i>
-                <span>Syarat & Ketentuan (S&K)</span>
-            </li>
-            <li>
-                <i class="fas fa-chevron-right"></i>
-                <span>Semua Fitur</span>
-            </li>
-        </ul>
-    </section>
-
-    <section class="section">
-        <h2><i class="fas fa-list feature-icon"></i>List Semua Fitur</h2>
-        <p>Pada tombol <span class="highlight">Semua Fitur</span>, pengguna dapat memilih fitur yang ingin digunakan. Berikut ini adalah fitur nya:</p>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-home"></i>
-                </div>
-                <h3>Halaman Utama</h3>
-                <p>Akses cepat ke halaman utama.</p>
-            </div>        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-exchange-alt"></i>
-                </div>
-                <h3>Konverter</h3>
-                <p>Ubah berbagai format file, video, audio sesuai kebutuhan Anda</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-download"></i>
-                </div>
-                <h3>Downloader</h3>
-                <p>Unduh konten dari berbagai platform media sosial</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <h3>Searching</h3>
-                <p>Dapatkan informasi, foto, video, lagu yang Anda butuhkan dengan cepat</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-user-ninja"></i>
-                </div>
-                <h3>Karakter Anime</h3>
-                <p>Dapatkan foto karakter anime favorit.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h3>Assistant AI</h3>
-                <p>Bantu tugas sehari-hari Anda.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-book"></i>
-                </div>
-                <h3>E-Perpus</h3>
-                <p>Temukan berbagai bacaan menarik Crpen.</p>
-            </div>
-             <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-laugh"></i>
-                </div>
-                <h3>Lelucon</h3>
-                <p>Temukan berbagai fitur-fitur hiburan.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-moon"></i>
-                </div>
-                <h3>Islamic</h3>
-                <p>Dapatkan kutipan dan doa Islam.</p>
-            </div>
-             <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-hat-wizard"></i>
-                </div>
-                <h3>Ramalan</h3>
-                <p>Lihat prediksi harian dan keberuntungan Anda.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-user"></i>
-                </div>
-                <h3>User Profile</h3>
-                <p>Akses profil dan pengaturan.</p>
-            </div>            
-        </div>
-    </section>
-
-    <section class="section">
-        <h2><i class="fas fa-info-circle feature-icon"></i>Cara Berinteraksi</h2>
-        <p>Gunakan tanda titik di awal perintah untuk berinteraksi dengan bot, tetapi untuk percakapan dengan AI, tidak diperlukan tanda titik atau prefix—cukup kirim pesan seperti biasa.</p>
-    </section>
-
-<footer>
-    &copy; 2024 Owalasoft. All rights reserved.
-</footer>
-
 </body>
 </html>
