@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Buka Blokir</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #0071f8, #0071f8);
+        }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.15);
+            transform: perspective(800px) rotateX(0deg) translateZ(0);
+            animation: popUp 1s ease-out forwards;
+            opacity: 0;
+        }
+        .container h2 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .container p {
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .form-group label {
+            position: absolute;
+            top: 0;
+            left: 50px;
+            color: #555;
+            font-size: 13px;
+            padding: 10px 0;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+        .form-group i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #ee626b;
+            font-size: 18px;
+            pointer-events: none;
+            z-index: 2; /* Ikon tetap di depan */
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, transform 0.3s;
+            position: relative;
+            z-index: 1; /* Agar input tidak menutupi ikon */
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #ee626b;
+            transform: translateY(-2px);
+        }
+        .form-group input:focus + label, 
+        .form-group textarea:focus + label, 
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -20px;
+            left: 50px;
+            background-color: #fff;
+            padding: 0 5px;
+            font-size: 15px;
+            color: #ee626b;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .submit-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #ee626b;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        .submit-btn:hover {
+            background-color: #ee626b;
+            transform: translateY(-2px);
+        }
+        .submit-btn i {
+            margin-right: 8px;
+        }
+        @keyframes popUp {
+            0% {
+                opacity: 0;
+                transform: perspective(800px) rotateX(-10deg) translateZ(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: perspective(800px) rotateX(0deg) translateZ(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Layanan Buka Blokir</h2>
+        <p>Masukkan nomor WhatsApp dan alasan Anda untuk membuka blokir</p>
+
+        <form id="unblockForm">
+            <div class="form-group">
+    <i class="fas fa-phone-alt"></i>
+    <input type="tel" id="phone" name="phone" required placeholder=" " pattern="[0-9]*" inputmode="numeric" />
+    <label for="phone">Nomor Akun WhatsApp Anda</label>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-comment-alt"></i>
+                <textarea id="reason" name="reason" rows="4" required placeholder=" "></textarea>
+                <label for="reason">Alasan Buka Blokir Akun</label>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="sendToWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Kirim Permintaan
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function sendToWhatsApp() {
+            const phone = document.getElementById('phone').value;
+            const reason = document.getElementById('reason').value;
+
+            if (phone && reason) {
+                const whatsappNumber = "6285369942151";
+                const message = `Permintaan Buka Blokir:\n\nNomor Telepon: ${phone}\nAlasan: ${reason}`;
+                const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+                window.open(whatsappLink, '_blank');
+            } else {
+                alert("Silakan lengkapi semua kolom sebelum mengirim.");
+            }
+        }
+    </script>
+</body>
+</html>
