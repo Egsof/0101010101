@@ -374,9 +374,9 @@
 
             <div id="step1">
                 <div class="captcha-box" id="captchaCode"></div>
-                <button type="button" class="btn" onclick="generateCaptcha()"><i class="fas fa-sync-alt"></i> Regenerasi CAPTCHA</button>
-                <input type="text" id="userCaptchaInput" class="input-box" placeholder="Masukkan CAPTCHA" required>
-                <button type="button" class="btn" onclick="validateCaptcha()"><i class="fas fa-check-circle"></i> Verifikasi CAPTCHA</button>
+                <button type="button" class="btn" onclick="generateCaptcha()"><i class="fas fa-sync-alt"></i> Regenerasi CODE</button>
+                <input type="text" id="userCaptchaInput" class="input-box" placeholder="Masukkan CODE" required>
+                <button type="button" class="btn" onclick="validateCaptcha()"><i class="fas fa-check-circle"></i> Verifikasi CODE</button>
                 <p id="result"></p>
             </div>
 
@@ -398,7 +398,7 @@
                         <option value="2">Mengapa anda memilih menggunakan layanan chatbot Owalasoft?</option>
                     </select>
                 </div>
-                <input type="text" id="securityAnswer" class="input-box" placeholder="Jawaban pertanyaan keamanan" required>
+                <input type="text" id="securityAnswer" class="input-box" placeholder="Tulis alasan anda di sini" required>
                 <button type="button" class="btn" onclick="validateSecurityQuestions()"><i class="fas fa-shield-alt"></i> Verifikasi Keamanan</button>
                 <p id="resultSecret"></p>
             </div>
@@ -413,10 +413,10 @@
 
             <div id="step4" class="hidden">
                 <h2>Verifikasi Final</h2>
-                <p>Silakan selesaikan captcha matematika berikut:</p>
+                <p>Silakan selesaikan soal matematika berikut:</p>
                 <div id="mathCaptcha"></div>
                 <input type="text" id="mathCaptchaInput" class="input-box" placeholder="Masukkan hasil perhitungan" required>
-                <button type="button" class="btn" onclick="validateMathCaptcha()"><i class="fas fa-calculator"></i> Verifikasi Perhitungan</button>
+                <button type="button" class="btn" onclick="validateMathCaptcha()"><i class="fas fa-check-circle"></i> Verifikasi Perhitungan</button>
             </div>
 
             <div class="loading" id="loading"><i class="fas fa-spinner"></i> Menghubungkan dengan server...</div>
@@ -443,10 +443,10 @@
 
         if (userCaptcha === captcha) {
             result.style.color = 'green';
-            result.innerText = 'CAPTCHA Terverifikasi! Lanjut ke verifikasi keamanan.';
+            result.innerText = 'CODE Terverifikasi! Lanjut ke verifikasi keamanan.';
             Toast.fire({
                 icon: "success",
-                title: "CAPTCHA Valid!"
+                title: "CODE Valid!"
             });
             document.getElementById('userCaptchaInput').value = '';
             document.getElementById('step1').classList.add('hidden');
@@ -454,10 +454,10 @@
             updateStepIndicator(2);
         } else {
             result.style.color = 'red';
-            result.innerText = 'CAPTCHA salah. Coba lagi.';
+            result.innerText = 'CODE salah. Coba lagi.';
             Toast.fire({
                 icon: "error",
-                title: "CAPTCHA Salah!"
+                title: "CODE Salah!"
             });
             document.getElementById('userCaptchaInput').value = '';
             generateCaptcha();
@@ -603,4 +603,4 @@
 </script>
 
 </body>
-</html>
+    </html>
