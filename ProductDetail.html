@@ -50,11 +50,11 @@
             gap: 0.5rem;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #2563eb;
+            color: #0071f8;
         }
 
         .listen-btn {
-            background: #2563eb;
+            background: #0071f8;
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
@@ -67,7 +67,7 @@
         }
 
         .listen-btn:hover {
-            background: #1d4ed8;
+            background: #0071f8;
             transform: translateY(-2px);
         }
 
@@ -104,7 +104,7 @@
         }
 
         .overlay-text {
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            background: linear-gradient(135deg, #0071f8, #0071f8);
             color: white;
             padding: 1rem;
             border-radius: 8px;
@@ -122,8 +122,8 @@
 
         .action-button {
             background: white;
-            color: #2563eb;
-            border: 2px solid #2563eb;
+            color: #0071f8;
+            border: 2px solid #0071f8;
             padding: 1rem 2rem;
             border-radius: 8px;
             font-weight: 600;
@@ -135,7 +135,7 @@
         }
 
         .action-button:hover {
-            background: #2563eb;
+            background: #0071f8;
             color: white;
             transform: translateY(-2px);
         }
@@ -156,7 +156,7 @@
         }
 
         .toggle-comments {
-            background: #2563eb;
+            background: #0071f8;
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
@@ -168,7 +168,7 @@
         }
 
         .toggle-comments:hover {
-            background: #1d4ed8;
+            background: #0071f8;
             transform: translateY(-2px);
         }
 
@@ -197,7 +197,7 @@
 
         .username {
             font-weight: 600;
-            color: #2563eb;
+            color: #0071f8;
             margin-bottom: 0.25rem;
         }
 
@@ -264,15 +264,49 @@
 
 <!-- Button Container -->
 <div class="button-container" id="buttonContainer">
-    <button class="action-button" onclick="gunakanBot()">
+    <button class="action-button" id="gunakanBotBtn">
         <i class="fas fa-robot"></i>
         Gunakan Bot
     </button>
-    <button class="action-button" onclick="gunakanAI()">
+    <button class="action-button" id="gunakanAIBtn">
         <i class="fas fa-brain"></i>
         Gunakan AI
     </button>
 </div>
+
+<script>
+    let botTimeout, aiTimeout;
+
+    function delayButton(button, url, timeoutRef, otherButton, otherTimeoutRef) {
+        clearTimeout(otherTimeoutRef);
+        otherButton.disabled = false;
+        otherButton.innerHTML = otherButton.id === 'gunakanBotBtn' 
+            ? '<i class="fas fa-robot"></i> Gunakan Bot' 
+            : '<i class="fas fa-brain"></i> Gunakan AI';
+
+        button.disabled = true;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menunggu...';
+
+        timeoutRef = setTimeout(() => {
+            window.location.href = url;
+            button.disabled = false;
+            button.innerHTML = button.id === 'gunakanBotBtn' 
+                ? '<i class="fas fa-robot"></i> Gunakan Bot' 
+                : '<i class="fas fa-brain"></i> Gunakan AI';
+        }, 5000);
+
+        return timeoutRef;
+    }
+
+    document.getElementById('gunakanBotBtn').addEventListener('click', function() {
+        botTimeout = delayButton(this, "https://wa.me/6285758412480?text=.menu", botTimeout, document.getElementById('gunakanAIBtn'), aiTimeout);
+    });
+
+    document.getElementById('gunakanAIBtn').addEventListener('click', function() {
+        aiTimeout = delayButton(this, "https://wa.me/6285758412480?text=Halo", aiTimeout, document.getElementById('gunakanBotBtn'), botTimeout);
+    });
+</script>
+
 
         <!-- Info Text -->
         <div class="info-text" id="infoText">
@@ -349,7 +383,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© Owalasoft Digital 2024</p>
+        <p>© Owalasoft 2024</p>
     </footer>
 
     <!-- JavaScript -->
