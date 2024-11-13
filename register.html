@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #4da6ff 0%, #0066cc 100%);
+            background: linear-gradient(135deg, #0071f8 0%, #0071f8 100%);
             margin: 0;
             padding: 0;
             display: flex;
@@ -41,7 +41,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(from 0deg, transparent, red, transparent 30%);
+            background: conic-gradient(from 0deg, transparent, #ee626b, transparent 30%);
             animation: rotate 4s linear infinite;
         }
 
@@ -121,7 +121,7 @@
         }
 
         .btn {
-            background-color: #004c99;
+            background-color: #ee626b;
             color: white;
             border: none;
             padding: 14px 24px;
@@ -156,7 +156,7 @@
         }
 
         .btn:hover {
-            background-color: #004c99;
+            background-color: #ee626b;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
@@ -234,7 +234,7 @@
         }
 
         .step.active {
-            background-color: #004c99;
+            background-color: #ee626b;
             transform: scale(1.1);
         }
 
@@ -247,7 +247,7 @@
         }
 
         .step-connector.active {
-            background-color: #004c99;
+            background-color: #ee626b;
             height: 3px;
         }
 
@@ -264,14 +264,14 @@
             -webkit-appearance: none;
             width: 20px;
             height: 20px;
-            border: 2px solid #004c99;
+            border: 2px solid #ee626b;
             border-radius: 4px;
             outline: none;
             transition: all 0.3s ease;
         }
 
         .checkbox-container input[type="checkbox"]:checked {
-            background-color: #004c99;
+            background-color: #ee626b;
         }
 
         .checkbox-container input[type="checkbox"]:checked::before {
@@ -303,7 +303,7 @@
             appearance: none;
             width: 20px;
             height: 20px;
-            background: #004c99;
+            background: #ee626b;
             cursor: pointer;
             border-radius: 50%;
         }
@@ -311,7 +311,7 @@
         #ageRange::-moz-range-thumb {
             width: 20px;
             height: 20px;
-            background: #004c99;
+            background: #ee626b;
             cursor: pointer;
             border-radius: 50%;
         }
@@ -319,7 +319,7 @@
         #ageValue {
             font-size: 18px;
             font-weight: bold;
-            color: #004c99;
+            color: #ee626b;
             margin-top: 10px;
             display: block;
         }
@@ -398,7 +398,7 @@
                         <option value="2">Mengapa anda memilih menggunakan layanan chatbot Owalasoft?</option>
                     </select>
                 </div>
-                <input type="text" id="securityAnswer" class="input-box" placeholder="Tulis alasan anda di sini" required>
+                <input type="text" id="securityAnswer" class="input-box" placeholder="Ketik Sesuatu" required>
                 <button type="button" class="btn" onclick="validateSecurityQuestions()"><i class="fas fa-shield-alt"></i> Verifikasi Keamanan</button>
                 <p id="resultSecret"></p>
             </div>
@@ -603,4 +603,4 @@
 </script>
 
 </body>
-    </html>
+ </html>
