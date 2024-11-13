@@ -1,91 +1,45 @@
 ;(function($, window, document, undefined) {
 
-	/**
-	 * Creates a carousel.
-	 * @class The Owl Carousel.
-	 * @public
-	 * @param {HTMLElement|jQuery} element - The element to create the carousel for.
-	 * @param {Object} [options] - The options
-	 */
+	
 	function Owl(element, options) {
 
-		/**
-		 * Current settings for the carousel.
-		 * @public
-		 */
+		
 		this.settings = null;
 
-		/**
-		 * Current options set by the caller including defaults.
-		 * @public
-		 */
+		
 		this.options = $.extend({}, Owl.Defaults, options);
 
-		/**
-		 * Plugin element.
-		 * @public
-		 */
+		
 		this.$element = $(element);
 
-		/**
-		 * Proxied event handlers.
-		 * @protected
-		 */
+		
 		this._handlers = {};
 
-		/**
-		 * References to the running plugins of this carousel.
-		 * @protected
-		 */
+		
 		this._plugins = {};
 
-		/**
-		 * Currently suppressed events to prevent them from being retriggered.
-		 * @protected
-		 */
+		
 		this._supress = {};
 
-		/**
-		 * Absolute current position.
-		 * @protected
-		 */
+		
 		this._current = null;
 
-		/**
-		 * Animation speed in milliseconds.
-		 * @protected
-		 */
+	
 		this._speed = null;
 
-		/**
-		 * Coordinates of all items in pixel.
-		 * @todo The name of this member is missleading.
-		 * @protected
-		 */
+		
 		this._coordinates = [];
 
-		/**
-		 * Current breakpoint.
-		 * @todo Real media queries would be nice.
-		 * @protected
-		 */
+		
 		this._breakpoint = null;
 
-		/**
-		 * Current width of the plugin element.
-		 */
+		
 		this._width = null;
 
-		/**
-		 * All real items.
-		 * @protected
-		 */
+		
 		this._items = [];
 
-		/**
-		 * All cloned items.
-		 * @protected
-		 */
+		
 		this._clones = [];
 
 		/**
@@ -1388,12 +1342,7 @@
 		this.trigger('added', { content: content, position: position });
 	};
 
-	/**
-	 * Removes an item by its position.
-	 * @todo Use `item` instead of `content` for the event arguments.
-	 * @public
-	 * @param {Number} position - The relative position of the item to remove.
-	 */
+	
 	Owl.prototype.remove = function(position) {
 		position = this.normalize(position, true);
 
@@ -1412,11 +1361,7 @@
 		this.trigger('removed', { content: null, position: position });
 	};
 
-	/**
-	 * Preloads images with auto width.
-	 * @todo Replace by a more generic approach
-	 * @protected
-	 */
+	
 	Owl.prototype.preloadAutoWidthImages = function(images) {
 		images.each($.proxy(function(i, element) {
 			this.enter('pre-loading');
@@ -1430,10 +1375,7 @@
 		}, this));
 	};
 
-	/**
-	 * Destroys the carousel.
-	 * @public
-	 */
+	
 	Owl.prototype.destroy = function() {
 
 		this.$element.off('.owl.core');
@@ -1489,14 +1431,7 @@
 		}
 	};
 
-	/**
-	 * Attaches to an internal event.
-	 * @protected
-	 * @param {HTMLElement} element - The event source.
-	 * @param {String} event - The event name.
-	 * @param {Function} listener - The event handler to attach.
-	 * @param {Boolean} capture - Wether the event should be handled at the capturing phase or not.
-	 */
+	
 	Owl.prototype.on = function(element, event, listener, capture) {
 		if (element.addEventListener) {
 			element.addEventListener(event, listener, capture);
@@ -1505,14 +1440,7 @@
 		}
 	};
 
-	/**
-	 * Detaches from an internal event.
-	 * @protected
-	 * @param {HTMLElement} element - The event source.
-	 * @param {String} event - The event name.
-	 * @param {Function} listener - The attached event handler to detach.
-	 * @param {Boolean} capture - Wether the attached event handler was registered as a capturing listener or not.
-	 */
+	
 	Owl.prototype.off = function(element, event, listener, capture) {
 		if (element.removeEventListener) {
 			element.removeEventListener(event, listener, capture);
@@ -1521,17 +1449,7 @@
 		}
 	};
 
-	/**
-	 * Triggers a public event.
-	 * @todo Remove `status`, `relatedTarget` should be used instead.
-	 * @protected
-	 * @param {String} name - The event name.
-	 * @param {*} [data=null] - The event data.
-	 * @param {String} [namespace=carousel] - The event namespace.
-	 * @param {String} [state] - The state which is associated with the event.
-	 * @param {Boolean} [enter=false] - Indicates if the call enters the specified state or not.
-	 * @returns {Event} - The event arguments.
-	 */
+	
 	Owl.prototype.trigger = function(name, data, namespace, state, enter) {
 		var status = {
 			item: { count: this._items.length, index: this.current() }
@@ -1561,10 +1479,7 @@
 		return event;
 	};
 
-	/**
-	 * Enters a state.
-	 * @param name - The state name.
-	 */
+	
 	Owl.prototype.enter = function(name) {
 		$.each([ name ].concat(this._states.tags[name] || []), $.proxy(function(i, name) {
 			if (this._states.current[name] === undefined) {
@@ -1575,10 +1490,7 @@
 		}, this));
 	};
 
-	/**
-	 * Leaves a state.
-	 * @param name - The state name.
-	 */
+	
 	Owl.prototype.leave = function(name) {
 		$.each([ name ].concat(this._states.tags[name] || []), $.proxy(function(i, name) {
 			this._states.current[name]--;
@@ -1641,13 +1553,7 @@
 		}, this));
 	};
 
-	/**
-	 * Gets unified pointer coordinates from event.
-	 * @todo #261
-	 * @protected
-	 * @param {Event} - The `mousedown` or `touchstart` event.
-	 * @returns {Object} - Contains `x` and `y` coordinates of current pointer position.
-	 */
+	
 	Owl.prototype.pointer = function(event) {
 		var result = { x: null, y: null };
 
@@ -1678,14 +1584,7 @@
 		return !isNaN(parseFloat(number));
 	};
 
-	/**
-	 * Gets the difference of two vectors.
-	 * @todo #261
-	 * @protected
-	 * @param {Object} - The first vector.
-	 * @param {Object} - The second vector.
-	 * @returns {Object} - The difference.
-	 */
+	
 	Owl.prototype.difference = function(first, second) {
 		return {
 			x: first.x - second.x,
