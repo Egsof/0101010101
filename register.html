@@ -393,12 +393,11 @@
                 <div class="security-question">
                     <label for="securityQuestion">Pilih pertanyaan keamanan:</label>
                     <select id="securityQuestion">
-                        <option value="">-- Pilih pertanyaan --</option>
-                        <option value="1">Untuk tujuan apa anda menggunakan layanan chatbot Owalasoft?</option>
-                        <option value="2">Mengapa anda memilih menggunakan layanan chatbot Owalasoft?</option>
+                        <option value="">-- Pilih Setatus Anda --</option>
+                        <option value="1">Pelajar</option>
+                        <option value="2">Pekerja</option>
                     </select>
                 </div>
-                <input type="text" id="securityAnswer" class="input-box" placeholder="Ketik Sesuatu" required>
                 <button type="button" class="btn" onclick="validateSecurityQuestions()"><i class="fas fa-shield-alt"></i> Verifikasi Keamanan</button>
                 <p id="resultSecret"></p>
             </div>
@@ -464,32 +463,71 @@
         }
     }
 
-    function validateSecurityQuestions() {
-        const humanVerification = document.getElementById('humanVerification').checked;
-        const termsAgreement = document.getElementById('termsAgreement').checked;
-        const securityQuestion = document.getElementById('securityQuestion').value;
-        const securityAnswer = document.getElementById('securityAnswer').value;
-        const resultSecret = document.getElementById('resultSecret');
+function validateSecurityQuestions() {
+    const humanVerification = document.getElementById('humanVerification').checked;
+    const termsAgreement = document.getElementById('termsAgreement').checked;
+    const securityQuestion = document.getElementById('securityQuestion').value;
+    
+    // Cek jika semua checkbox dan dropdown terpilih
+    if (humanVerification && termsAgreement && securityQuestion) {
+        // Langsung lanjut jika semua terverifikasi
+        document.getElementById('step2').classList.add('hidden');
+        document.getElementById('step3').classList.remove('hidden');
+        updateStepIndicator(3);
 
-        if (humanVerification && termsAgreement && securityQuestion && securityAnswer) {
-            resultSecret.style.color = 'green';
-            resultSecret.innerText = 'Verifikasi Keamanan Berhasil! Lanjut ke verifikasi umur.';
+        Toast.fire({
+            icon: "success",
+            title: "Verifikasi Keamanan Berhasil!"
+        });
+    } else {
+        const resultSecret = document.getElementById('resultSecret');
+        resultSecret.style.color = 'red';
+        resultSecret.innerText = 'Mohon lengkapi semua informasi untuk melanjutkan.';
+        Toast.fire({
+            icon: "error",
+            title: "Verifikasi Keamanan Gagal!"
+        });
+    }
+}
+
+
+    function validateAge() {
+        const age = document.getElementById('ageRange').value;
+        const ageButton = document.getElementById('ageButton');
+        if (age >= 10) {
             Toast.fire({
                 icon: "success",
-                title: "Verifikasi Keamanan Berhasil!"
+                title: "Verifikasi Umur Berhasil!"
             });
-            document.getElementById('step2').classList.add('hidden');
-            document.getElementById('step3').classList.remove('hidden');
-            updateStepIndicator(3);
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('step4').classList.remove('hidden');
+            updateStepIndicator(4);
+            generateMathCaptcha();
         } else {
-            resultSecret.style.color = 'red';
-            resultSecret.innerText = 'Mohon lengkapi semua informasi untuk melanjutkan.';
             Toast.fire({
                 icon: "error",
-                title: "Verifikasi Keamanan Gagal!"
+                title: "Anda harus berumur minimal 10 tahun!"
             });
         }
     }
+
+    function updateStepIndicator(stepNumber) {
+        for (let i = 1; i <= 4; i++) {
+            const step = document.getElementById(`step${i}Indicator`);
+            const connector = document.getElementById(`connector${i}`);
+            if (i <= stepNumber) {
+                step.classList.add('active');
+                if (connector) connector.classList.add('active');
+            } else {
+                step.classList.remove('active');
+                if (connector) connector.classList.remove('active');
+            }
+        }
+    }
+
+    // Ensure you have an element for the security answer if you are using it.
+    // If you don't need it, remove the corresponding check in the validateSecurityQuestions function.
+
 
     function updateAgeValue(value) {
         document.getElementById('ageValue').textContent = 'Umur: ' + value;
