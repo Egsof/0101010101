@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards Premium Free</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFE66D;
+            --text-color: #2C3E50;
+            --background-color: #F7F9FC;
+            --whatsapp-color: #25D366;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .point-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 20px auto;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .points-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 10px;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+        }
+
+        .button[disabled] {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .button.claim {
+            background-color: var(--whatsapp-color);
+        }
+
+        .button.claim:hover {
+            box-shadow: 0 5px 15px rgba(37,211,102,0.4);
+        }
+
+        .reward-progress {
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--secondary-color);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .status-message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status-message.max {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            display: block;
+        }
+
+        .verification-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .verification-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .user-id {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+
+        .screenshot-instructions {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .reward-icon {
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-gift fa-3x" style="color: var(--primary-color);"></i>
+            <h1>Rewards Center</h1>
+            <p>Bagikan link dan kumpulkan poin untuk mendapatkan Owa Premium!</p>
+        </div>
+
+        <div class="point-box">
+            <i class="fas fa-trophy reward-icon"></i>
+            <div class="points-display">
+                <i class="fas fa-star"></i>
+                <span id="point">0</span>
+            </div>
+            
+            <div class="reward-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <p>Progress menuju Premium: <span id="progressText">0</span>/100 poin</p>
+            </div>
+
+            <div id="statusMessage" class="status-message">
+                Anda telah mencapai 100 poin! Silakan ikuti instruksi di bawah untuk klaim Premium.
+            </div>
+
+            <button class="button" id="shareButton" onclick="startSharing()">
+                <i class="fas fa-share-alt"></i>
+                Bagikan Link
+            </button>
+
+            <div id="verificationSection" class="verification-section">
+                <h3>Langkah Klaim Premium:</h3>
+                <p>1. Screenshot halaman ini (Pastikan User ID terlihat)</p>
+                <p>2. Klik tombol Klaim via WhatsApp di bawah</p>
+                <div class="user-id">
+                    User ID: <span id="userId"></span>
+                </div>
+                <p class="screenshot-instructions">
+                    <i class="fas fa-info-circle"></i>
+                    Screenshot diperlukan untuk verifikasi klaim Anda
+                </p>
+            </div>
+
+            <a href="#" id="claimButton" class="button claim" style="display: none;" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                Klaim via WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let point = 0;
+        let shareStartTime;
+        let hasShared = false;
+        let userId = generateUserId();
+
+        function generateUserId() {
+            return 'ID' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        function updateProgress() {
+            const progress = Math.min(point, 100);
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = point;
+        }
+
+        function updateStatusMessage() {
+            const statusMessage = document.getElementById('statusMessage');
+            const shareButton = document.getElementById('shareButton');
+            const verificationSection = document.getElementById('verificationSection');
+            const claimButton = document.getElementById('claimButton');
+            
+            if (point >= 100) {
+                statusMessage.classList.add('max');
+                shareButton.disabled = true;
+                verificationSection.classList.add('show');
+                claimButton.style.display = 'inline-flex';
+                document.getElementById('userId').textContent = userId;
+                
+                // Update WhatsApp link
+                const message = encodeURIComponent(
+                    `Saya telah mendapatkan Premium!\n` +
+                    `User ID: ${userId}\n` +
+                    `(Screenshot terlampir)`
+                );
+                claimButton.href = `https://wa.me/6285369942151?text=${message}`;
+            } else {
+                statusMessage.classList.remove('max');
+                shareButton.disabled = false;
+                verificationSection.classList.remove('show');
+                claimButton.style.display = 'none';
+            }
+        }
+
+        async function startSharing() {
+            if (point >= 100) {
+                alert('Anda sudah mencapai 100 poin. Silakan klaim Premium Anda!');
+                return;
+            }
+
+            const shareData = {
+                title: 'Owalasoft',
+                text: 'Layanan bot Whatsapp gratis dari Owalasoft ayo coba sekarang klik link:',
+                url: 'https://Owalasoft.biz.id'
+            };
+            hasShared = true;
+            shareStartTime = Date.now();
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    hasShared = false;
+                }
+            } else {
+                alert('Browser Anda tidak mendukung fitur berbagi.');
+                hasShared = false;
+            }
+        }
+
+        function handleVisibilityChange() {
+            if (document.visibilityState === 'visible' && hasShared) {
+                checkShareDuration();
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
+        }
+
+        function checkShareDuration() {
+            const shareDuration = (Date.now() - shareStartTime) / 1000;
+            if (shareDuration >= 5) {
+                if (point < 100) {
+                    addPoint();
+                }
+            } else {
+                alert('Anda harus berbagi ke 1 teman untuk mendapatkan poin!');
+            }
+            hasShared = false;
+        }
+
+        function addPoint() {
+            if (point + 10 <= 100) {
+                point += 10;
+                document.getElementById('point').textContent = point;
+                updateProgress();
+                updateStatusMessage();
+                
+                const pointsDisplay = document.querySelector('.points-display');
+                pointsDisplay.style.animation = 'pulse 0.5s ease';
+                setTimeout(() => {
+                    pointsDisplay.style.animation = '';
+                }, 500);
+
+                alert('Terima kasih sudah membagikan link! Poin Anda bertambah.');
+            }
+        }
+
+        // Initialize
+        updateProgress();
+        updateStatusMessage();
+    </script>
+</body>
+              </html>
