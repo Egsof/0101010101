@@ -30,10 +30,6 @@
                         <span class="value" id="transaction-id"></span>
                     </li>
                     <li>
-                        <span class="label">Total Bayar:</span>
-                        <span class="value">Rp20.000</span>
-                    </li>
-                    <li>
                         <span class="label">Biaya Admin:</span>
                         <span class="value">Gratis</span>
                     </li>
@@ -95,7 +91,6 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const transactionId = urlParams.get('id');
-        const total = "Rp20.000"; 
         const phoneNumber = '6285369942151'; 
 
         if (!transactionId || transactionId.length !== 10) {
@@ -105,7 +100,6 @@
         } else {
             function initializePayment(transactionId) {
                 document.getElementById('transaction-id').innerText = transactionId;
-
 
                 document.getElementById('detail-button').addEventListener('click', function() {
                     const detailContent = document.getElementById('detail-content');
@@ -122,11 +116,11 @@
                 });
 
                 document.getElementById('whatsapp-button').addEventListener('click', function() {
-                    const message = `Halo, saya ingin mengkonfirmasi pembayaran.\n\nID Transaksi: ${transactionId}\nTotal Bayar: ${total}`;
+                    const message = `Halo, saya ingin mengkonfirmasi pembayaran.\n\nID Transaksi: ${transactionId}`;
                     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
                 });
 
-document.getElementById('listen-button').addEventListener('click', function() {
+                document.getElementById('listen-button').addEventListener('click', function() {
                     if (isPlaying) {
                         audio.pause();
                         audio.currentTime = 0;
@@ -180,4 +174,4 @@ document.getElementById('listen-button').addEventListener('click', function() {
     });
 </script>
 </body>
-</html>                
+</html>
