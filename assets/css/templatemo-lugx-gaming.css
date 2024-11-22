@@ -1,15 +1,3 @@
-/*
-
-*/
-
-/*
-
---------------------------------------------- */
-/* 
----------------------------------------------
-font & reset css
---------------------------------------------- 
-*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900");
 /* 
 ---------------------------------------------
@@ -136,7 +124,7 @@ body {
 }
 
 .section-heading h6 {
-  color: #ee626b;
+  color: #1E9F13;
   font-size: 15px;
   text-transform: uppercase;
   font-weight: 700;
@@ -144,7 +132,7 @@ body {
 
 .main-button a {
   display: inline-block;
-  background-color: #ee626b;
+  background-color: #1E9F13;
   text-transform: uppercase;
   color: #fff;
   font-size: 14px;
@@ -372,13 +360,13 @@ Header Style
 }
 
 .header-area .main-nav .nav li:last-child a {
-  background-color: #ee626b;
+  background-color: #1E9F13;
   text-transform: uppercase;
   font-weight: 500;
 }
 
 .header-area .main-nav .nav li:last-child:hover a {
-  background-color: #ee626b;
+  background-color: #1E9F13;
 }
 
 .header-area .main-nav .nav li:hover a {
@@ -570,7 +558,7 @@ Header Style
   }
   .header-area.header-sticky .nav li a:hover,
   .header-area.header-sticky .nav li a.active {
-    color: #ee626b!important;
+    color: #1E9F13!important;
     opacity: 1;
   }
   .header-area.header-sticky .nav li.search-icon a {
@@ -698,7 +686,7 @@ Banner Style
   display: inline-block;
   height: 50px;
   line-height: 50px;
-  background-color: #ee626b;
+  background-color: #1E9F13;
   color: #fff;
   font-size: 15px;
   text-transform: uppercase;
@@ -742,7 +730,7 @@ Banner Style
   left: -25px;
   bottom: -25px;
   border-radius: 50%;
-  background-color: #ee626b;
+  background-color: #1E9F13;
   font-size: 28px;
   text-transform: uppercase;
   font-weight: 700;
@@ -792,7 +780,7 @@ Services Style
 }
 
 .features .item:hover .image {
-  background-color: #ee626b;
+  background-color: #1E9F13;
 }
 
 
@@ -868,7 +856,7 @@ Trending Style
   line-height: 40px;
   width: 40px;
   height: 40px;
-  background-color: #ee626b;
+  background-color: #1E9F13;
   color: #fff;
   border-radius: 50%;
   right: 25px;
@@ -940,7 +928,7 @@ Most Played Style
   line-height: 40px;
   height: 40px;
   padding: 0px 15px;
-  background-color: #ee626b;
+  background-color: #1E9F13;
   color: #fff;
   border-radius: 20px;
   font-size: 15px;
@@ -1071,7 +1059,7 @@ CTA Style
   display: inline-block;
   height: 50px;
   line-height: 50px;
-  background-color: #ee626b;
+  background-color: #1E9F13;
   color: #fff;
   font-size: 15px;
   text-transform: uppercase;
@@ -1193,7 +1181,7 @@ Shop Page Style
 }
 
 .trending ul.trending-filter li a.is_active {
-  background-color: #ee626b;
+  background-color: #1E9F13;
   color: #fff;
 }
 
@@ -1202,7 +1190,7 @@ Shop Page Style
 }
 
 .trending ul.trending-filter li a:hover {
-  color: #ee626b;
+  color: #1E9F13;
 }
 
 .trending-box .item  {
@@ -1265,7 +1253,7 @@ Shop Page Style
   line-height: 40px;
   width: 40px;
   height: 40px;
-  background-color: #ee626b;
+  background-color: #1E9F13;
   color: #fff;
   border-radius: 50%;
   right: 25px;
@@ -1379,7 +1367,7 @@ Single Page Style
   display: inline-block;
   height: 50px;
   line-height: 50px;
-  background-color: #ee626b;
+  background-color: #1E9F13;
   color: #fff;
   font-size: 15px;
   text-transform: uppercase;
@@ -1542,7 +1530,7 @@ Contact PAge Style
   display: inline-block;
   height: 50px;
   line-height: 50px;
-  background-color: #ee626b;
+  background-color: #1E9F13;
   color: #fff;
   font-size: 15px;
   text-transform: uppercase;
