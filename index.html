@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,7 +41,6 @@
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
-    <!-- Swiper CSS -->
     <style>
         /* Swiper container */
         .swiper-container {
@@ -76,11 +74,18 @@
                 width: 33.33% !important; /* 3 slides visible at a time on desktop */
             }
         }
+
+        .cta {
+            margin-top: 20px; 
+        }
+        .statistics-section {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <!-- ***** Preloader Start ***** -->
+    <!-- Preloader -->
     <div id="js-preloader" class="js-preloader">
         <div class="preloader-inner">
             <span class="dot"></span>
@@ -91,20 +96,16 @@
             </div>
         </div>
     </div>
-    <!-- ***** Preloader End ***** -->
 
-    <!-- ***** Header Area Start ***** -->
+    <!-- Header Area -->
     <header class="header-area header-sticky">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
                         <a href="https://owalasoft.biz.id" class="logo">
                             <img src="assets/images/logo.png" alt="" style="width: 158px;">
                         </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="https://owalasoft.biz.id" class="active">Rumah</a></li>
                             <li><a href="shop">Toko Kami</a></li>
@@ -114,14 +115,13 @@
                         <a class='menu-trigger'>
                             <span>Menu</span>
                         </a>
-                        <!-- ***** Menu End ***** -->
                     </nav>
                 </div>
             </div>
         </div>
     </header>
-    <!-- ***** Header Area End ***** -->
 
+    <!-- Main Banner -->
     <div class="main-banner">
         <div class="container">
             <div class="row">
@@ -141,6 +141,7 @@
         </div>
     </div>
     
+    <!-- Features -->
     <div class="features">
         <div class="container">
             <div class="row">
@@ -181,7 +182,7 @@
         </div>
     </div>
 
-    <!-- Statistik Section -->
+    <!-- Statistics Section -->
     <div class="statistics-section" style="background-color: #f9f9f9; padding: 50px 0; border-top: 2px solid #e5e5e5; border-bottom: 2px solid #e5e5e5;">
         <div class="container">
             <div class="row text-center">
@@ -205,6 +206,7 @@
         </div>
     </div>
 
+    <!-- Swiper Slideshow -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="assets/images/pro1.jpg" alt=""></div>
@@ -221,6 +223,7 @@
         </div>
     </div>
 
+    <!-- CTA Sections -->
     <div class="section cta">
         <div class="container">
             <div class="row">
@@ -238,6 +241,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="section cta">
         <div class="container">
             <div class="row">
@@ -247,9 +256,9 @@
                             <div class="col-lg-12">
                                 <div class="section-heading">
                                     <h6>Coba Gratis</h6>
-                                    <h2>Coba Bot <em>Gratis</em> Kami Di Telegram</h2>
+                                    <h2>Ayo Coba Juga Bot <em>Gratis</em> Kami Di Telegram</h2>
                                 </div>
-                                <p>Bot ini sepenuhnya gratis dan kami sediakan di Telegram tanpa ada batasan sepenuhnya gratis.</p>
+                                <p>Bot ini sepenuhnya gratis dan kami sediakan di Telegram tanpa ada batasan.</p>
                                 <div class="main-button">
                                     <a href="https://t.me/owaloft_bot">Mulai</a>
                                 </div>
@@ -260,15 +269,6 @@
             </div>
         </div>
     </div>
-
-    <style>
-        .cta {
-            margin-top: -10px; 
-        }
-        .statistics-section {
-            margin-bottom: 20px;
-        }
-    </style>
 
     <!-- Footer section -->
     <footer class="footer_section">
@@ -290,7 +290,6 @@
     <script src="assets/js/custom.js"></script>
 
     <script>
-
         var swiper = new Swiper('.swiper-container', {
             loop: true, 
             autoplay: {
@@ -305,7 +304,6 @@
             },
         });
 
-
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js')
@@ -318,9 +316,7 @@
             });
         }
 
-
         function isAppInstalled() {
-
             if (window.matchMedia('(display-mode: standalone)').matches) {
                 return true;
             }
@@ -331,16 +327,13 @@
             return false;
         }
 
-
-function showCustomInstallPrompt() {
-    if (!isAppInstalled()) {
-
-    }
-}
-
+        function showCustomInstallPrompt() {
+            if (!isAppInstalled()) {
+                // Optional: Add custom install prompt logic
+            }
+        }
 
         setTimeout(showCustomInstallPrompt, 3000);
-
 
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
