@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Text Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        .section-card {
+            transition: all 0.3s ease-in-out;
+            transform-origin: center;
+        }
+
+        .section-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse-animation:hover {
+            animation: pulse 0.7s ease-in-out;
+        }
+
+        @keyframes recording-pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+
+        .recording-animation {
+            animation: recording-pulse 1.5s infinite;
+        }
+
+        .gradient-border {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #4fcf70, #fad648, #a767e5, #12bcff);
+            z-index: -1;
+            background-size: 400%;
+            animation: glowing 20s linear infinite;
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="container mx-auto max-w-4xl">
+        <div class="glass-morphism p-8 rounded-2xl shadow-2xl">
+            <div class="flex items-center justify-center mb-8">
+                <h1 class="text-4xl font-bold text-gray-800 flex items-center">
+                    <i class="ri-soundcloud-line mr-4 text-blue-600"></i>
+                    Audio Converter
+                </h1>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Language Selection -->
+                <div class="section-card bg-white/70 rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-all">
+                    <div class="flex items-center mb-4">
+                        <i class="ri-global-line text-2xl mr-3 text-purple-600"></i>
+                        <h2 class="text-xl font-semibold text-gray-800">Pilih Bahasa</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <select 
+                            id="languageSelect" 
+                            class="w-full p-2 border border-gray-200 rounded-lg"
+                        >
+                            <option value="id-ID">Indonesia</option>
+                            <option value="en-US">English (US)</option>
+                            <option value="en-GB">English (UK)</option>
+                            <option value="es-ES">Español</option>
+                            <option value="fr-FR">Français</option>
+                            <option value="de-DE">Deutsch</option>
+                            <option value="ja-JP">日本語</option>
+                            <option value="ko-KR">한국어</option>
+                            <option value="zh-CN">中文 (简体)</option>
+                        </select>
+                        
+                        <select 
+                            id="voiceSelect" 
+                            class="w-full p-2 border border-gray-200 rounded-lg"
+                        >
+                            <option value="">Pilih Suara</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Text to Speech Section -->
+                <div class="section-card bg-white/70 rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-all">
+                    <div class="flex items-center mb-4">
+                        <i class="ri-volume-up-line text-2xl mr-3 text-blue-600"></i>
+                        <h2 class="text-xl font-semibold text-gray-800">Teks ke Audio</h2>
+                    </div>
+                    
+                    <textarea 
+                        id="textInput" 
+                        rows="4" 
+                        class="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-300 transition"
+                        placeholder="Ketik teks yang ingin diubah menjadi suara..."
+                    ></textarea>
+                    
+                    <div class="grid grid-cols-2 gap-3 mt-4">
+                        <button 
+                            onclick="playText()" 
+                            class="pulse-animation bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition flex items-center justify-center"
+                        >
+                            <i class="ri-play-fill mr-2"></i> Putar
+                        </button>
+                        <button 
+                            onclick="stopSpeech()" 
+                            class="pulse-animation bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition flex items-center justify-center"
+                        >
+                            <i class="ri-stop-line mr-2"></i> Berhenti
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speech to Text Section -->
+            <div class="section-card bg-white/70 rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-all mt-6">
+                <div class="flex items-center mb-4">
+                    <i class="ri-mic-line text-2xl mr-3 text-green-600"></i>
+                    <h2 class="text-xl font-semibold text-gray-800">Audio ke Teks</h2>
+                </div>
+                
+                <button 
+                    id="recordButton" 
+                    class="w-full gradient-border bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition flex items-center justify-center"
+                >
+                    <i class="ri-mic-fill mr-2"></i> Rekam Audio
+                </button>
+
+                <div 
+                    id="outputText" 
+                    class="mt-4 p-3 border border-gray-200 rounded-lg min-h-[120px] bg-white"
+                >
+                    <div class="text-gray-500 flex items-center">
+                        <i class="ri-text-spacing mr-2"></i>
+                        Teks hasil rekaman akan muncul di sini...
+                    </div>
+                </div>
+
+                <div 
+                    id="recordStatus" 
+                    class="text-center mt-2 text-sm text-gray-600 flex items-center justify-center"
+                >
+                    <i class="ri-information-line mr-2"></i>
+                    Status Rekaman
+                </div>
+            </div>
+
+            <div class="mt-6 text-center text-gray-500 text-sm">
+                <i class="ri-shield-check-line mr-2"></i>
+                Privasi & Keamanan Terjamin
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let recognition;
+        let voices = [];
+        const languageSelect = document.getElementById('languageSelect');
+        const voiceSelect = document.getElementById('voiceSelect');
+        const recordButton = document.getElementById('recordButton');
+        const outputText = document.getElementById('outputText');
+        const recordStatus = document.getElementById('recordStatus');
+
+
+        function populateVoiceList() {
+            voices = window.speechSynthesis.getVoices();
+            voiceSelect.innerHTML = '<option value="">Pilih Suara</option>';
+
+ 
+            const selectedLang = languageSelect.value;
+            const languageVoices = voices.filter(voice => 
+                voice.lang.startsWith(selectedLang.split('-')[0])
+            );
+
+  
+            const femaleVoices = languageVoices.filter(voice => 
+                voice.name.toLowerCase().includes('female') || 
+                voice.name.toLowerCase().includes('wanita')
+            );
+            const maleVoices = languageVoices.filter(voice => 
+                voice.name.toLowerCase().includes('male') || 
+                voice.name.toLowerCase().includes('pria')
+            );
+
+  
+            [
+                ...femaleVoices.map(voice => ({ 
+                    name: `👩 ${voice.name}`, 
+                    index: voices.indexOf(voice) 
+                })),
+                ...maleVoices.map(voice => ({ 
+                    name: `👨 ${voice.name}`, 
+                    index: voices.indexOf(voice) 
+                })),
+                ...languageVoices.filter(voice => 
+                    !voice.name.toLowerCase().includes('female') && 
+                    !voice.name.toLowerCase().includes('male') &&
+                    !voice.name.toLowerCase().includes('wanita') &&
+                    !voice.name.toLowerCase().includes('pria')
+                ).map(voice => ({ 
+                    name: `🎙️ ${voice.name}`, 
+                    index: voices.indexOf(voice) 
+                }))
+            ].forEach(voice => {
+                const option = document.createElement('option');
+                option.textContent = voice.name;
+                option.setAttribute('data-index', voice.index);
+                voiceSelect.appendChild(option);
+            });
+        }
+
+  
+        speechSynthesis.addEventListener('voiceschanged', populateVoiceList);
+        languageSelect.addEventListener('change', () => {
+            populateVoiceList();
+            
+ 
+            if (recognition) {
+                recognition.lang = languageSelect.value;
+            }
+        });
+        populateVoiceList();
+
+ 
+        function playText() {
+            const text = document.getElementById('textInput').value;
+            const selectedVoiceIndex = voiceSelect.selectedOptions[0]?.getAttribute('data-index');
+
+            if (!text) {
+                alert('Silakan masukkan teks terlebih dahulu');
+                return;
+            }
+
+            const speech = new SpeechSynthesisUtterance(text);
+            
+            if (selectedVoiceIndex !== null) {
+                speech.voice = voices[selectedVoiceIndex];
+            } else {
+                speech.lang = languageSelect.value;
+            }
+
+            speech.rate = 1.0;  
+            speech.pitch = 1.0; 
+
+            window.speechSynthesis.speak(speech);
+        }
+
+
+        function stopSpeech() {
+            window.speechSynthesis.cancel();
+        }
+
+
+        function startSpeechRecognition() {
+            if (!('webkitSpeechRecognition' in window)) {
+                alert("Maaf, browser Anda tidak mendukung fitur Speech-to-Text.");
+                return;
+            }
+
+            recognition = new webkitSpeechRecognition();
+            recognition.lang = languageSelect.value;
+            recognition.interimResults = false;
+            recognition.continuous = false;
+
+            recordButton.classList.add('recording-animation', 'bg-red-500');
+            recordButton.innerHTML = '<i class="ri-mic-fill mr-2"></i> Sedang Merekam';
+            recordButton.disabled = true;
+            recordStatus.textContent = 'Sedang mendengarkan...';
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                outputText.textContent = transcript;
+                recordStatus.textContent = 'Rekaman berhasil';
+            };
+
+            recognition.onerror = function(event) {
+                outputText.textContent = "Error: " + event.error;
+                recordStatus.textContent = 'Rekaman gagal';
+            };
+
+            recognition.onend = function() {
+                recordButton.classList.remove('recording-animation', 'bg-red-500');
+                recordButton.innerHTML = '<i class="ri-mic-fill mr-2"></i> Rekam Audio';
+                recordButton.disabled = false;
+                recordStatus.textContent = '';
+            };
+
+            recognition.start();
+        }
+
+
+        function stopSpeechRecognition() {
+            if (recognition) {
+                recognition.stop();
+                recordButton.disabled = false;
+                recordButton.classList.remove('recording-animation', 'bg-red-500');
+                recordButton.innerHTML = '<i class="ri-mic-fill mr-2"></i> Rekam Audio';
+            }
+        }
+
+// Program ini di buat oleh Bagus Ahmad ega permana jika mau menggunakan izin dulu ke saya © Owalasoft.
+        recordButton.addEventListener('mousedown', startSpeechRecognition);
+        recordButton.addEventListener('mouseup', stopSpeechRecognition);
+        recordButton.addEventListener('mouseleave', stopSpeechRecognition);
+    </script>
+</body>
+</html>
