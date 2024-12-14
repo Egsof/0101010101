@@ -1,4 +1,3 @@
-    <script>
         let recognition;
         let voices = [];
         const languageSelect = document.getElementById('languageSelect');
@@ -148,4 +147,3 @@
         recordButton.addEventListener('mousedown', startSpeechRecognition);
         recordButton.addEventListener('mouseup', stopSpeechRecognition);
         recordButton.addEventListener('mouseleave', stopSpeechRecognition);
-    </script>
