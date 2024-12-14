@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owalasoft - Download App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #0CB03D 0%, #075E55 100%);
+            overflow: hidden; 
+        }
+
+        /* Background animasi */
+        .blob {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 150%; 
+            height: 150%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+            animation: blob-spin 20s linear infinite;
+        }
+        @keyframes blob-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        
+        .download-btn {
+            transition: background-color 0.3s ease;
+        }
+        .download-btn:hover {
+            background-color: #075E55;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center relative">
+    <!-- Background Blob -->
+    <div class="blob"></div>
+
+    <!-- Konten Utama -->
+    <div class="container mx-auto px-4 relative z-10 max-w-full">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 md:p-12 max-w-lg mx-auto">
+            <!-- Judul Tanpa Logo -->
+            <div class="text-center mb-6">
+                <h1 class="text-4xl font-extrabold text-green-700 mb-4">
+                    Owalasoft
+                </h1>
+                <p class="text-gray-600 text-sm sm:text-base">
+                    Download the latest version of our innovative mobile application
+                </p>
+            </div>
+
+            
+            <div class="bg-green-50 rounded-xl p-4 mb-6">
+                <div class="flex items-center space-x-4 mb-4">
+                    
+                    <div class="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center">
+                        <img src="https://telegra.ph/file/d7ccc315ef53c49a29b07.jpg" alt="Owalasoft Logo" class="w-12 h-12 rounded-full">
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-green-800">Owalasoft APK</h3>
+                        <p class="text-sm text-gray-500">Latest Version: 1.0.0</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-600">
+                        <strong>File Size:</strong> 0.5 MB<br>
+                        <strong>Updated:</strong> December 2024
+                    </div>
+                    <a href="https://www.mediafire.com/file/8gcu3lxzca2iffd/Owalasoft.apk" 
+                       class="download-btn bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700">
+                        Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center text-gray-500 text-sm">
+                <p>
+                    By downloading, you agree to our 
+                    <a href="https://Owalasoft.biz.id/s&k" class="text-green-600 hover:underline">Terms of Service</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
