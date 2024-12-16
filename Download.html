@@ -13,27 +13,12 @@
         }
         body {
             background: linear-gradient(135deg, #0CB03D 0%, #075E55 100%);
-            overflow: hidden; 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Background animasi */
-        .blob {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 150%; 
-            height: 150%;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            z-index: 0;
-            animation: blob-spin 20s linear infinite;
-        }
-        @keyframes blob-spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        
         .download-btn {
             transition: background-color 0.3s ease;
         }
@@ -42,12 +27,9 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center relative">
-    <!-- Background Blob -->
-    <div class="blob"></div>
-
+<body>
     <!-- Konten Utama -->
-    <div class="container mx-auto px-4 relative z-10 max-w-full">
+    <div class="container mx-auto px-4 max-w-full">
         <div class="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 md:p-12 max-w-lg mx-auto">
             <!-- Judul Tanpa Logo -->
             <div class="text-center mb-6">
